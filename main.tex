@@ -1,0 +1,101 @@
+\documentclass[11pt]{report}
+\usepackage{a4wide,parskip,graphicx,amsmath,natbib,xurl,hyperref,xcolor,tikz}
+\usetikzlibrary{arrows.meta,calc}
+
+\renewcommand{\chaptername}{Section}
+
+% Assignment details
+\newcommand{\subject}{COSC2148/COSC3130 Computing Research and Project Preparation}
+\newcommand{\assignment}{Assignment 2}
+\newcommand{\institution}{RMIT University}
+\newcommand{\school}{School of Computer Science and Information Technology}
+\newcommand{\dateSubmitted}{\today}
+\newcommand{\tutor}{Dr. Tutor Name} 
+\newcommand{\projectLeader}{Timothy Kohlman}
+
+% Group member details
+\newcommand{\memberA}{Krati Awasthi & s3898306 & s3898306@student.rmit.edu.au}
+\newcommand{\memberB}{Timothy Kohlman & s4110661 & s4110661@student.rmit.edu.au}
+\newcommand{\memberC}{Lyris Tri Lestya & s4155150 & s4155150@student.rmit.edu.au}
+\newcommand{\memberD}{Vaidehi Patel & s3895545 & s3895545@student.rmit.edu.au}
+\newcommand{\memberE}{Laiba Siraj & s3960652 & s3960652@student.rmit.edu.au}
+
+\bibpunct{[}{]}{;}{a}{,}{;}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+
+\vspace*{3cm}
+
+{\Huge \textbf{\subject} \par}
+\vspace{1cm}
+
+{\LARGE \assignment \par}
+
+\vspace{1cm}
+
+{\Large \textbf{Group Members} \par}
+\vspace{0.5cm}
+
+\begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Name} & \textbf{Student ID} & \textbf{Student Email} \\
+    \hline
+    \memberA \\
+    \memberB \\
+    \memberC \\
+    \memberD \\
+    \memberE \\
+    \hline
+\end{tabular}
+
+\vspace{1cm}
+
+{\Large \textbf{Tutor Name:} \tutor \par}
+{\Large \textbf{Project Leader:} \projectLeader \par}
+{\Large \textbf{Submission Date:} \dateSubmitted \par}
+
+\vspace{0.5cm}
+
+{\Large \school \par}
+
+\vspace{0.5cm}
+
+{\Large \institution \par}
+
+\vspace{0.5cm}
+
+\vfill
+
+\end{titlepage}
+
+\clearpage
+\pagenumbering{roman}
+
+%\input{frontmatter/declare}
+%\input{frontmatter/summary}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\clearpage
+\pagenumbering{arabic}
+
+\include{chapters/01_introduction}
+\include{chapters/02_research_questions}
+\include{chapters/03_literature_review}
+\include{chapters/04_methodologies}
+\include{chapters/05_evaluation}
+\include{chapters/06_project_management}
+
+\bibliographystyle{abbrvnat}
+\bibliography{bib/strings,bib/main}
+
+\appendix
+\include{appendix/ai_usage}
+
+\end{document}
+
