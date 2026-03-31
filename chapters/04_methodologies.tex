@@ -1,26 +1,124 @@
 \chapter{Research Methodologies}
 
-\section{DELETE original question}
-methodologies - 1 page (3 marks)
+This research adopts a comparative experimental design to investigate 
+the effectiveness of multimodal content and social context features 
+in the detection of inauthentic social media posts.
 
-This section should address the “how”, that is, how you will be addressing your research (or research questions).
+note  Dellys et al. (2025) is flagged as the closest prior work (how does this differentiate?)
 
-The aim of this section is to convince the reader that your overall research design and analysis methods will enable
-you to solve the research problem (i.e., research questions) you have identified and also enable you to accurately
-and effectively interpret the results of your research. Consequently, it is important that the research design and
-methods section is well-written, clear, and logically organised.
+\section{System Overview}
 
-Specifically, this section should be clearly tied to the specific objectives of your study; however, it is also
-important to draw on and include examples from the literature review that relate to your design and intended
-methods. In other words, you must clearly demonstrate how your study utilises and builds on previous studies as
-it relates to the research design and intended methods. For example, what methods have other researchers used
-in similar studies?
+Prior research has demonstrated that combining text-based content 
+features with social context improved detection performance in
+identifying inauthentic social media posts. Separate studies have 
+shown that multimodal models can 
+outperform text-based models.
 
-Finally, this section should clearly show the different pieces that you will need to do in your project (in the
-form of a table). Break it down and give a timeline. Allow at least four (4) weeks to write the thesis.
+Limited research has been conducted to investigate the combined 
+effectiveness of multimodal content features and social context 
+features by substituting text-based representations with multimodal 
+representations within a context-aware framework. 
 
-\section{aaaSection2}
-\subsection{aaaSection2Subsection1}
-aaa
+The proposed system aims to address this gap by utilising existing 
+DANES and GETAE feature ensemble architectures that combine text content 
+with social context features, and extending them to incorporate 
+multimodal content features. 
+
+\section{Proposed Framework Architecture}
+
+
+\subsection{Baseline Architecture: DANES/GETAE}
+
+DANES (citE) and GETAE (cite) each comprise two branches: a text-based 
+content branch that encodes textual content using word embeddings and 
+transformer-based representations in a neural network, and a social 
+context branch (referred to as the Propagation Branch in GETAE) that 
+models the social network user interactions and behaviour using graph 
+neural networks and deriving node embeddings. 
+
+Outputs from these branches are combined using an ensemble approach 
+produce a classification embedding. These models achieve state-of-the-art 
+performance in detecting inauthentic social media posts in Twitter15 
+and Twitter16 datasets, outperforming text-only models and other 
+context-aware models that do not utilise multimodal content features.
+
+These models represent a principled starting point for the proposed 
+architecture modification.
+
+\subsection{Proposed Modifications to Baseline Architecture}
+
+The proposed architecture modification involves substituting the text-based 
+content branch with a multimodal content branch that incorporates visual 
+features extracted from social media posts as well 
+as textual features. The social context branch is retained, as in the 
+baseline architectures, allowing the contribution of the multimodal 
+content branch to be evaluated against the baseline models.
+
+\subsection{Multimodal Branch Design}
+
+This research will adopt a well validated multimodal architecture from the literature that has been designed for the task of multimodal fake news detection. 
+This approach maintains a focus on the architectural substitution question rather than the design and optimisation of a novel multimodal architecture. 
+
+The key considerations for the selection are: task alignment, dataset compatibility, ease of integration and widespread validation. 
+
+From our review of the literature, HMCAN and MPFN models have both demonstrated excellent accuracy (0.89.7\% and 83.3\% respectively) in multimodal fake news detection using the 
+Multimodal Twitter dataset, outperforming other common multimodal models for fake news detection (such as EANN). HMCAN's BERT + ResNet 
+encoding pipeline is consistent with the text branch of DANES/GETAE and has been independently validated on the Multimodal Twitter dataset 
+as well as Fakedit dataset, making it a suitable candidate for the multimodal content branch. MPFN utilises a more complex image pipeline 
+which could be beneficial for detecting manipulated or artificially generated images, and is another potential candidate.
+
+Our system will adopt HMCAN with MPFN as a fallback option as this provides a robust foundation for handling multimodal content.
+
+
+\subsection{Experimental Design}
+
+The initial stage is to replicate the published DANES/GETAE architectures and 
+evaluate their performance on the Twitter15 and Twitter16 datasets and ensure 
+that the results are consistent with those reported in the original papers.
+
+This is followed by the transition to a dataset that contains multimodal 
+content and the implementation of the proposed architecture 
+modification to incorporate multimodal content features.
+
+
+The following configurations are proposed for evaluation: 
+\begin{itemize}
+    \item \textbf{Stage 1 --- Condition A (Implementation Baseline):} Replicate the published DANES/GETAE architectures using the Twitter 15/16 datasets to confirm the implementation reproduces performance consistent with the original papers before any modifications are introduced.
+    \item \textbf{Stage 2 --- Condition A (Dataset Baseline):} Evaluate the DANES/GETAE architectures on a multimodal dataset in text-only mode (i.e. ignoring the visual content) to establish a baseline for the DANES/GETAE architectures on the new dataset that Stage 2 conditions will be compared with.
+    \item \textbf{Stage 2 --- Condition B (Ablation 1):} Text-only content branch with no social context branch to isolate the contribution of textual features without social context features.
+    \item \textbf{Stage 2 --- Condition C (Ablation 2):} Multimodal content branch with no social context branch to isolate the contribution of multimodal features without social context features.
+    \item \textbf{Stage 2 --- Condition D (Proposed):} Multimodal content branch with a social context branch to represent the full proposed framework for primary evaluation.
+\end{itemize}
+
+Each stage 2 condition is compared against the stage 2 condition A baseline to evaluate the attribution of performance improvements. 
+
+RQ1 is directly addressed by comparing the performance of the proposed architecture (Condition D) against the baseline architecture (Condition A) with the multimodal dataset.
+
+A pairwise comparison of condition's B, C and D address RQ2 by evaluating the contribution of the multimodal content branch and the social context branch to the overall 
+performance of the model.
+
+It is anticipated that the transition from Twitter15/16 datasets to a multimodal datasets will result in a performance difference in Stage 2 Condition A relative to Stage 1 depending 
+on the extent to which these models generalise to a new dataset. This does not impact the evaluation of the proposed architecture change since all Stage 2 conditions are evaluated 
+against the Stage 2 Condition A baseline. (TODO: this would require a mention under the LIMITATIONS section, we aren't interested in researching the generalisability of these models 
+this is rather an expected degradation)
+
+This methodology enables direct evaluation of the research questions by isolating the impact of multimodal content through controlled substitution of the content branch and by analysing the relative contribution of content and context features through ablation experiments. 
+The structured experimental design ensures that performance differences can be attributed to specific components of the model.
+
+\subsection{Processing Pipeline}
+
+
+\subsection{Evaluation Metrics}
+
+
+\subsection{Datasets and Data Preparation}
+
+\subsection{Timeline}
+
+
+
+
+
+
 
 
