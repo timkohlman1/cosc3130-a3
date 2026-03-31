@@ -1,8 +1,6 @@
 \chapter{Research Methodologies}
 
-This research adopts a comparative experimental design to investigate 
-the effectiveness of multimodal content and social context features 
-in the detection of inauthentic social media posts.
+
 
 note  Dellys et al. (2025) is flagged as the closest prior work (how does this differentiate?)
 
@@ -105,20 +103,80 @@ this is rather an expected degradation)
 This methodology enables direct evaluation of the research questions by isolating the impact of multimodal content through controlled substitution of the content branch and by analysing the relative contribution of content and context features through ablation experiments. 
 The structured experimental design ensures that performance differences can be attributed to specific components of the model.
 
-\subsection{Processing Pipeline}
+
+
+
+
+
+\section{Research Design}
+
+% Write a concise paragraph describing the comparative experimental approach and how it addresses the research questions.
+This research adopts a comparative experimental approach to investigate 
+the effectiveness of multimodal content and social context features 
+in the detection of inauthentic social media posts.
+
+The proposed research will substitute the text-based content branch of existing 
+state-of-the-art context-aware models (DANES/GETAE) with a multimodal content branch, 
+allowing for direct comparison of the contribution of multimodal content features 
+to detection performance.
+
+\section{System Architecture}
+
+% Provide a high-level overview of the proposed dual-branch framework and its relationship to DANES/GETAE.
+
+
+\subsection{Multimodal Content Branch}
+
+% Briefly describe how textual and visual features are extracted and combined.
+
+
+\subsection{Social Context Branch}
+
+% Describe the user-level, interaction-based, and lightweight network/context features.
+
+
+\subsection{Feature Fusion and Classification}
+
+% Explain how the multimodal content and social context representations are combined for final prediction.
+
+
+\section{Experimental Design}
+
+% Describe the comparative model setup and the logic of the experiments.
+
+
+\subsection{Model Configurations}
+
+% Describe the baseline and proposed model variants.
+
+
+\subsection{Research Question Alignment}
+
+% Explain how the experiments answer RQ1 and RQ2.
+
+
+\section{Datasets and Data Preparation}
+
+% Briefly describe dataset selection, preprocessing, and train/validation/test split.
+
+
+\section{Evaluation Strategy}
+
+% Outline the evaluation approach and performance comparison plan.
 
 
 \subsection{Evaluation Metrics}
 
-
-\subsection{Datasets and Data Preparation}
-
-\subsection{Timeline}
+% Describe the metrics used, such as accuracy, precision, recall, and F1-score.
 
 
+\subsection{Ablation Study}
+
+% Explain how component contributions will be tested by removing or varying branches/features.
 
 
+\section{Project Timeline}
 
-
+% Insert the project schedule and timeline table here.
 
 
