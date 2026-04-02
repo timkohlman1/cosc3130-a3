@@ -1,23 +1,121 @@
 \chapter{Literature Review}
 
-\section{DELETE original question}
-
-Literature Review - 2 pages (7 marks)
-
-It is indeed essential to demonstrate that you are familiar with the most important research on your selected
-topic. A strong literature review convinces the reader that your research/project has a solid foundation in existing
-knowledge or theory. It also shows that you are not simply repeating what others have already done or said.
-
-The aim of this section is to show exactly how your project will contribute to discussions in the field.
+\section{Overview of Fake News Detection}
 
 \begin{itemize}
-\item Compare and contrast: what are the main theories, methods, debates, and controversies?
-\item Be critical: what are the strengths and weaknesses of different approaches?
-\item Show how your research fits in: how will you build on, challenge, or synthesise the work of others?
+    \item Introduce fake news and inauthentic content problem
+    \item Explain importance of detection in social media
+    \item Evolution of approaches:
+    \begin{itemize}
+        \item Text-only models
+        \item Context-aware models
+        \item Multimodal models
+    \end{itemize}
+    \item Content alone is not sufficient, context and behaviour matter
+    \item Deep learning dominates modern approaches
+    \item Different approaches address different aspects of the problem
 \end{itemize}
 
-\section{aaaSection2}
-\subsection{aaaSection2Subsection1}
-aaa
+\section{Content-Based Approaches}
+
+\begin{itemize}
+    \item Models analyse only textual features
+    \item Techniques:
+    \begin{itemize}
+        \item NLP, BERT, RNN, CNN
+    \end{itemize}
+    \item Examples:
+    \begin{itemize}
+        \item Text branch in DANES and GETAE
+    \end{itemize}
+    \item Strengths:
+    \begin{itemize}
+        \item Simple and efficient
+        \item Good baseline performance
+    \end{itemize}
+    \item Weaknesses:
+    \begin{itemize}
+        \item Cannot detect visual misinformation
+        \item Ignores user behaviour and propagation
+        \item Struggles with subtle misinformation
+    \end{itemize}
+    \item Content-only approaches are not sufficient for real-world scenarios
+\end{itemize}
+
+\section{Context-Aware Approaches}
+
+\begin{itemize}
+    \item Use social media context instead of only content
+    \item Types of context:
+    \begin{itemize}
+        \item User behaviour
+        \item Interactions
+        \item Propagation patterns
+    \end{itemize}
+    \item Models:
+    \begin{itemize}
+        \item DANES (text + social context)
+        \item GETAE (text + propagation graph)
+        \item GCAN (context only)
+    \end{itemize}
+    \item Techniques:
+    \begin{itemize}
+        \item Graph neural networks
+        \item Propagation graphs
+    \end{itemize}
+    \item Strengths:
+    \begin{itemize}
+        \item Captures real-world behaviour
+        \item Improves detection performance
+    \end{itemize}
+    \item Weaknesses:
+    \begin{itemize}
+        \item Relies on text-only content
+        \item Ignores multimodal data
+        \item Depends on specific datasets
+    \end{itemize}
+    \item Context improves detection but content is still limited
+\end{itemize}
+
+\section{Multimodal Approaches}
+
+\begin{itemize}
+    \item Combine multiple data types such as text and images
+    \item Social media content is inherently multimodal
+    \item Models:
+    \begin{itemize}
+        \item EANN, MCNN, HMCAN, MPFN, LDPG
+    \end{itemize}
+    \item Techniques:
+    \begin{itemize}
+        \item CNN, transformers, fusion methods
+    \end{itemize}
+    \item Strengths:
+    \begin{itemize}
+        \item Better feature representation
+        \item Improved accuracy
+        \item Detects misleading visuals
+    \end{itemize}
+    \item Weaknesses:
+    \begin{itemize}
+        \item Ignores social context
+        \item Static models without propagation
+        \item Requires large datasets
+    \end{itemize}
+    \item Multimodal improves content but lacks context integration
+\end{itemize}
+
+\section{Research Gap and Positioning}
+
+\begin{itemize}
+    \item Content-based models are limited
+    \item Context-aware models rely on text-only content
+    \item Multimodal models ignore social context
+    \item There is no effective integration of multimodal and context-aware approaches
+    \item Existing models such as DANES and GETAE use text-only content branches
+    \item Proposed research replaces text branch with multimodal branch
+    \item Combines multimodal content with context-aware architecture
+    \item Evaluates performance improvement and contribution of each branch
+\end{itemize}
 
 
