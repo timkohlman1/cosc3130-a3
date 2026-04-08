@@ -1,29 +1,20 @@
-\chapter{Research Questions}
+\section{Research Questions}
+\label{sec:research_questions}
 
+This research aims to develop a context-aware misinformation detection framework that substitutes the text-only content branch used in established context-aware ensemble models, such as DANES~\cite{truica2024danes} and GETAE~\cite{truica2025getae}, with a multimodal content branch that jointly captures textual and visual information. While recent work has shown that multimodal content features and social context features each independently improve fake news detection, the closest existing combinations~\cite{nadeem2023efnd, jing2025dpsg, dellys2025multimodal} use social branches that differ architecturally from the propagation-graph ensembles of the DANES/GETAE family. As a result, two questions remain unanswered, and together they form the technical core of this project.
 
+\paragraph{RQ1.} \textit{How does replacing a text-only content branch with a multimodal content branch affect the performance of context-aware inauthentic social media content detection models, and to what extent?}
+\begin{description}
+    \item[What it addresses.] This question isolates a single architectural change: keeping the social context branch of DANES and GETAE intact while substituting the text-only content processor with a content branch that fuses textual and visual features (e.g., BERT for text and a CNN- or transformer-based visual encoder for images). The effect is measured against the original text-only baselines on the same benchmark datasets used in the DANES and GETAE papers (Twitter15 and Twitter16), as well as the multimodal Fakeddit dataset~\cite{nakamura2020fakeddit}, using accuracy, F1-score, precision, and recall.
+    \item[Significance.] Misinformation on social platforms increasingly relies on manipulated images, memes, and screenshots, where the textual signal alone is insufficient or misleading~\cite{segura2022multimodal}. Even strong context-aware ensembles inherit the blindness of their text-only content component, meaning a measurable portion of detectable misinformation may be missed not because the social signal is weak, but because the content signal is incomplete. Quantifying the gain (or absence of gain) from a multimodal substitution directly informs whether the established DANES/GETAE family of architectures is leaving accuracy on the table.
+    \item[Novelty and complexity.] No prior work directly performs this controlled substitution and isolates its effect on the DANES/GETAE backbone. Existing multimodal-plus-context models such as EFND~\cite{nadeem2023efnd}, DPSG~\cite{jing2025dpsg}, and the framework of Dellys et al.~\cite{dellys2025multimodal} use fundamentally different social branches (engagement signals, dynamic propagation graphs, or attention-based fusion), so their results cannot be cleanly attributed to the multimodal component. Answering RQ1 requires re-implementing a non-trivial baseline, designing a compatible multimodal branch, and ensuring the comparison remains controlled --- a challenging but well-defined contribution.
+\end{description}
 
-\section{DELETE original question}
+\paragraph{RQ2.} \textit{How does the relative contribution of the multimodal content branch and the social context branch affect overall detection performance?}
+\begin{description}
+    \item[What it addresses.] This question moves beyond headline accuracy to decompose where the model's predictive power comes from. Through ablation studies (content-only, social-only, and full ensemble configurations) and analysis of the fusion-layer weights, the project will quantify how much each branch contributes to correct classification, and whether the two branches are complementary or redundant on different categories of misinformation.
+    \item[Significance.] Knowing that a combined model performs well is not enough; researchers and practitioners need to know \emph{which} signal is doing the work. If the social context branch dominates, then the additional engineering cost of multimodal feature extraction may not be justified for deployment. Conversely, if the multimodal branch dominates, the field should reconsider its current emphasis on increasingly complex propagation-graph architectures. The answer therefore has direct design implications for the next generation of misinformation detectors.
+    \item[Novelty and complexity.] Most prior multimodal-plus-context studies report only aggregate performance and do not cleanly decompose contributions across a propagation-graph social branch of the DANES/GETAE family. Approaches such as TMEF-BI~\cite{chen2025tmefbi} perform reliability-aware weighting but on a different social signal (speaker behaviour rather than propagation), so their findings do not transfer directly. A principled contribution analysis on the proposed backbone is therefore both novel and methodologically demanding, requiring careful experimental design to avoid confounding the two branches.
+\end{description}
 
-Research questions - 1 page (4 marks)
-
-
-This section should address the technical issues you will be addressing in your research. It is about the “what”
-(you will be addressing/focussing when you start your thesis).
-
-Describe here the specific research questions to be addressed. You need to break the problem you are addressing
-into specific sub-problems (called here research questions) that could help you during the thesis to come up with
-innovative solutions properly. 
-
-Show how the research questions are interesting and worth addressing. 
-
-Please
-include at least two (2) research questions, but you are limited to a maximum of three (3) research questions. 
-
-For
-each research question, describe what it is, its significance, and why it is important to address it.
-
-\section{aaaSection2}
-\subsection{aaaSection2Subsection1}
-aaa
-
-
+Together, RQ1 and RQ2 form a coherent investigation: RQ1 establishes \emph{whether} multimodal substitution improves context-aware misinformation detection, while RQ2 explains \emph{why}, by revealing how the content and social signals interact. Answering both is necessary to make a defensible contribution to the context-aware fake news detection literature.
