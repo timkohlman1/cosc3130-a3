@@ -1,131 +1,15 @@
 \chapter{Introduction}
 
-\section{Introduction}
-Introduction - 1 page (2 marks)
+Widespread misinformation, generating challenges for information credibility alongside informed decision-making can be attributed to the rise of social media. The increasing complexity of online content consisting of textual, visual, and interaction-based elements, has increased the difficulty of accurately identifying false information. Thus, the development of reliable misinformation detection systems has become a critical research focus.
 
-Briefly describe your topic and why it is important or interesting. You could start by describing the area of
-interest and later summarise the existing solutions and their limitations. You could also explain the specific focus
-of your research and why you are doing so. Feel free to include specific information, such as detailed statistics,
-that will back up your claims (and thus make your statements much stronger).
+Early research in misinformation detection has been predominantly characterised using text-based classification models, where linguistic features are utilised to determine content authenticity. However, limitations in these approaches have been observed, predominantly in the inability to capture non-textual signals embedded within modern social media content. Multimodal learning has partially overcome this limitation by integrating text alongside images. For example, EANN framework demonstrated that combining both text and images leads to enhanced detection performance compared to unimodal approaches (Wang et al., 2018). Similar to this, large-scale multimodal dataset such as Fakeddit allows better testing, showing that multimodal representations provide superior accuracy when detecting complex misinformation classes (Nakamura et al., 2020). Moreover, recent progress in multimodal architectures has been made towards cross-modal interaction and multimodal feature fusion.Models such as HMCAN and MPFN prove that modelling relationships between text and image modalities significantly enhances detection performance (Qian et al., 2021; Jing et al., 2023).
 
-In summary, an introduction should:
+In parallel, the incorporation of social context information has been explored through the development of context-aware detection models. These approaches utilise features derived from user interactions, propagation patterns, and temporal dynamics to improve classification performance. For example, models using graph representations of temporally evolving graphs to represent social media dynamics allow for the modelling of information diffusion in the social media environment (Song et al., 2021). On the other hand, models based on social interactions between posts and social media users have shown the ability of social interactions to be employed to detect misleading posts (Min et al., 2022). Moreover, recent advances have demonstrated that incorporating both modalities of content and social context data enhances the performance of the classifier (Nadeem et al., 2023; Jing et al., 2025).
 
-\begin{itemize}
-\item Introduce the topic and its significance.
-\item Give background and context.
-\item Outline your problem and research questions.
-\end{itemize}
+Despite these advancements, a crucial limitation remains being the lack of systematic integration between multimodal content modelling and context-aware architectures. Existing context-aware frameworks (i.e. DANES and GETAE), retain a text-only content branch restricting their ability to fully leverage multimodal signals present in contemporary social media environments (Truică et al., 2024).Whilst prior studies have explored the combination of multimodal content and social context, limited research has conducted controlled evaluations that isolate the contribution of each component within a unified framework (Dellys et al., 2025). This results in an incomplete understanding of the relative impact of multimodal content features and social context features on detection performance.
 
-Some important questions to guide your introduction include:
-\begin{itemize}
-\item Who is interested in the topic (e.g. scientists, practitioners, policymakers, particular members of society)?
-\item How much is already known about the problem?
-\item What is missing from current body knowledge?
-\item What new insights will your research contribute?
-\item Why is this research worth doing
-\end{itemize}
+This research proposes the development of a context-aware multimodal misinformation detection framework, in which the traditional text-based content branch is substituted with a multimodal content branch that integrates both textual and visual representations. The research adopts a comparative experimental design to enable the systematic evaluation of architectural modifications through controlled substitution and ablation-based analysis. The objective of this research is to determine whether the integration of multimodal features within a context-aware framework results in measurable performance improvements, and to analyse the relative contribution of multimodal content and social context components to overall detection effectiveness.
 
-\section{aaaSection2}
-\subsection{aaaSection2Subsection1}
-aaa
+The contribution of this research is threefold. First, existing context-aware architectures are extended through the incorporation of a multimodal content branch. Second, a structured experimental framework is introduced to enable direct attribution of performance improvements through controlled ablation. Third, empirical insights are generated into the interaction between multimodal content features and social context signals. The significance of this research lies in its potential to support the development of more robust and contextually aligned misinformation detection systems that reflect the complexity of real-world social media environments.
 
-\section{Introduction}
-
-\subsection{Introduction}
-
-\textbf{Topic and Importance}
-\begin{itemize}
-    \item Social media platforms contain both authentic and inauthentic content.
-    \item Inauthentic content is increasingly produced by malicious actors.
-    \item Advances in generative AI enable creation of highly realistic:
-    \begin{itemize}
-        \item Text
-        \item Images
-        \item Video and audio
-    \end{itemize}
-    \item This makes fake content:
-    \begin{itemize}
-        \item Harder to detect
-        \item More scalable
-    \end{itemize}
-    \item This creates risks for:
-    \begin{itemize}
-        \item Public trust
-        \item Information integrity
-    \end{itemize}
-    \item Therefore, detecting inauthentic social media content is a critical research problem.
-\end{itemize}
-
-\textbf{Background and Existing Work}
-\begin{itemize}
-    \item Early fake news detection approaches focused on text-only analysis.
-    \item These methods used:
-    \begin{itemize}
-        \item Natural Language Processing (NLP)
-        \item Machine learning models
-    \end{itemize}
-    \item Limitation:
-    \begin{itemize}
-        \item Text alone is often insufficient for detection
-    \end{itemize}
-    \item Multimodal approaches combine:
-    \begin{itemize}
-        \item Textual features
-        \item Visual features
-    \end{itemize}
-    \item Prior studies show multimodal models outperform unimodal models.
-    \item Another research direction uses social context:
-    \begin{itemize}
-        \item User interactions
-        \item Propagation patterns
-        \item Engagement behaviour
-    \end{itemize}
-    \item Models such as DANES and GETAE incorporate social network information.
-\end{itemize}
-
-\textbf{Research Gap}
-\begin{itemize}
-    \item Existing approaches are divided into:
-    \begin{itemize}
-        \item Multimodal content-based models
-        \item Social context-based models
-    \end{itemize}
-    \item Context-aware models (e.g. DANES, GETAE) still rely on:
-    \begin{itemize}
-        \item Text-only content branches
-    \end{itemize}
-    \item Multimodal models often do not fully integrate social context.
-    \item There is limited research on:
-    \begin{itemize}
-        \item Combining multimodal content with strong social context frameworks
-        \item Replacing text-only content components within existing architectures
-    \end{itemize}
-\end{itemize}
-
-\textbf{Proposed Approach}
-\begin{itemize}
-    \item This research proposes a context-aware misinformation detection framework.
-    \item Key idea:
-    \begin{itemize}
-        \item Replace the text-only content branch
-        \item With a multimodal content branch (text + image)
-    \end{itemize}
-    \item The framework builds on existing models such as:
-    \begin{itemize}
-        \item DANES
-        \item GETAE
-    \end{itemize}
-    \item The goal is to evaluate whether multimodal integration improves detection performance.
-\end{itemize}
-
-\textbf{Significance of the Research}
-\begin{itemize}
-    \item Provides insight into the value of multimodal features in context-aware systems.
-    \item Contributes to improving robustness of fake news detection models.
-    \item Addresses challenges posed by AI-generated misinformation.
-    \item Supports advancements in:
-    \begin{itemize}
-        \item Social media data mining
-        \item Fake news detection research
-    \end{itemize}
-\end{itemize}
+The structure of this paper is organised as follows. In Section 2, the research questions are presented, which provide a basis for the problems to be solved through this study. Section 3 is concerned with an analysis of previous research, particularly on multimodal and context-aware systems of misinformation detection, highlighting their limitations. The research methodology, comprising details on system architecture, experiment setup, and evaluation method, is described in Section 4. Section 5 deals with describing the procedure for evaluating the performance of our model against previous benchmark models. Finally, Section 6 explains the approach adopted for project management.
