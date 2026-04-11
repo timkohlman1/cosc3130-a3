@@ -1,0 +1,94 @@
+# .github/workflows/ci-latex.yml
+name: Build LaTeX PDF
+
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch: {}
+
+concurrency:
+  group: ci-latex-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  build-latex:
+    name: Compile and upload PDF
+    runs-on: [self-hosted, linux, X64]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+
+      - name: Compile LaTeX (pdflatex → bibtex → pdflatex × 2)
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/workspace" \
+            -w /workspace \
+            texlive/texlive:latest \
+            bash -c "
+              set -euo pipefail
+
+              echo '=== Pass 1: pdflatex ==='
+              pdflatex -interaction=nonstopmode -file-line-error main.tex 2>&1 | tee pass1.log
+
+              echo '=== Pass 2: bibtex ==='
+              bibtex main 2>&1 | tee bibtex.log
+
+              echo '=== Pass 3: pdflatex ==='
+              pdflatex -interaction=nonstopmode -file-line-error main.tex 2>&1 | tee pass2.log
+
+              echo '=== Pass 4: pdflatex (final) ==='
+              pdflatex -interaction=nonstopmode -file-line-error main.tex 2>&1 | tee pass3.log
+
+              echo '=== Build complete ==='
+            "
+
+      - name: Report warnings and errors
+        if: always()
+        run: |
+          echo "========================================="
+          echo "         WARNINGS AND ERRORS SUMMARY"
+          echo "========================================="
+
+          for log in pass1.log pass2.log pass3.log bibtex.log; do
+            if [ -f "$log" ]; then
+              echo ""
+              echo "--- $log ---"
+              grep -E "^[^:]+:[0-9]+:.*|Warning:|Error:|undefined|multiply defined|Citation .* undefined|Reference .* undefined" \
+                "$log" || echo "(none found)"
+            fi
+          done
+
+          echo ""
+          echo "==========================================="
+          echo "Full LaTeX log (final pass) tail:"
+          echo "==========================================="
+          tail -50 pass3.log || true
+
+          # Fail the job if pdflatex exited with an error
+          if grep -q "^!" pass3.log; then
+            echo ""
+            echo "ERROR: LaTeX reported fatal errors (lines starting with '!'):"
+            grep "^!" pass3.log
+            exit 1
+          fi
+
+      - name: Upload PDF artifact
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: main-pdf-${{ github.ref_name }}-${{ github.run_number }}
+          path: main.pdf
+          if-no-files-found: error
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: build-logs-${{ github.ref_name }}-${{ github.run_number }}
+          path: |
+            *.log
