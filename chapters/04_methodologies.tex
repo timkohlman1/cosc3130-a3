@@ -1,5 +1,6 @@
 \chapter{Research Methodologies}
 
+Feedback from tutor.   come up with a name. architecture diagram,  use tables to condense info
 
 
 note  Dellys et al. (2025) is flagged as the closest prior work (how does this differentiate?)
@@ -115,15 +116,27 @@ This research adopts a comparative experimental approach to investigate
 the effectiveness of multimodal content and social context features 
 in the detection of inauthentic social media posts.
 
-The proposed research will substitute the text-based content branch of existing 
-state-of-the-art context-aware models (DANES/GETAE) with a multimodal content branch, 
-allowing for direct comparison of the contribution of multimodal content features 
-to detection performance.
+By adapting existing state-of-the-art context-aware models (DANES/GETAE) 
+to incorporate multimodal content features, we directly compare the performance 
+and contribution of multimodal content features against text-based content 
+features when incorporating social context features to produce a combined 
+classification embedding.
 
 \section{System Architecture}
 
 % Provide a high-level overview of the proposed dual-branch framework and its relationship to DANES/GETAE.
+DANES (citE) and GETAE (cite) are ensemble approaches with two branches: a text-based 
+content branch that encodes textual content using word embeddings and 
+transformer-based representations in a neural network, and a social 
+context branch (referred to as the Propagation Branch in GETAE) that 
+models the social network user interactions and behaviour using graph 
+neural networks. 
 
+The proposed architecture modification is to substitute the text-based content branch 
+with a multimodal content branch to incorporate visual content features in addition 
+to textual features, while retaining the social context branch. 
+
+Diagram Here (TODO: insert architecture diagram showing the proposed modifications to the baseline architecture).
 
 \subsection{Multimodal Content Branch}
 
