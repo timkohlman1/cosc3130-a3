@@ -1,121 +1,27 @@
 \chapter{Literature Review}
 
-\section{Overview of Fake News Detection}
+\subsection{Overview of Social Media Misinformation Detection}
 
-\begin{itemize}
-    \item Introduce fake news and inauthentic content problem
-    \item Explain importance of detection in social media
-    \item Evolution of approaches:
-    \begin{itemize}
-        \item Text-only models
-        \item Context-aware models
-        \item Multimodal models
-    \end{itemize}
-    \item Content alone is not sufficient, context and behaviour matter
-    \item Deep learning dominates modern approaches
-    \item Different approaches address different aspects of the problem
-\end{itemize}
+The development of misinformation detection in social media can be observed across three main directions: text-based content analysis, social-context modelling, and multimodal detection. Earlier studies framed misinformation detection as a content classification problem, focusing on the linguistic and semantic properties of posts. While these approaches established useful baselines, increasing limitations have been identified in modern social media environments, where misleading information is conveyed not only through text but also through images, memes, screenshots, and user interaction patterns. As a result, a shift toward multimodal learning and context-aware modelling has been observed, reflecting the need to capture broader signals available within online platforms (Wang et al., 2018; Qian et al., 2021; Truică et al., 2024; Truică et al., 2025).
 
-\section{Content-Based Approaches}
+\subsection{Text-Only Content-Based Detection Approaches}
 
-\begin{itemize}
-    \item Models analyse only textual features
-    \item Techniques:
-    \begin{itemize}
-        \item NLP, BERT, RNN, CNN
-    \end{itemize}
-    \item Examples:
-    \begin{itemize}
-        \item Text branch in DANES and GETAE
-    \end{itemize}
-    \item Strengths:
-    \begin{itemize}
-        \item Simple and efficient
-        \item Good baseline performance
-    \end{itemize}
-    \item Weaknesses:
-    \begin{itemize}
-        \item Cannot detect visual misinformation
-        \item Ignores user behaviour and propagation
-        \item Struggles with subtle misinformation
-    \end{itemize}
-    \item Content-only approaches are not sufficient for real-world scenarios
-\end{itemize}
+Text-only content modelling has remained a foundational component in misinformation detection, including within later context-aware systems. In the relevant literature, post content continues to be represented primarily through text-based features. The main strength of this approach is the provision of a strong semantic baseline, particularly when misinformation is expressed through written language. However, limitations are increasingly evident in social media contexts, where misinformation is often conveyed through visual and multimodal formats. This is visible in models such as DANES and GETAE, where text-only representations are still used within the content branch despite strong performance (Truică et al., 2024; Truică et al., 2025). Thus, while useful as a baseline, text-only modelling provides a restricted view of content and is insufficient for capturing the full complexity of contemporary inauthentic posts.
 
-\section{Context-Aware Approaches}
+\subsection{Context-Aware Detection with Social and Propagation Signals}
 
-\begin{itemize}
-    \item Use social media context instead of only content
-    \item Types of context:
-    \begin{itemize}
-        \item User behaviour
-        \item Interactions
-        \item Propagation patterns
-    \end{itemize}
-    \item Models:
-    \begin{itemize}
-        \item DANES (text + social context)
-        \item GETAE (text + propagation graph)
-        \item GCAN (context only)
-    \end{itemize}
-    \item Techniques:
-    \begin{itemize}
-        \item Graph neural networks
-        \item Propagation graphs
-    \end{itemize}
-    \item Strengths:
-    \begin{itemize}
-        \item Captures real-world behaviour
-        \item Improves detection performance
-    \end{itemize}
-    \item Weaknesses:
-    \begin{itemize}
-        \item Relies on text-only content
-        \item Ignores multimodal data
-        \item Depends on specific datasets
-    \end{itemize}
-    \item Context improves detection but content is still limited
-\end{itemize}
+A major research direction involves the incorporation of social context into misinformation detection. Rather than focusing only on post content, these approaches model information spread, user engagement, and temporal interaction patterns. Evidence shows that diffusion patterns, user relationships, and temporal dynamics provide strong classification signals, often capturing behavioural evidence unavailable from content alone (Song et al., 2021; Min et al., 2022; Zhu et al., 2024). Models such as DANES and GETAE represent important context-aware ensemble architectures, combining a content branch with a social or propagation branch. Their strength lies in structured use of social context and strong benchmark performance. However, reliance on a text-only content branch limits the ability to capture visual misinformation. Additionally, propagation-based methods depend on interaction data that may be sparse or delayed, particularly in early detection scenarios. Consequently, while detection extends beyond content, limitations of text-only representation are still inherited (Truică et al., 2024; Truică et al., 2025).
 
-\section{Multimodal Approaches}
+\subsection{Multimodal Content-Based Detection Approaches}
 
-\begin{itemize}
-    \item Combine multiple data types such as text and images
-    \item Social media content is inherently multimodal
-    \item Models:
-    \begin{itemize}
-        \item EANN, MCNN, HMCAN, MPFN, LDPG
-    \end{itemize}
-    \item Techniques:
-    \begin{itemize}
-        \item CNN, transformers, fusion methods
-    \end{itemize}
-    \item Strengths:
-    \begin{itemize}
-        \item Better feature representation
-        \item Improved accuracy
-        \item Detects misleading visuals
-    \end{itemize}
-    \item Weaknesses:
-    \begin{itemize}
-        \item Ignores social context
-        \item Static models without propagation
-        \item Requires large datasets
-    \end{itemize}
-    \item Multimodal improves content but lacks context integration
-\end{itemize}
+Multimodal detection addresses the limitations of text-only modelling. Foundational work such as EANN demonstrated improved performance through combining textual and visual features (Wang et al., 2018). Later studies focused on improving fusion methods. For example, MCNN models text-image consistency, while HMCAN and MPFN show that hierarchical attention and progressive fusion better capture cross-modal relationships than simple concatenation (Xue et al., 2021; Qian et al., 2021; Jing et al., 2023). This progression indicates that gains depend not only on modality inclusion but also on interaction quality. Benchmark datasets such as Fakeddit 
+further show that multimodal classifiers outperform unimodal baselines (Nakamura et al., 2020; Segura-Bedmar \& Alonso-Bartolome, 2022). While this literature reflects modern social media content well, a key limitation is the focus on content-level modelling, with limited integration of social and propagation context.
 
-\section{Research Gap and Positioning}
+\subsection{Integrating Multimodal Content and Social Context}
 
-\begin{itemize}
-    \item Content-based models are limited
-    \item Context-aware models rely on text-only content
-    \item Multimodal models ignore social context
-    \item There is no effective integration of multimodal and context-aware approaches
-    \item Existing models such as DANES and GETAE use text-only content branches
-    \item Proposed research replaces text branch with multimodal branch
-    \item Combines multimodal content with context-aware architecture
-    \item Evaluates performance improvement and contribution of each branch
-\end{itemize}
+Recent research has explored integrating multimodal content and social context within unified frameworks. Studies such as EFND, C\textsuperscript{2}DCMTN, DPSG, TMEF-BI, and ESDGFN show that combining textual, visual, and contextual signals can achieve strong performance (Nadeem et al., 2023; Wang et al., 2024; Jing et al., 2025; Chen et al., 2025; Sun et al., 2025; Ji et al., 2026). These findings indicate that multimodal content and social context are complementary. However, variation in how social context is represented introduces challenges in comparison. Some models use engagement data, while others incorporate behaviour, stance, or dynamic graph fusion (Nadeem et al., 2023; Wang et al., 2024; Chen et al., 2025; Sun et al., 2025). This lack of consistency prevents clear attribution of performance gains, as both multimodal and social components are often changed simultaneously. As a result, while joint modelling is supported, the specific contribution of multimodality remains unclear, particularly compared to DANES and GETAE architectures (Truică et al., 2024; Truică et al., 2025; Dellys et al., 2025).
 
+\subsection{Research Gap and Positioning of the Proposed Study}
+
+A central gap in the literature is identified. Prior research shows that both multimodal content and social context improve misinformation detection (Wang et al., 2018; Qian et al., 2021; Truică et al., 2024; Nadeem et al., 2023; Jing et al., 2025). However, limited research performs controlled substitution of the text-only content branch within established context-aware ensembles while keeping the social branch unchanged. As a result, the specific contribution of multimodal substitution within DANES/GETAE remains unclear, and the relative contribution of content and social context is not well decomposed (Truică et al., 2024; Truică et al., 2025; Dellys et al., 2025; Chen et al., 2025). This gap aligns with the project’s research questions. Research Question 1 evaluates performance improvement from multimodal substitution, while Research Question 2 examines whether multimodal and social branches provide complementary or overlapping value. To address this, the study uses DANES and GETAE as baselines, replaces the text-only content branch with a multimodal alternative, and conducts ablation-based comparisons across configurations. This enables a controlled evaluation of the contribution of multimodal content and social context in misinformation detection.
 

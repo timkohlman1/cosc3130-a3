@@ -1,1 +1,159 @@
-
+@inproceedings{Wang2018,
+    author = {Wang, Yaqing and Ma, Fenglong and Jin, Zhiwei and Yuan, Ye and Xun, Guangxu and Jha, Kishlay and Su, Lu and Gao, Jing},
+    title = {EANN: Event Adversarial Neural Networks for Multi-Modal Fake News Detection},
+    year = {2018},
+    isbn = {9781450355520},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3219819.3219903},
+    doi = {10.1145/3219819.3219903},
+    abstract = {As news reading on social media becomes more and more popular, fake news becomes a major issue concerning the public and government. The fake news can take advantage of multimedia content to mislead readers and get dissemination, which can cause negative effects or even manipulate the public events. One of the unique challenges for fake news detection on social media is how to identify fake news on newly emerged events. Unfortunately, most of the existing approaches can hardly handle this challenge, since they tend to learn event-specific features that can not be transferred to unseen events. In order to address this issue, we propose an end-to-end framework named Event Adversarial Neural Network (EANN), which can derive event-invariant features and thus benefit the detection of fake news on newly arrived events. It consists of three main components: the multi-modal feature extractor, the fake news detector, and the event discriminator. The multi-modal feature extractor is responsible for extracting the textual and visual features from posts. It cooperates with the fake news detector to learn the discriminable representation for the detection of fake news. The role of event discriminator is to remove the event-specific features and keep shared features among events. Extensive experiments are conducted on multimedia datasets collected from Weibo and Twitter. The experimental results show our proposed EANN model can outperform the state-of-the-art methods, and learn transferable feature representations.},
+    booktitle = {Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery \& Data Mining},
+    pages = {849–857},
+    numpages = {9},
+    keywords = {fake news detection, deep learning, adversarial neural networks},
+    location = {London, United Kingdom},
+    series = {KDD '18}
+}
+@inproceedings{Nakamura2020,
+    title = "{F}akeddit: A New Multimodal Benchmark Dataset for Fine-grained Fake News Detection",
+    author = "Nakamura, Kai  and
+        Levy, Sharon  and
+        Wang, William Yang",
+    editor = "Calzolari, Nicoletta  and
+        B{\'e}chet, Fr{\'e}d{\'e}ric  and
+        Blache, Philippe  and
+        Choukri, Khalid  and
+        Cieri, Christopher  and
+        Declerck, Thierry  and
+        Goggi, Sara  and
+        Isahara, Hitoshi  and
+        Maegaard, Bente  and
+        Mariani, Joseph  and
+        Mazo, H{\'e}l{\`e}ne  and
+        Moreno, Asuncion  and
+        Odijk, Jan  and
+        Piperidis, Stelios",
+    booktitle = "Proceedings of the Twelfth Language Resources and Evaluation Conference",
+    month = may,
+    year = "2020",
+    address = "Marseille, France",
+    publisher = "European Language Resources Association",
+    url = "https://aclanthology.org/2020.lrec-1.755/",
+    pages = "6149--6157",
+    language = "eng",
+    ISBN = "979-10-95546-34-4",
+    abstract = "Fake news has altered society in negative ways in politics and culture. It has adversely affected both online social network systems as well as offline communities and conversations. Using automatic machine learning classification models is an efficient way to combat the widespread dissemination of fake news. However, a lack of effective, comprehensive datasets has been a problem for fake news research and detection model development. Prior fake news datasets do not provide multimodal text and image data, metadata, comment data, and fine-grained fake news categorization at the scale and breadth of our dataset. We present Fakeddit, a novel multimodal dataset consisting of over 1 million samples from multiple categories of fake news. After being processed through several stages of review, the samples are labeled according to 2-way, 3-way, and 6-way classification categories through distant supervision. We construct hybrid text+image models and perform extensive experiments for multiple variations of classification, demonstrating the importance of the novel aspect of multimodality and fine-grained classification unique to Fakeddit."
+}
+@article{Xue2021,
+    title = {Detecting fake news by exploring the consistency of multimodal data},
+    journal = {Information Processing & Management},
+    volume = {58},
+    number = {5},
+    pages = {102610},
+    year = {2021},
+    issn = {0306-4573},
+    doi = {https://doi.org/10.1016/j.ipm.2021.102610},
+    url = {https://www.sciencedirect.com/science/article/pii/S0306457321001060},
+    author = {Junxiao Xue and Yabo Wang and Yichen Tian and Yafei Li and Lei Shi and Lin Wei},
+    keywords = {Fake news detect, Multimodal, Social media, Neural network, Tampering},
+    abstract = {During the outbreak of the new Coronavirus (2019-nCoV) in 2020, the spread of fake news has caused serious social panic. Fake news often uses multimedia information such as text and image to mislead readers, spreading and expanding its influence. One of the most important problems in fake news detection based on multimodal data is to extract the general features as well as to fuse the intrinsic characteristics of the fake news, such as mismatch of image and text and image tampering. This paper proposes a Multimodal Consistency Neural Network (MCNN) that considers the consistency of multimodal data and captures the overall characteristics of social media information. Our method consists of five subnetworks: the text feature extraction module, the visual semantic feature extraction module, the visual tampering feature extraction module, the similarity measurement module, and the multimodal fusion module. The text feature extraction module and the visual semantic feature extraction module are responsible for extracting the semantic features of text and vision and mapping them to the same space for a common representation of cross-modal features. The visual tampering feature extraction module is responsible for extracting visual physical and tamper features. The similarity measurement module can directly measure the similarity of multimodal data for the problem of mismatching of image and text. We assess the constructed method in terms of four datasets commonly used for fake news detection. The accuracy of the detection is improved clearly compared to the best available methods.}
+}
+@inproceedings{Qian2021,
+    author = {Qian, Shengsheng and Wang, Jinguang and Hu, Jun and Fang, Quan and Xu, Changsheng},
+    title = {Hierarchical Multi-modal Contextual Attention Network for Fake News Detection},
+    year = {2021},
+    isbn = {9781450380379},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3404835.3462871},
+    doi = {10.1145/3404835.3462871},
+    abstract = {Nowadays, detecting fake news on social media platforms has become a top priority since the widespread dissemination of fake news may mislead readers and have negative effects. To date, many algorithms have been proposed to facilitate the detection of fake news from the hand-crafted feature extraction methods to deep learning approaches. However, these methods may suffer from the following limitations: (1) fail to utilize the multi-modal context information and extract high-order complementary information for each news to enhance the detection of fake news; (2) largely ignore the full hierarchical semantics of textual content to assist in learning a better news representation. To overcome these limitations, this paper proposes a novel hierarchical multi-modal contextual attention network (HMCAN) for fake news detection by jointly modeling the multi-modal context information and the hierarchical semantics of text in a unified deep model. Specifically, we employ BERT and ResNet to learn better representations for text and images, respectively. Then, we feed the obtained representations of images and text into a multi-modal contextual attention network to fuse both inter-modality and intra-modality relationships. Finally, we design a hierarchical encoding network to capture the rich hierarchical semantics for fake news detection. Extensive experiments on three public real datasets demonstrate that our proposed HMCAN achieves state-of-the-art performance.},
+    booktitle = {Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+    pages = {153–162},
+    numpages = {10},
+    keywords = {fake news detection, multi-modal learning, social media},
+    location = {Virtual Event, Canada},
+    series = {SIGIR '21}
+}
+@article{Song2021,
+    title = {Temporally evolving graph neural network for fake news detection},
+    journal = {Information Processing & Management},
+    volume = {58},
+    number = {6},
+    pages = {102712},
+    year = {2021},
+    issn = {0306-4573},
+    doi = {https://doi.org/10.1016/j.ipm.2021.102712},
+    url = {https://www.sciencedirect.com/science/article/pii/S0306457321001965},
+    author = {Chenguang Song and Kai Shu and Bin Wu},
+    keywords = {Fake news detection, Temporal evolution, Diffusion networks},
+    abstract = {The proliferation of fake news on social media has the probability to bring an unfavorable impact on public opinion and social development. Many efforts have been paid to develop effective detection and intervention algorithms in recent years. Most of the existing propagation-based fake news detection methods focus on static networks and assume the whole information propagation network structure is accessible before performing learning algorithms. However, in real-world information diffusion networks, new nodes and edges constantly emerge. Therefore, in this paper, we introduce a novel temporal propagation-based fake news detection framework, which could fuse structure, content semantics, and temporal information. In particular, our model can model temporal evolution patterns of real-world news as the graph evolving under the setting of continuous-time dynamic diffusion networks. We conduct extensive experiments on large-scale real-world datasets and the experimental results demonstrate that our proposed model outperforms state-of-the-art fake news detection methods.}
+}
+@inproceedings{Min2022,
+    author = {Min, Erxue and Rong, Yu and Bian, Yatao and Xu, Tingyang and Zhao, Peilin and Huang, Junzhou and Ananiadou, Sophia},
+    title = {Divide-and-Conquer: Post-User Interaction Network for Fake News Detection on Social Media},
+    year = {2022},
+    isbn = {9781450390965},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3485447.3512163},
+    doi = {10.1145/3485447.3512163},
+    abstract = {Fake News detection has attracted much attention in recent years. Social context based detection methods attempt to model the spreading patterns of fake news by utilizing the collective wisdom from users on social media. This task is challenging for three reasons: (1) There are multiple types of entities and relations in social context, requiring methods to effectively model the heterogeneity. (2) The emergence of news in novel topics in social media causes distribution shifts, which can significantly degrade the performance of fake news detectors. (3) Existing fake news datasets usually lack of great scale, topic diversity and user social relations, impeding the development of this field. To solve these problems, we formulate social context based fake news detection as a heterogeneous graph classification problem, and propose a fake news detection model named Post-User Interaction Network (PSIN), which adopts a divide-and-conquer strategy to model the post-post, user-user and post-user interactions in social context effectively while maintaining their intrinsic characteristics. Moreover,we adopt an adversarial topic discriminator for topic-agnostic feature learning, in order to improve the generalizability of our method for new-emerging topics. Furthermore, we curate a new dataset for fake news detection, which contains over 27,155 news from 5 topics, 5 million posts, 2 million users and their induced social graph with 0.2 billion edges. It has been published on https://github.com/qwerfdsaplking/MC-Fake. Extensive experiments illustrate that our method outperforms SOTA baselines in both in-topic and out-of-topic settings.},
+    booktitle = {Proceedings of the ACM Web Conference 2022},
+    pages = {1148–1158},
+    numpages = {11},
+    keywords = {Fake News Detection, Graph Neural Network, Social Media},
+    location = {Virtual Event, Lyon, France},
+    series = {WWW '22}
+}
+@article{SeguraBedmar2022,
+    author = {Segura-Bedmar, Isabel and Alonso-Bartolome, Santiago},
+    title = {Multimodal Fake News Detection},
+    journal = {Information},
+    year = {2022},
+    volume = {13},
+    number = {6},
+    pages = {284},
+    doi = {10.3390/info13060284},
+    url = {https://doi.org/10.3390/info13060284},
+    publisher = {MDPI}
+}
+@article{Jing2023,
+    title = {Multimodal fake news detection via progressive fusion networks},
+    journal = {Information Processing & Management},
+    volume = {60},
+    number = {1},
+    pages = {103120},
+    year = {2023},
+    issn = {0306-4573},
+    doi = {https://doi.org/10.1016/j.ipm.2022.103120},
+    url = {https://www.sciencedirect.com/science/article/pii/S0306457322002217},
+    author = {Jing Jing and Hongchen Wu and Jie Sun and Xiaochang Fang and Huaxiang Zhang},
+    keywords = {Fake news detection, Multimodal fusion, Social media, Neural network},
+    abstract = {Multimodal fake news detection methods based on semantic information have achieved great success. However, these methods only exploit the deep features of multimodal information, which leads to a large loss of valid information at the shallow level. To address this problem, we propose a progressive fusion network (MPFN) for multimodal disinformation detection, which captures the representational information of each modality at different levels and achieves fusion between modalities at the same level and at different levels by means of a mixer to establish a strong connection between the modalities. Specifically, we use a transformer structure, which is effective in computer vision tasks, as a visual feature extractor to gradually sample features at different levels and combine features obtained from a text feature extractor and image frequency domain information at different levels for fine-grained modeling. In addition, we design a feature fusion approach to better establish connections between modalities, which can further improve the performance and thus surpass other network structures in the literature. We conducted extensive experiments on two real datasets, Weibo and Twitter, where our method achieved 83.3% accuracy on the Twitter dataset, which has increased by at least 4.3% compared to other state-of-the-art methods. This demonstrates the effectiveness of MPFN for identifying fake news, and the method reaches a relatively advanced level by combining different levels of information from each modality and a powerful modality fusion method.}
+}
+@article{Truică2024,
+    title = {DANES: Deep Neural Network Ensemble Architecture for Social and Textual Context-aware Fake News Detection},
+    journal = {Knowledge-Based Systems},
+    volume = {294},
+    pages = {111715},
+    year = {2024},
+    issn = {0950-7051},
+    doi = {https://doi.org/10.1016/j.knosys.2024.111715},
+    url = {https://www.sciencedirect.com/science/article/pii/S0950705124003502},
+    author = {Ciprian-Octavian Truică and Elena-Simona Apostol and Panagiotis Karras},
+    keywords = {Fake News Detection, Social network analysis, Ensemble model, Network embeddings, Word embeddings},
+    abstract = {The growing popularity of social media platforms has simplified the creation and distribution of news articles but also creates a conduit for spreading fake news. In consequence, the need arises for effective context-aware fake news detection mechanisms, where the contextual information can be built either from the textual content of posts or from available social data (e.g., information about the users, reactions to posts, or the social network). In this paper, we propose DANES, a Deep Neural Network Ensemble Architecture for Social and Textual Context-aware Fake News Detection. DANES comprises a Text Branch for a textual content-based context and a Social Branch for the social context. These two branches are used to create a novel Network Embedding. Preliminary ablation results on 3 real-world datasets, i.e., BuzzFace, Twitter15, and Twitter16, are promising, with an accuracy that outperforms state-of-the-art solutions when employing both social and textual content features. In the present setting, with so much manipulation on social media platforms, our solution can enhance fake news identification even with limited training data.}
+}
+@article{Nadeem2023,
+    author  = {Nadeem, Muhammad Imran and Ahmed, Kanwal and Li, Dun and Zheng, Zhiyun and Alkahtani, Hend Khalid and Mostafa, Samih M. and Mamyrbayev, Orken and Abdel Hameed, Hala},
+    title   = {EFND: A Semantic, Visual, and Socially Augmented Deep Framework for Extreme Fake News Detection},
+    journal = {Sustainability},
+    year    = {2023},
+    volume  = {15},
+    number  = {1},
+    pages   = {133},
+    doi     = {10.3390/su15010133},
+    url     = {https://doi.org/10.3390/su15010133}
+}
