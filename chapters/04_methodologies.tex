@@ -60,11 +60,7 @@ This approach maintains a focus on the architectural substitution question rathe
 
 The key considerations for the selection are: task alignment, dataset compatibility, ease of integration and widespread validation. 
 
-From our review of the literature, HMCAN and MPFN models have both demonstrated excellent accuracy (0.89.7\% and 83.3\% respectively) in multimodal fake news detection using the 
-Multimodal Twitter dataset, outperforming other common multimodal models for fake news detection (such as EANN). HMCAN's BERT + ResNet 
-encoding pipeline is consistent with the text branch of DANES/GETAE and has been independently validated on the Multimodal Twitter dataset 
-as well as Fakedit dataset, making it a suitable candidate for the multimodal content branch. MPFN utilises a more complex image pipeline 
-which could be beneficial for detecting manipulated or artificially generated images, and is another potential candidate.
+
 
 Our system will adopt HMCAN with MPFN as a fallback option as this provides a robust foundation for handling multimodal content.
 
@@ -107,7 +103,10 @@ The structured experimental design ensures that performance differences can be a
 
 
 
-
+By adapting existing state-of-the-art context-aware models (DANES/GETAE) 
+we produce the MACE (Multimodal and Context-aware Ensemble) framework 
+incorporating multimodal content and context features for inauthentic social 
+media post detection.
 
 \section{Research Design}
 
@@ -116,16 +115,20 @@ This research adopts a comparative experimental approach to investigate
 the effectiveness of multimodal content and social context features 
 in the detection of inauthentic social media posts.
 
-By adapting existing state-of-the-art context-aware models (DANES/GETAE) 
-to incorporate multimodal content features, we directly compare the performance 
-and contribution of multimodal content features against text-based content 
-features when incorporating social context features to produce a combined 
-classification embedding.
+The research design involves implementing a modified architecture based on 
+existing state of the art ensemble models incorporating textual and social context 
+features, and substituting text-based content features with a 
+multimodal content branch, while retaining the social context branch.
+
+Performance will be evaluated based on comparisons 
+and ablation studies against the baseline models using a multimodal dataset, 
+allowing for systematic evaluation of content and social context features and 
+their contribution to the overall performance of the model. 
 
 \section{System Architecture}
 
 % Provide a high-level overview of the proposed dual-branch framework and its relationship to DANES/GETAE.
-DANES (citE) and GETAE (cite) are ensemble approaches with two branches: a text-based 
+DANES and GETAE are ensemble approaches with two branches: a text-based 
 content branch that encodes textual content using word embeddings and 
 transformer-based representations in a neural network, and a social 
 context branch (referred to as the Propagation Branch in GETAE) that 
@@ -133,15 +136,26 @@ models the social network user interactions and behaviour using graph
 neural networks. 
 
 The proposed architecture modification is to substitute the text-based content branch 
-with a multimodal content branch to incorporate visual content features in addition 
-to textual features, while retaining the social context branch. 
+with a HMCAN multimodal content branch to incorporate visual content features in addition 
+to textual features, while retaining the social context branch used in the baseline ensemble 
+models. 
 
 Diagram Here (TODO: insert architecture diagram showing the proposed modifications to the baseline architecture).
 
 \subsection{Multimodal Content Branch}
 
 % Briefly describe how textual and visual features are extracted and combined.
+MACE will adopt a well validated multimodal model (HMCAN, with MPFN as an alternative) from the literature 
+that has been designed for the task of multimodal fake news detection. The key considerations for the selection 
+are: task alignment, dataset compatibility, ease of integration and widespread validation; accordingly the focus will be 
+on architectural substitution rather than design and optimisation of a novel multimodel architecture.
 
+From our review of the literature, HMCAN and MPFN models have both demonstrated excellent accuracy (89.7\% and 83.3\% respectively) in multimodal 
+fake news detection using the 
+Multimodal Twitter dataset, outperforming other common multimodal models for fake news detection (such as EANN). HMCAN's BERT + ResNet 
+encoding pipeline is consistent with the text branch of DANES/GETAE and has been independently validated on the Multimodal Twitter dataset 
+as well as Fakedit dataset, making it a suitable candidate. MPFN utilises a more complex image pipeline 
+which could be beneficial for detecting manipulated or artificially generated images, and is another potential candidate.
 
 \subsection{Social Context Branch}
 
