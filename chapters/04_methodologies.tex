@@ -12,19 +12,18 @@ content features into existing ensemble models.
 \section{System Architecture}
 
 % Provide a high-level overview of the proposed dual-branch framework and its relationship to DANES/GETAE.
-DANES and GETAE are dual-branch ensemble approaches fusing a text-based content branch (which encodes 
-post text using word embeddings and transformer-based representations) with a social context branch 
-(that models user interactions and behaviour using graph-based deep learning models) to perform a final classification 
-(authentic or inauthentic).
+DANES and GETAE are ensemble approaches fusing a text-based content branch and a social context branch 
+to classify inauthentic content on social media.
 
-HMCAN(Hierarchical Multi-modal Contextual Attention Network \cite{Qian2021}) and MPFN (Multimodal Progressive Fusion Network \cite{Jing2023}) are multimodal architectures designed for fake news detection that encode both textual and 
-visual features from social media posts.
+HMCAN(Hierarchical Multi-modal Contextual Attention Network \cite{Qian2021}) and MPFN (Multimodal Progressive Fusion 
+Network \cite{Jing2023}) are multimodal architectures performing inauthentic content detection based on 
+textual and visual features in social media posts.
 
-The proposed MACE framework retains the dual-branch structure of the baseline ensemble models and replaces 
-the text-based content branch with a HMCAN multimodal (or alternatively MPFN\footnote{If HMCAN proves incompatible with 
+The proposed MACE framework retains the dual-branch structure and social context features of DANES and GETAE and replaces 
+the text-based content branch with a multimodal branch (HMCAN or MPFN\footnote{If HMCAN proves incompatible with 
 the selected dataset or integration constraints, MPFN is 
 identified as a potential fallback candidate, utilising a more complex image pipeline.})
-content branch, while keeping the social context branch intact.
+content branch, allowing for evaulation of the classification performance of multimodal content features within existing ensemble frameworks.
 
 Diagram Here (TODO: insert architecture diagram showing the proposed modifications to the baseline architecture).
 
@@ -35,7 +34,7 @@ MACE adopts HMCAN as the multimodal content branch, which is selected
 for its task alignment, dataset compatibility and ease of integration 
 with the existing DANES/GETAE architectures.
 
-From our review of the literature, HMCAN has demonstrated 
+HMCAN has demonstrated 
 excellent accuracy (89.7\%, outperforming common baselines such as EANN) in multimodal fake news 
 detection using its BERT + ResNet encoding pipeline, 
 is consistent with the text branch of DANES/GETAE and has been independently validated on the Multimodal 
@@ -79,7 +78,7 @@ Both fusion models combine branch outputs by concatenating the content and conte
 a classification embedding, which is passed to a classification layer. The classification layer applies a softmax function to produce a probability 
 distribution over the classes (authentic or inauthentic) and assigns a label based on the highest probability.
 
-MACE retains this fusion mechanism without modification, ensuring performance differences can be attributed 
+MACE retains this fusion mechanism to ensure the performance differences can be attributed 
 to the substitution of the content branch rather than changes in the fusion or classification approach. 
 
 \section{Experimental Design}
