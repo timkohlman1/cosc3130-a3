@@ -152,32 +152,6 @@ RQ1 & A vs D &
 }
 \end{table}
 
-\section{Datasets and Data Preparation}
-
-% Briefly describe dataset selection, preprocessing, and train/validation/test split.
-Twitter15 and Twitter16 are used for Stage 1 replication only, 
-as they do not contain image data.
-
-For Stage 2, a multimodal dataset will be used containing multimodal content (text and images) and social context features 
-through a conversation thread structure, comparable to Twitter15/16 (to ensure the social context branch can be retained with minimal modification).
-
-We are not intending to derive conclusions about the relative performance of the models on the Twitter15/16 datasets and the multimodal dataset so comparisons 
-between stage 1 and 2 are not relevant\footnote{It is anticipated that the transition from Twitter15/16 datasets to a multimodal datasets will result in a performance difference in Stage 2 Condition A relative to Stage 1 depending 
-on the extent to which these models generalise to a new dataset.}.
-
-TODO this needs fleshing out a bit more I think
-
-\section{Evaluation Strategy}
-
-% Outline the evaluation approach and performance comparison plan.
-The four-condition design allows for systematic evaluation of the proposed architecture modification 
-by isolating the impact of multimodal content and social context features through controlled ablation experiments. 
-
-Performance is evaluated using accuracy, precision, recall, and
-F1-score, which are standard metrics for classification tasks 
-and allow for comprehensive assessment of model performance across both classes (authentic and inauthentic). 
-
-ROC AUC will also be used to evaluate the model's ability to distinguish between classes across different thresholds.
 
 
 
