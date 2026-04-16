@@ -1,23 +1,154 @@
 \chapter{Literature Review}
 
-\section{DELETE original question}
+\section{Overview of Social Media Misinformation Detection}
 
-Literature Review - 2 pages (7 marks)
+The development of misinformation detection in social media can be observed across three main directions: text-based content analysis, social-context modelling, and multimodal detection. Earlier studies framed misinformation detection as a content classification problem, focusing on the linguistic and semantic properties of posts. While these approaches established useful baselines, increasing limitations have been identified in modern social media environments, where misleading information is conveyed not only through text but also through images, memes, screenshots, and user interaction patterns. As a result, a shift toward multimodal learning and context-aware modelling has been observed, reflecting the need to capture broader signals available within online platforms \citep{Wang2018,Qian2021,truica2024danes,truica2025getae}.
 
-It is indeed essential to demonstrate that you are familiar with the most important research on your selected
-topic. A strong literature review convinces the reader that your research/project has a solid foundation in existing
-knowledge or theory. It also shows that you are not simply repeating what others have already done or said.
+\section{Text-Only Content-Based Detection Approaches}
 
-The aim of this section is to show exactly how your project will contribute to discussions in the field.
+Text-only content modelling has remained a foundational component in misinformation detection, including within later context-aware systems. In the relevant literature, post content continues to be represented primarily through text-based features. The main strength of this approach is the provision of a strong semantic baseline, particularly when misinformation is expressed through written language. However, limitations are increasingly evident in social media contexts, where misinformation is often conveyed through visual and multimodal formats. This is visible in models such as DANES and GETAE, where text-only representations are still used within the content branch despite strong performance \citep{truica2024danes,truica2025getae}. Thus, while useful as a baseline, text-only modelling provides a restricted view of content and is insufficient for capturing the full complexity of contemporary inauthentic posts.
 
-\begin{itemize}
-\item Compare and contrast: what are the main theories, methods, debates, and controversies?
-\item Be critical: what are the strengths and weaknesses of different approaches?
-\item Show how your research fits in: how will you build on, challenge, or synthesise the work of others?
-\end{itemize}
+\section{Context-Aware Detection with Social and Propagation Signals}
 
-\section{aaaSection2}
-\subsection{aaaSection2Subsection1}
-aaa
+A major research direction involves the incorporation of social context into misinformation detection. Rather than focusing only on post content, these approaches model information spread, user engagement, and temporal interaction patterns. Evidence shows that diffusion patterns, user relationships, and temporal dynamics provide strong classification signals, often capturing behavioural evidence unavailable from content alone \citep{Song2021,Min2022,Zhu24}. Models such as DANES and GETAE represent important context-aware ensemble architectures, combining a content branch with a social or propagation branch. Their strength lies in structured use of social context and strong benchmark performance. However, reliance on a text-only content branch limits the ability to capture visual misinformation. Additionally, propagation-based methods depend on interaction data that may be sparse or delayed, particularly in early detection scenarios. Consequently, while detection extends beyond content, limitations of text-only representation are still inherited \citep{truica2024danes,truica2025getae}.
 
+\section{Multimodal Content-Based Detection Approaches}
 
+Multimodal detection addresses the limitations of text-only modelling. Foundational work such as EANN demonstrated improved performance through combining textual and visual features \citep{Wang2018}. Later studies focused on improving fusion methods. For example, MCNN models text-image consistency, while HMCAN and MPFN show that hierarchical attention and progressive fusion better capture cross-modal relationships than simple concatenation \citep{Xue2021,Qian2021,Jing2023}. This progression indicates that gains depend not only on modality inclusion but also on interaction quality. Benchmark datasets such as Fakeddit further show that multimodal classifiers outperform unimodal baselines \citep{nakamura2020fakeddit,segura2022multimodal}. While this literature reflects modern social media content well, a key limitation is the focus on content-level modelling, with limited integration of social and propagation context.
+
+\section{Integrating Multimodal Content and Social Context}
+
+Recent research has explored integrating multimodal content and social context within unified frameworks. Studies such as EFND, C\textsuperscript{2}DCMTN, DPSG, TMEF-BI, and ESDGFN show that combining textual, visual, and contextual signals can achieve strong performance \citep{nadeem2023efnd,Wang2024,jing2025dpsg,Chen25,Sun25,Ji2026LDPG}. These findings indicate that multimodal content and social context are complementary. However, variation in how social context is represented introduces challenges in comparison. Some models use engagement data, while others incorporate behaviour, stance, or dynamic graph fusion \citep{nadeem2023efnd,Wang2024,Chen25,Sun25}. This lack of consistency prevents clear attribution of performance gains, as both multimodal and social components are often changed simultaneously. As a result, while joint modelling is supported, the specific contribution of multimodality remains unclear, particularly compared to DANES and GETAE architectures \citep{truica2024danes,truica2025getae,dellys2025multimodal}.
+
+\section{Research Gap and Positioning of the Proposed Study}
+
+A central gap in the literature is identified. Prior research shows that both multimodal content and social context improve misinformation detection \citep{Wang2018,Qian2021,truica2024danes,nadeem2023efnd,jing2025dpsg}. However, limited research performs controlled substitution of the text-only content branch within established context-aware ensembles while keeping the social branch unchanged. As a result, the specific contribution of multimodal substitution within DANES/GETAE remains unclear, and the relative contribution of content and social context is not well decomposed \citep{truica2024danes,truica2025getae,dellys2025multimodal,Chen25}. This gap aligns with the project’s research questions. Research Question 1 evaluates performance improvement from multimodal substitution, while Research Question 2 examines whether multimodal and social branches provide complementary or overlapping value. To address this, the study uses DANES and GETAE as baselines, replaces the text-only content branch with a multimodal alternative, and conducts ablation-based comparisons across configurations. This enables a controlled evaluation of the contribution of multimodal content and social context in misinformation detection.
+
+\begin{longtable}{|p{3.2cm}|p{3cm}|p{4.8cm}|p{4.8cm}|}
+\caption{Summary of prior studies on multimodal and context-aware misinformation detection}
+\label{tab:literature_summary} \\
+\hline
+\textbf{Study} & \textbf{Focus} & \textbf{Key finding / contribution} & \textbf{Main limitation} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Study} & \textbf{Focus} & \textbf{Key finding / contribution} & \textbf{Main limitation} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+Wang et al. (2018) -- EANN
+& Early multimodal fake news detection
+& Showed that combining text + image features improves misinformation detection over text-only methods
+& Fusion was still relatively early-stage and did not fully model deeper cross-modal relationships \\
+\hline
+
+Nakamura et al. (2020) -- Fakeddit
+& Multimodal benchmark dataset
+& Provided a large benchmark showing that multimodal classifiers outperform unimodal baselines
+& Focused more on benchmarking than integrating social context \\
+\hline
+
+Xue et al. (2021) -- MCNN
+& Text-image consistency modelling
+& Demonstrated that modelling the relationship between text and image improves classification
+& Mainly content-focused, with limited use of propagation or user context \\
+\hline
+
+Qian et al. (2021) -- HMCAN
+& Hierarchical multimodal attention
+& Showed that attention-based multimodal fusion captures cross-modal interactions better than simple feature concatenation
+& Still concentrated on content-level signals rather than broader platform context \\
+\hline
+
+Song et al. (2021)
+& Social/propagation context
+& Found that diffusion patterns and user interaction signals are useful for misinformation detection
+& Reliant on interaction data, which may be sparse in early detection \\
+\hline
+
+Min et al. (2022)
+& Temporal and behavioural signals
+& Confirmed that temporal dynamics and engagement behaviour can improve classification
+& Less effective when user activity data is limited or delayed \\
+\hline
+
+Segura-Bedmar \& Alonso-Bartolome (2022)
+& Multimodal benchmarking
+& Reinforced evidence that multimodal approaches outperform text-only models on social media misinformation tasks
+& Does not resolve how multimodality compares when social context is held constant \\
+\hline
+
+Nadeem et al. (2023) -- EFND
+& Multimodal + contextual integration
+& Showed that combining content and contextual signals can produce strong detection performance
+& Hard to isolate whether gains come from multimodality or the added context \\
+\hline
+
+Jing et al. (2023) -- MPFN
+& Progressive multimodal fusion
+& Demonstrated that better fusion design, not just adding more modalities, improves results
+& Limited social-context integration \\
+\hline
+
+Truică et al. (2024) -- DANES
+& Context-aware ensemble model
+& Combined a text-based content branch with a social/propagation branch, achieving strong benchmark performance
+& Content branch remains text-only, so visual misinformation may be missed \\
+\hline
+
+Wang et al. (2024)
+& Joint multimodal-context modelling
+& Supported the view that multimodal content and social context are complementary
+& Social context representation differs from other studies, making comparison difficult \\
+\hline
+
+Zhu et al. (2024)
+& Propagation-aware detection
+& Showed that behavioural and diffusion evidence adds strong classification value beyond content alone
+& Performance depends on availability of network/interaction data \\
+\hline
+
+Truică et al. (2025) -- GETAE
+& Context-aware ensemble model
+& Similar to DANES, achieved strong results by combining text content + social context
+& Still inherits the weakness of a text-only content branch \\
+\hline
+
+Jing et al. (2025)
+& Unified multimodal-context model
+& Reported strong performance from joint modelling of text, visuals, and context
+& Multiple components change at once, so the exact source of improvement is unclear \\
+\hline
+
+Chen et al. (2025)
+& Behaviour/context-enhanced multimodal model
+& Found that integrating behavioural context with multimodal content improves detection
+& Comparison across studies is difficult because context features vary widely \\
+\hline
+
+Sun et al. (2025)
+& Dynamic graph/context fusion
+& Showed value in modelling dynamic relationships and graph-based context alongside content
+& Adds complexity and reduces comparability with simpler baselines \\
+\hline
+
+Dellys et al. (2025)
+& Comparative/contextual discussion
+& Highlighted the difficulty of identifying the specific contribution of multimodal substitution in context-aware systems
+& Does not fully isolate multimodal effects within DANES/GETAE-style architectures \\
+\hline
+
+Ji et al. (2026)
+& Recent integrated framework
+& Further supported the effectiveness of combining multimodal and contextual signals
+& The separate effect of multimodality is still not clearly decomposed \\
+\hline
+
+\end{longtable}

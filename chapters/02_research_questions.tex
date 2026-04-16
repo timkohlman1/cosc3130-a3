@@ -10,11 +10,51 @@ This research aims to develop a context-aware misinformation detection framework
     \item[Novelty and complexity.] No prior work directly performs this controlled substitution and isolates its effect on the DANES/GETAE backbone. Existing multimodal-plus-context models such as EFND~\cite{nadeem2023efnd}, DPSG~\cite{jing2025dpsg}, and the framework of Dellys et al.~\cite{dellys2025multimodal} use fundamentally different social branches (engagement signals, dynamic propagation graphs, or attention-based fusion), so their results cannot be cleanly attributed to the multimodal component. Answering RQ1 requires re-implementing a non-trivial baseline, designing a compatible multimodal branch, and ensuring the comparison remains controlled --- a challenging but well-defined contribution.
 \end{description}
 
-\paragraph{RQ2.} \textit{How does the relative contribution of the multimodal content branch and the social context branch affect overall detection performance?}
-\begin{description}
-    \item[What it addresses.] This question moves beyond headline accuracy to decompose where the model's predictive power comes from. Through ablation studies (content-only, social-only, and full ensemble configurations) and analysis of the fusion-layer weights, the project will quantify how much each branch contributes to correct classification, and whether the two branches are complementary or redundant on different categories of misinformation.
-    \item[Significance.] Knowing that a combined model performs well is not enough; researchers and practitioners need to know \emph{which} signal is doing the work. If the social context branch dominates, then the additional engineering cost of multimodal feature extraction may not be justified for deployment. Conversely, if the multimodal branch dominates, the field should reconsider its current emphasis on increasingly complex propagation-graph architectures. The answer therefore has direct design implications for the next generation of misinformation detectors.
-    \item[Novelty and complexity.] Most prior multimodal-plus-context studies report only aggregate performance and do not cleanly decompose contributions across a propagation-graph social branch of the DANES/GETAE family. Approaches such as TMEF-BI~\cite{chen2025tmefbi} perform reliability-aware weighting but on a different social signal (speaker behaviour rather than propagation), so their findings do not transfer directly. A principled contribution analysis on the proposed backbone is therefore both novel and methodologically demanding, requiring careful experimental design to avoid confounding the two branches.
-\end{description}
 
-Together, RQ1 and RQ2 form a coherent investigation: RQ1 establishes \emph{whether} multimodal substitution improves context-aware misinformation detection, while RQ2 explains \emph{why}, by revealing how the content and social signals interact. Answering both is necessary to make a defensible contribution to the context-aware fake news detection literature.
+
+
+\section{Research Questions}
+
+\subsection{Research Questions}
+
+\textbf{Overview}
+\begin{itemize}
+    \item This research focuses on evaluating the integration of multimodal content within context-aware fake news detection models.
+    \item The study aims to investigate how combining multimodal features with social context affects detection performance.
+    \item The research questions are designed to break the problem into key sub-problems related to model performance and component contribution.
+\end{itemize}
+
+\textbf{RQ1: Effect of Multimodal Content Integration}
+\begin{itemize}
+    \item How does replacing a text-only content branch with a multimodal content branch affect the performance of context-aware inauthentic social media content detection models, and to what extent?
+    
+    \item Significance:
+    \begin{itemize}
+        \item Evaluates whether multimodal representations improve detection accuracy.
+        \item Provides direct comparison with existing context-aware models such as DANES and GETAE.
+        \item Helps quantify the performance gain from incorporating visual features alongside text.
+    \end{itemize}
+    
+    \item Why it is important:
+    \begin{itemize}
+        \item Addresses a key limitation in current models that rely on text-only content.
+        \item Helps determine if multimodal integration is worth the added complexity.
+    \end{itemize}
+\end{itemize}
+
+\textbf{RQ2: Contribution of Model Components}
+\begin{itemize}
+    \item How does the relative contribution of the multimodal content branch and the social content branch affect overall detection performance?
+    
+    \item Significance:
+    \begin{itemize}
+        \item Analyses the importance of different components within the model.
+        \item Identifies whether content features or social context features contribute more to performance.
+    \end{itemize}
+    
+    \item Why it is important:
+    \begin{itemize}
+        \item Supports better design of hybrid detection frameworks.
+        \item Helps prioritise which components should be optimised in future models.
+    \end{itemize}
+\end{itemize}
