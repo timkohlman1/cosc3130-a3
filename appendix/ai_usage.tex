@@ -2,62 +2,69 @@
 
 \begin{table}[H]
 \centering
-\small
-\begin{tabularx}{\textwidth}{c|X|c|X|X|X}
-\toprule
-\textbf{Rank} & \textbf{Risks} & \textbf{Impact} & \textbf{Mitigation} & \textbf{Response} & \textbf{Contingency} \\
-\midrule
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.2}
 
-1 & Unclear research problem or gap leads to poorly defined research questions 
-& High 
-& Conduct comprehensive literature review on the theme of misinformation detection models 
-& Reassess research direction and go through the highlights of conducted literature reviews 
-& Clarify objective of research, narrow scope of research and sharpen research questions \\
-
+\begin{tabular}{|c|p{3.2cm}|c|p{3.2cm}|p{3.2cm}|p{3.2cm}|}
+\hline
+\textbf{Rank} & \textbf{Risk} & \textbf{Impact} & \textbf{Mitigation} & \textbf{Response} & \textbf{Contingency} \\
 \hline
 
-2 & Complex methodology design without any benchmark on existing detection models 
+1 
+& Unclear research problem or gap leads to poorly defined research questions 
 & High 
-& Align design with proposal scope, referencing / benchmark prior research papers 
-& Simplify framework / parameters of models and reduce components 
-& Adopt baseline models in prior research paper with modified parameters \\
-
+& Conduct a comprehensive literature review on misinformation detection models. 
+& Reassess the research direction and review the main findings from the literature. 
+& Clarify the research objective, narrow the scope, and sharpen the research questions. \\
 \hline
 
-3 & Difficulty in selecting datasets for social-context aware multimodal analysis 
+2 
+& Complex methodology design without a benchmark from existing detection models 
 & High 
-& Identify validated datasets that have been used in prior research papers 
-& Evaluate alternative datasets available today that may be compatible with the proposed model 
-& Choose alternative datasets aligned with proposed model features and parameters or adjust models to selected datasets \\
-
+& Align the design with the proposal scope and benchmark it against prior research. 
+& Simplify the framework, model parameters, or components. 
+& Adopt baseline models from prior research with modified parameters if needed. \\
 \hline
 
-4 & Time constraints lead to incomplete research proposals 
+3 
+& Difficulty selecting datasets for social-context-aware multimodal analysis 
 & High 
-& Set up weekly milestones and weekly progress tracking 
-& Reallocate tasks to different team members with available bandwidth 
-& Set priority on core sections and establish a strict timeline (days) \\
-
+& Identify validated datasets used in prior research. 
+& Evaluate alternative datasets that may be compatible with the proposed model. 
+& Choose alternative datasets aligned with the proposed features and parameters, or adjust the model to fit the selected datasets. \\
 \hline
 
-5 & Inconsistent writing quality across members 
+4 
+& Time constraints lead to an incomplete research proposal 
+& High 
+& Set weekly milestones and track progress each week. 
+& Reallocate tasks to team members with available capacity. 
+& Prioritise core sections and work to a strict day-by-day timeline. \\
+\hline
+
+5 
+& Inconsistent writing quality across team members 
 & Medium 
-& Assign clear section ownership to each member 
-& Conduct peer review and standardise writing style 
-& Perform final integration and editing by designated member \\
-
+& Assign clear section ownership to each member. 
+& Conduct peer review and standardise writing style. 
+& Complete final integration and editing through a designated member. \\
 \hline
 
-6 & Uneven workload distribution among team members 
+6 
+& Uneven workload distribution among team members 
 & Medium 
-& Clear task allocation and perform weekly progress tracking 
-& Reassign tasks during weekly meetings / sprint reviews 
-& Reassign tasks during weekly meetings / sprint reviews to adjust future workload \\
+& Allocate tasks clearly and monitor progress weekly. 
+& Reassign tasks during weekly meetings or sprint reviews. 
+& Adjust future workload distribution based on progress and capacity. \\
+\hline
 
-\bottomrule
-\end{tabularx}
+\end{tabular}
+
 \caption{Risk Management Plan}
+\label{tab:risk_management_plan}
 \end{table}
+
 
 
 \chapter{Generative AI Usage}
