@@ -1,0 +1,130 @@
+\chapter{Literature Review Summary Table}
+
+\begin{longtable}{|p{3.2cm}|p{3cm}|p{4.8cm}|p{4.8cm}|}
+\caption{Summary of prior studies on multimodal and context-aware misinformation detection}
+\label{tab:literature_summary} \\
+\hline
+\textbf{Study} & \textbf{Focus} & \textbf{Key finding / contribution} & \textbf{Main limitation} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Study} & \textbf{Focus} & \textbf{Key finding / contribution} & \textbf{Main limitation} \\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+Wang et al. (2018) -- EANN
+& Early multimodal fake news detection
+& Showed that combining text + image features improves misinformation detection over text-only methods
+& Fusion was still relatively early-stage and did not fully model deeper cross-modal relationships \\
+\hline
+
+Nakamura et al. (2020) -- Fakeddit
+& Multimodal benchmark dataset
+& Provided a large benchmark showing that multimodal classifiers outperform unimodal baselines
+& Focused more on benchmarking than integrating social context \\
+\hline
+
+Xue et al. (2021) -- MCNN
+& Text-image consistency modelling
+& Demonstrated that modelling the relationship between text and image improves classification
+& Mainly content-focused, with limited use of propagation or user context \\
+\hline
+
+Qian et al. (2021) -- HMCAN
+& Hierarchical multimodal attention
+& Showed that attention-based multimodal fusion captures cross-modal interactions better than simple feature concatenation
+& Still concentrated on content-level signals rather than broader platform context \\
+\hline
+
+Song et al. (2021)
+& Social/propagation context
+& Found that diffusion patterns and user interaction signals are useful for misinformation detection
+& Reliant on interaction data, which may be sparse in early detection \\
+\hline
+
+Min et al. (2022)
+& Temporal and behavioural signals
+& Confirmed that temporal dynamics and engagement behaviour can improve classification
+& Less effective when user activity data is limited or delayed \\
+\hline
+
+Segura-Bedmar \& Alonso-Bartolome (2022)
+& Multimodal benchmarking
+& Reinforced evidence that multimodal approaches outperform text-only models on social media misinformation tasks
+& Does not resolve how multimodality compares when social context is held constant \\
+\hline
+
+Nadeem et al. (2023) -- EFND
+& Multimodal + contextual integration
+& Showed that combining content and contextual signals can produce strong detection performance
+& Hard to isolate whether gains come from multimodality or the added context \\
+\hline
+
+Jing et al. (2023) -- MPFN
+& Progressive multimodal fusion
+& Demonstrated that better fusion design, not just adding more modalities, improves results
+& Limited social-context integration \\
+\hline
+
+Truică et al. (2024) -- DANES
+& Context-aware ensemble model
+& Combined a text-based content branch with a social/propagation branch, achieving strong benchmark performance
+& Content branch remains text-only, so visual misinformation may be missed \\
+\hline
+
+Wang et al. (2024)
+& Joint multimodal-context modelling
+& Supported the view that multimodal content and social context are complementary
+& Social context representation differs from other studies, making comparison difficult \\
+\hline
+
+Zhu et al. (2024)
+& Propagation-aware detection
+& Showed that behavioural and diffusion evidence adds strong classification value beyond content alone
+& Performance depends on availability of network/interaction data \\
+\hline
+
+Truică et al. (2025) -- GETAE
+& Context-aware ensemble model
+& Similar to DANES, achieved strong results by combining text content + social context
+& Still inherits the weakness of a text-only content branch \\
+\hline
+
+Jing et al. (2025)
+& Unified multimodal-context model
+& Reported strong performance from joint modelling of text, visuals, and context
+& Multiple components change at once, so the exact source of improvement is unclear \\
+\hline
+
+Chen et al. (2025)
+& Behaviour/context-enhanced multimodal model
+& Found that integrating behavioural context with multimodal content improves detection
+& Comparison across studies is difficult because context features vary widely \\
+\hline
+
+Sun et al. (2025)
+& Dynamic graph/context fusion
+& Showed value in modelling dynamic relationships and graph-based context alongside content
+& Adds complexity and reduces comparability with simpler baselines \\
+\hline
+
+Dellys et al. (2025)
+& Comparative/contextual discussion
+& Highlighted the difficulty of identifying the specific contribution of multimodal substitution in context-aware systems
+& Does not fully isolate multimodal effects within DANES/GETAE-style architectures \\
+\hline
+
+Ji et al. (2026)
+& Recent integrated framework
+& Further supported the effectiveness of combining multimodal and contextual signals
+& The separate effect of multimodality is still not clearly decomposed \\
+\hline
+
+\end{longtable}
