@@ -12,10 +12,10 @@ To evaluate the effectiveness of the proposed MACE model, the results of inauthe
 The comparisons will be done across three domains: (1) single-modal with social-context modelling, (2) multi-modal without social-context modelling, and (3) multi-modal with social-context modelling that is similar to the proposed MACE.
 \begin{itemize}
     \item \textbf single-modal with social-context modelling, consists of DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}. These models will be the primary baseline for combining text or graph neural networks with social context features.
-    \item \textbf multi-modal without social-context modelling, consists of HMCAN \citep{Qian2021} and MPFN \citep{Jing2023}
+    \item \textbf multi-modal without social-context modelling, consists of HMCAN \citep{Qian2021} and MPFN \citep{Jing2023}. As sub-components of MACE, the standalone performance of these models is considered as a comparitor during ablation experiments.
     \item \textbf multi-modal with social-context modelling, consists of DPSG \citep{jing2025} and multi-modal fusion from Dellys et al \citep{Dellys2025}.
 \end{itemize}
-These three domain baselines gives a structured comparison across single or multi-modal, context-aware, and hybrid approaches, ensuring that the performance of the proposed MACE model is evaluated properly against existing methods.
+These three domain baselines gives a structured comparison across single or multi-modal, context-aware, and hybrid approaches, ensuring that the performance of the proposed MACE model is evaluated properly against existing methods in full-model testing and under ablation conditions.
 
 \section{Evaluation Metrics}
 For evaluation plan, the main objective is to determine how effective the proposed model is in detecting inauthentic social media post.
