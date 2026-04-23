@@ -1,22 +1,20 @@
 \chapter{Evaluation}
-
-\section{Data Sets}
-DESCRIBE TWITTER15 \& TWITTER16
-
+To assess the performance of the proposed model, these datasets will be used to compare performance to the baseline model.
+Datasets are chosen because it provides textual, visual and social context features which is align with the proposed model architecture. The datasets are described in detail as follows:
+\begin{itemize}
+    \item \textbf FakeNewsNet \citep{shu2020fakenewsnet}, it integrates news content, social context, and spatiotemporal information, making it highly suitable for evaluating models that combine content-based and multimodal features. The dataset is constructed from two fact-checking sources \citep{shu2018fake} \citep{shu2017fake} \citep{shu2017fake2}, PolitiFact and GossipCop, and includes news articles labelled as real or fake. Social context include user profiles, user posts, and the social network. 
+    \item \textbf MuMin \citep{mumindataset}, is a recent dataset specifically designed to support multimodal and social-context-aware misinformation detection. The dataset is structured as a heterogeneous graph and features 21,565,018 tweets and 1,986,354 users, belonging to 26,048 Twitter threads, discussing 12,914 fact-checked claims from 115 fact-checking organisations in 41 different languages, spanning a decade. It classifies claims and tweets as misinformation or factual.
+\end{itemize}
 
 \section{Evaluation Metrics}
-For evaluation plan, the main objective is to determine how effective the proposed model is in detecting inauthentic social media post. To achieve this, standard performance metrics (https://www.ibm.com/think/topics/model-performance) are used to measure how the model identified between authentic and inauthentic post.
-
+For evaluation plan, the main objective is to determine how effective the proposed model is in detecting inauthentic social media post. To achieve this, standard performance metrics are used to measure how the model identified between authentic and inauthentic post.
 \begin{itemize}
-    \item \textbf{1.} Accuracy, measures the number of correct classification divided by the total number of classifications.
-    \item \textbf{2.} Recall, measures the number of inauthentic posts correctly classified out of all actual inauthentic posts (true positive rate or TPR).
-    \item \textbf{3.} Precision, measures the number of inauthentic posts correctly classified out of all number of inauthentic post classified by the model.
-    \item \textbf{4.} F1 Score, harmonic mean of recall and precision, considers the two measures to be of equal weight to balance out any false positives or false negatives.
+    \item \textbf Accuracy, measures the number of correct classification divided by the total number of classifications.
+    \item \textbf Recall, measures the number of inauthentic posts correctly classified out of all actual inauthentic posts (true positive rate or TPR).
+    \item \textbf Precision, measures the number of inauthentic posts correctly classified out of all number of inauthentic post classified by the model.
+    \item \textbf F1 Score, harmonic mean of recall and precision, considers the two measures to be of equal weight to balance out any false positives or false negatives.
 \end{itemize}
-These metrics are compared against the baseline models to assess the effectiveness of the proposed model \citep{Xue2021}.
+These metrics are compared against the baseline models to assess the effectiveness of the proposed model \citep{XUE2021102610}.
 A high accuracy means that a model is more accurate in classifying inauthentic social media posts.
-High precision and high recall also indicating that the model ensures inauthentic post is detected and avoids incorrectly labelling authentic content as inauthentic.
-F1 score will be used as the main comparison between model and experiment datasets as it capture the balance of detection capability (recall) and reliability (precision).
-All metrics are evaluated across Stage 1 and Stage 2 (Conditions A–D).
-This allows for a consistent comparison between the baseline and modified model, and helps to measure the contribution of multimodal content and social context features. 
-
+High precision and high recall also indicating that the model ensures inauthentic post is detected and avoids incorrectly labelling authentic content as inauthentic. F1 score will be used as the main comparison between model and experiment datasets as it capture the balance of detection capability (recall) and reliability (precision).
+All metrics are evaluated across Stage 1 and Stage 2 (Conditions A–D). This allows for a consistent comparison between the baseline and modified model, and helps to measure the contribution of multimodal content and social context features. 
