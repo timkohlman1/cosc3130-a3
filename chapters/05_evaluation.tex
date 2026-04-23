@@ -1,4 +1,5 @@
 \chapter{Evaluation}
+\section{Datasets}
 To assess the performance of the proposed model, these datasets will be used to compare performance to the baseline model.
 Datasets are chosen because it provides textual, visual and social context features which is align with the proposed model architecture. The datasets are described in detail as follows:
 \begin{itemize}
@@ -6,13 +7,22 @@ Datasets are chosen because it provides textual, visual and social context featu
     \item \textbf MuMin \citep{mumindataset}, is a recent dataset specifically designed to support multimodal and social-context-aware misinformation detection. The dataset is structured as a heterogeneous graph and features 21,565,018 tweets and 1,986,354 users, belonging to 26,048 Twitter threads, discussing 12,914 fact-checked claims from 115 fact-checking organisations in 41 different languages, spanning a decade. It classifies claims and tweets as misinformation or factual.
 \end{itemize}
 
+\section{Benchmarking}
+To evaluate the effectiveness of the proposed MACE model, the results of inauthentic social media classification from the selected datasets will be compared to previous research works with similar objective.
+The comparisons will be done across three domains: (1) single-modal with social-context modelling, (2) multi-modal without social-context modelling, and (3) multi-modal with social-context modelling that is similar to the proposed MACE.
+\begin{itemize}
+    \item \textbf single-modal with social-context modelling, consists of DANES \citep{truica2024danes} and GETAE \citep{truica2025getae}. These models will be the primary baseline for combining text or graph neural networks with social context features.
+    \item \textbf multi-modal without social-context modelling, consists of HMCAN \citep{Qian2021} and MPFN \citep{Jing2023}
+    \item \textbf multi-modal with social-context modelling, consists of DPSG \citep{Jing2025} and multi-modal fusion from Dellys et al \citep{Dellys2025}.
+\end{itemize}
+These three domain baselines gives a structured comparison across single or multi-modal, context-aware, and hybrid approaches, ensuring that the performance of the proposed MACE model is evaluated properly against existing methods.
+
 \section{Evaluation Metrics}
 For evaluation plan, the main objective is to determine how effective the proposed model is in detecting inauthentic social media post.
 To achieve this, standard performance metrics are used to measure how the model identified between authentic and inauthentic post.
 The project adopts standard performance metrics as these are widely used and well-established in inauthentic or fake news detection research.
 Prior studies, including DANES \citep{truica2024danes} and GETAE \citep{truica2025getae}, also has adopted the same metrics to assess their model performance and compare them to other different model architectures.
 Other multimodal research such as HMCAN \citep{Qian2021} and MPFN \citep{Jing2023} also utilise standard performance metrics to evaluate the effectiveness of integrating text and visual features.
-
 \begin{itemize}
     \item \textbf Accuracy, measures the number of correct classification divided by the total number of classifications.
     \item \textbf Recall, measures the number of inauthentic posts correctly classified out of all actual inauthentic posts (true positive rate or TPR).
