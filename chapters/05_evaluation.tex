@@ -3,7 +3,7 @@
 To assess the performance of the proposed model, these datasets will be used to compare performance to the baseline model.
 Datasets are chosen because they provides textual, visual and social context features which is align with the proposed model architecture. The datasets are described in detail as follows:
 \begin{itemize}
-    \item \textbf FakeNewsNet \citep{shu2020fakenewsnet}, it integrates news content, social context, and spatiotemporal information, making it highly suitable for evaluating models that combine content-based and multimodal features. The dataset is constructed from two fact-checking sources \citep{shu2018fake} \citep{shu2017fake} \citep{shu2017fake2}, PolitiFact and GossipCop, and includes news articles labelled as real or fake. Social context include user profiles, user posts, and the social network. 
+    \item \textbf FakeNewsNet \citep{shu2020fakenewsnet}, it integrates news content, social context, and spatiotemporal information, making it highly suitable for evaluating models that combine content-based and multimodal features. The dataset is constructed from two fact-checking sources \citep{shu2018fake, shu2017fake, shu2017fake2}, PolitiFact and GossipCop, and includes news articles labelled as real or fake. Social context include user profiles, user posts, and the social network. 
     \item \textbf MuMin \citep{mumindataset}, is a recent dataset specifically designed to support multimodal and social-context-aware misinformation detection. The dataset is structured as a heterogeneous graph and features 21,565,018 tweets and 1,986,354 users, belonging to 26,048 Twitter threads, discussing 12,914 fact-checked claims from 115 fact-checking organisations in 41 different languages, spanning a decade. It classifies claims and tweets as misinformation or factual.
 \end{itemize}
 
@@ -13,7 +13,7 @@ The comparisons will be done across three domains: (1) single-modal with social-
 \begin{itemize}
     \item \textbf single-modal with social-context modelling, consists of DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}. These models will be the primary baseline for combining text or graph neural networks with social context features.
     \item \textbf multi-modal without social-context modelling, consists of HMCAN \citep{Qian2021} and MPFN \citep{Jing2023}. As sub-components of MACE, the standalone performance of these models is considered as a comparator during ablation experiments.
-    \item \textbf multi-modal with social-context modelling, consists of DPSG \citep{jing2025} and multi-modal fusion from Dellys et al \citep{Dellys2025}.
+    \item \textbf multi-modal with social-context modelling, consists of DPSG \citep{jing2025} and multi-modal fusion from \citet{Dellys2025}.
 \end{itemize}
 These three domain baselines gives a structured comparison across single or multi-modal, context-aware, and hybrid approaches, ensuring that the performance of the proposed MACE model is evaluated properly against existing methods in full-model testing and under ablation conditions.
 
