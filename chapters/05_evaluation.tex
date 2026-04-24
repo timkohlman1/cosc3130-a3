@@ -1,7 +1,7 @@
 \chapter{Evaluation}
 \section{Datasets}
 To assess the performance of the proposed model, these datasets will be used to compare performance to the baseline model.
-Datasets are chosen because it provides textual, visual and social context features which is align with the proposed model architecture. The datasets are described in detail as follows:
+Datasets are chosen because they provides textual, visual and social context features which is align with the proposed model architecture. The datasets are described in detail as follows:
 \begin{itemize}
     \item \textbf FakeNewsNet \citep{shu2020fakenewsnet}, it integrates news content, social context, and spatiotemporal information, making it highly suitable for evaluating models that combine content-based and multimodal features. The dataset is constructed from two fact-checking sources \citep{shu2018fake} \citep{shu2017fake} \citep{shu2017fake2}, PolitiFact and GossipCop, and includes news articles labelled as real or fake. Social context include user profiles, user posts, and the social network. 
     \item \textbf MuMin \citep{mumindataset}, is a recent dataset specifically designed to support multimodal and social-context-aware misinformation detection. The dataset is structured as a heterogeneous graph and features 21,565,018 tweets and 1,986,354 users, belonging to 26,048 Twitter threads, discussing 12,914 fact-checked claims from 115 fact-checking organisations in 41 different languages, spanning a decade. It classifies claims and tweets as misinformation or factual.
@@ -12,7 +12,7 @@ To evaluate the effectiveness of the proposed MACE model, the results of inauthe
 The comparisons will be done across three domains: (1) single-modal with social-context modelling, (2) multi-modal without social-context modelling, and (3) multi-modal with social-context modelling that is similar to the proposed MACE.
 \begin{itemize}
     \item \textbf single-modal with social-context modelling, consists of DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}. These models will be the primary baseline for combining text or graph neural networks with social context features.
-    \item \textbf multi-modal without social-context modelling, consists of HMCAN \citep{Qian2021} and MPFN \citep{Jing2023}. As sub-components of MACE, the standalone performance of these models is considered as a comparitor during ablation experiments.
+    \item \textbf multi-modal without social-context modelling, consists of HMCAN \citep{Qian2021} and MPFN \citep{Jing2023}. As sub-components of MACE, the standalone performance of these models is considered as a comparator during ablation experiments.
     \item \textbf multi-modal with social-context modelling, consists of DPSG \citep{jing2025} and multi-modal fusion from Dellys et al \citep{Dellys2025}.
 \end{itemize}
 These three domain baselines gives a structured comparison across single or multi-modal, context-aware, and hybrid approaches, ensuring that the performance of the proposed MACE model is evaluated properly against existing methods in full-model testing and under ablation conditions.
@@ -21,7 +21,7 @@ These three domain baselines gives a structured comparison across single or mult
 For evaluation plan, the main objective is to determine how effective the proposed model is in detecting inauthentic social media post.
 To achieve this, standard performance metrics are used to measure how the model identified between authentic and inauthentic post.
 The project adopts standard performance metrics as these are widely used and well-established in inauthentic or fake news detection research.
-Prior studies, including DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}, also has adopted the same metrics to assess their model performance and compare them to other different model architectures.
+Prior studies, including DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}, have adopted the same metrics to assess their model performance and compare them to other different model architectures.
 Other multimodal research such as HMCAN \citep{Qian2021} and MPFN \citep{Jing2023} also utilise standard performance metrics to evaluate the effectiveness of integrating text and visual features.
 \begin{itemize}
     \item \textbf Accuracy, measures the number of correct classification divided by the total number of classifications.
@@ -32,4 +32,4 @@ Other multimodal research such as HMCAN \citep{Qian2021} and MPFN \citep{Jing202
 These metrics are compared against the baseline models to assess the effectiveness of the proposed model \citep{Xue2021}.
 A high accuracy means that a model is more accurate in classifying inauthentic social media posts.
 High precision and high recall also indicating that the model ensures inauthentic post is detected and avoids incorrectly labelling authentic content as inauthentic. F1 score will be used as the main comparison between model and experiment datasets as it capture the balance of detection capability (recall) and reliability (precision).
-All metrics are evaluated across Stage 1 and Stage 2 (Conditions A–D). This allows for a consistent comparison between the baseline and modified model, and helps to measure the contribution of multimodal content and social context features. 
+All metrics are evaluated across Stage 1 and Stage 2 (Conditions A-D). This allows for a consistent comparison between the baseline and modified model, and helps to measure the contribution of multimodal content and social context features. 
