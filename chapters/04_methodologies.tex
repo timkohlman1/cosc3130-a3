@@ -2,7 +2,7 @@
 
 \section{Proposed Framework}
 
-DANES and GETAE classify inauthentic social media content by fusing a single-modal text-based content branch and a social context branch to create an ensemble model. The proposed MACE (\textbf{M}ultimodal \textbf{A}nd \textbf{C}ontext-aware \textbf{E}nsemble) framework adopts a comparative experimental design to evaluate the impact of integrating multimodal content features into these models.
+DANES~\citep{truica2024danes} and GETAE~\citep{GETAE2025} classify inauthentic social media content by fusing a single-modal text-based content branch and a social context branch to create an ensemble model. The proposed MACE (\textbf{M}ultimodal \textbf{A}nd \textbf{C}ontext-aware \textbf{E}nsemble) framework adopts a comparative experimental design to evaluate the impact of integrating multimodal content features into these models.
 
 MACE retains the dual-branch structure and social context features of DANES and GETAE, and replaces the text-based content branch with a multimodal content branch, allowing for evaluation of the classification performance of multimodal content features within these ensemble frameworks.
 
@@ -20,12 +20,12 @@ MACE retains the dual-branch structure and social context features of DANES and 
 % Briefly describe how textual and visual features are extracted and combined.
 MACE adopts HMCAN (Hierarchical Multi-modal Contextual Attention Network \citep{Qian2021}), or alternatively MPFN (Multimodal Progressive Fusion Network \citep{Jing2023})\footnote{If HMCAN proves incompatible with the selected dataset or integration constraints, MPFN is identified as a potential fallback candidate, utilising a more complex image pipeline.}, these models are selected for their task alignment, dataset compatibility and ease of integration with the existing DANES/GETAE architectures.
 
-HMCAN has demonstrated excellent accuracy using Twitter-based data sets (89.7\%, outperforming common baselines such as EANN) in multimodal fake news detection using its BERT + ResNet encoding pipeline, making it a good candidate.
+HMCAN has demonstrated excellent accuracy using Twitter-based data sets (89.7\%, outperforming common baselines such as EANN) in multimodal fake news detection using its BERT + ResNet encoding pipeline, making it a good candidate \citep{Qian2021}.
 
 \subsection{Social Context Branch}
 
 % Describe the user-level, interaction-based, and lightweight network/context features.
-We retain the Graph-based Deep Learning social context branches from the baseline DANES/GETAE architectures.
+We retain the Graph-based Deep Learning social context branches from the baseline DANES/GETAE architectures, as these studies and others provide strong evidence supporting the effectiveness of propagation and interaction signals in misinformation detection \citep{truica2024danes, GETAE2025, Song2021,Min2022,Zhu24}.
 
 \begin{table}[h]
 \centering
@@ -57,7 +57,7 @@ a classification embedding, which is passed to a classification layer. The class
 distribution over the classes (authentic or inauthentic) and assigns a label based on the highest probability.
 
 MACE retains this fusion mechanism to ensure the performance differences can be attributed 
-to the substitution of the content branch rather than changes in the fusion or classification approach. 
+to the substitution of the content branch rather than changes in the fusion or classification approach in response to limitations identified in prior work \citep{Dellys2025, jing2025}. 
 
 \section{Experimental Design}
 
