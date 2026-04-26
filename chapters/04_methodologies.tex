@@ -1,131 +1,215 @@
-\chapter{Research Methodologies}
+  \chapter{Research Methodologies}
 
-\section{Proposed Framework}
+  \section{Proposed Framework}
 
-DANES~\citep{truica2024danes} and GETAE~\citep{GETAE2025} classify inauthentic social media content by fusing a single-modal text-based content branch and a social context branch to create an ensemble model. The proposed MACE (\textbf{M}ultimodal \textbf{A}nd \textbf{C}ontext-aware \textbf{E}nsemble) framework adopts a comparative experimental design to evaluate the impact of integrating multimodal content features into these models.
+  DANES~\citep{truica2024danes} and GETAE~\citep{GETAE2025} classify inauthentic social media content by fusing a single-modal text-based content branch and a social context branch to create an ensemble model. The proposed MACE (\textbf{M}ultimodal \textbf{A}nd \textbf{C}ontext-aware \textbf{E}nsemble) framework adopts a comparative experimental design to evaluate the impact of integrating multimodal content features into these models.
 
-MACE retains the dual-branch structure and social context features of DANES and GETAE, and replaces the text-based content branch with a multimodal content branch, allowing for evaluation of the classification performance of multimodal content features within these ensemble frameworks.
+  MACE retains the dual-branch structure and social context features of DANES and GETAE, and replaces the text-based content branch with a multimodal content branch, allowing for evaluation of the classification performance of multimodal content features within these ensemble frameworks.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth]{figs/MACE-Architecture}
-    \caption{
-    Proposed MACE Ensemble Framework for Inauthentic Social Media Post Classification
-    }
-    \label{fig:MACE-Architecture}
-\end{figure}
+  \begin{figure}[H]
+      \centering
+      \includegraphics[width=0.95\textwidth]{figs/MACE-Architecture}
+      \caption{
+      Proposed MACE Ensemble Framework for Inauthentic Social Media Post Classification
+      }
+      \label{fig:MACE-Architecture}
+  \end{figure}
 
-\subsection{Multimodal Content Branch}
+  \subsection{Multimodal Content Branch}
 
-% Briefly describe how textual and visual features are extracted and combined.
-MACE adopts HMCAN (Hierarchical Multi-modal Contextual Attention Network \citep{Qian2021}), or alternatively MPFN (Multimodal Progressive Fusion Network \citep{Jing2023})\footnote{If HMCAN proves incompatible with the selected dataset or integration constraints, MPFN is identified as a potential fallback candidate, utilising a more complex image pipeline.}, these models are selected for their task alignment, dataset compatibility and ease of integration with the existing DANES/GETAE architectures.
+  % Briefly describe how textual and visual features are extracted and combined.
+  MACE adopts HMCAN (Hierarchical Multi-modal Contextual Attention Network \citep{Qian2021}), or alternatively MPFN (Multimodal Progressive Fusion Network \citep{Jing2023})\footnote{If HMCAN proves incompatible with the selected dataset or integration constraints, MPFN is identified as a potential fallback candidate, utilising a more complex image pipeline.}, these models are selected for their task alignment, dataset compatibility and ease of integration with the existing DANES/GETAE architectures.
 
-HMCAN has demonstrated excellent accuracy using Twitter-based data sets (89.7\%, outperforming common baselines such as EANN) in multimodal fake news detection using its BERT + ResNet encoding pipeline, making it a good candidate \citep{Qian2021}.
+  HMCAN has demonstrated excellent accuracy using Twitter-based data sets (89.7\%, outperforming common baselines such as EANN) in multimodal fake news detection using its BERT + ResNet encoding pipeline, making it a good candidate \citep{Qian2021}.
 
-\subsection{Social Context Branch}
+  \subsection{Social Context Branch}
 
-% Describe the user-level, interaction-based, and lightweight network/context features.
-We retain the Graph-based Deep Learning social context branches from the baseline DANES/GETAE architectures, as these studies and others provide strong evidence supporting the effectiveness of propagation and interaction signals in misinformation detection \citep{truica2024danes, GETAE2025, Song2021,Min2022,Zhu24}.
+  % Describe the user-level, interaction-based, and lightweight network/context features.
+  We retain the Graph-based Deep Learning social context branches from the baseline DANES/GETAE architectures, as these studies and others provide strong evidence supporting the effectiveness of propagation and interaction signals in misinformation detection \citep{truica2024danes, GETAE2025, Song2021,Min2022,Zhu24}.
 
-\begin{table}[h]
+  \begin{table}[h]
+  \centering
+  {\small
+
+  \begin{tabular}{lp{4.5cm}p{4.5cm}}
+  \hline
+  & \textbf{DANES} & \textbf{GETAE} \\
+  \hline
+
+  Social context approach & Graph embedding from static
+    network structure &
+    GNN over dynamic propagation graph \\
+  Key information used & User interactions, relationships,
+    and post behaviour &
+    Information diffusion and propagation patterns \\
+  \hline
+  \end{tabular}
+  \caption{Comparison of DANES and GETAE social context branches.}}
+  \label{tab:danes_getae}
+
+  \end{table}
+
+  \subsection{Feature Fusion and Classification}
+
+  % Explain how the multimodal content and social context representations are combined for final prediction.
+  Both fusion models combine branch outputs by concatenating the content and context embeddings to produce 
+  a classification embedding, which is passed to a classification layer. The classification layer applies a softmax function to produce a probability 
+  distribution over the classes (authentic or inauthentic) and assigns a label based on the highest probability.
+
+  MACE retains this fusion mechanism to ensure the performance differences can be attributed 
+  to the substitution of the content branch rather than changes in the fusion or classification approach in response to limitations identified in prior work \citep{Dellys2025, jing2025}. 
+
+  \section{Experimental Design}
+
+  % Describe the comparative model setup and the logic of the experiments.
+  The experiment design is structured as a two-stage process to systematically evaluate 
+  the proposed architecture and address the research questions. Both base architectures are 
+  evaluated allowing the findings to be evaluated for consistency across different fusion approaches.
+
+  The model is treated as a replication factor, rather than a variable, as the primary focus is on 
+  evaluating the impact of the proposed architecture modifications (multimodal content branch), rather 
+  than comparing the performance of the two fusion approaches.
+
+  \subsection{Experiment Stages and Conditions}
+
+  \textbf{Stage 1} is to replicate the published architectures and  
+  evaluate their performance on the Twitter15 and Twitter16 datasets to ensure 
+  the implementation is correct and consistent with the published results.
+
+  \textbf{Stage 2} evaluates four conditions on a multimodal dataset. Condition A establishes a new 
+  baseline and Conditions B, C and D systematically evaluate the contribution of content and 
+  context features against this new baseline to isolate the impact of the proposed architecture modification.
+
+  \begin{table}[h!]
+  {\small
+  \begin{tabular}{llllll}
+  \hline
+  \multicolumn{2}{l}{\textbf{Stage}} & \textbf{Label}                                                    & \textbf{\begin{tabular}[c]{@{}l@{}}Content\\ Branch\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Context\\ Branch\end{tabular}} & \textbf{Goal / Purpose}                                                                                                                          \\ \hline
+  1                        & A       & \begin{tabular}[c]{@{}l@{}}Implementation\\ Baseline\end{tabular} & Text-only                                                         & \checkmark                                                                        & \begin{tabular}[c]{@{}l@{}}Replicate baseline fusion models \\ and confirm published results prior \\ to introducing modifications.\end{tabular} \\ \hline
+  \multirow{4}{*}{2}       & A       & \begin{tabular}[c]{@{}l@{}}Dataset\\ Baseline\end{tabular}        & Text-only                                                         & \checkmark                                                                        & \begin{tabular}[c]{@{}l@{}}Establish baseline on multimodal \\ dataset using existing fusion models.\end{tabular}                                \\ \cline{2-6} 
+                          & B       & Ablation 1                                                        & Text-only                                                         & $\times$                                                                         & \begin{tabular}[c]{@{}l@{}}Isolate contribution of text-only \\ features.\end{tabular}                                                           \\ \cline{2-6} 
+                          & C       & Ablation 2                                                        & Multimodal                                                        & $\times$                                                                         & \begin{tabular}[c]{@{}l@{}}Isolate contribution of multimodal \\ features.\end{tabular}                                                          \\ \cline{2-6} 
+                          & D       & \begin{tabular}[c]{@{}l@{}}Proposed \\ (MACE)\end{tabular}        & Multimodal                                                        & \checkmark                                                                        & Evaluation of full proposed framework.                                                                                                           \\ \hline
+  \end{tabular}
+  \caption{Summary of experiment conditions and objectives.}
+
+  }
+  \end{table}
+
+  \subsection{Research Question Alignment}
+
+  % Explain how the experiments answer RQ1 and RQ2.
+  RQ1 is directly addressed by comparing the performance of the proposed architecture (Condition D) against the baseline architecture (Condition A) with the multimodal dataset. A pairwise comparison of condition's B, C and D address RQ2 by evaluating the contribution of the multimodal content branch and the social context branch to the overall 
+  performance of the model.
+
+  \begin{table}[h!]
+  \centering
+  {\small
+
+
+  \begin{tabular}{llp{3.5cm}p{5.5cm}}
+  \hline
+  & \textbf{Comparison} & \textbf{What varies} & \textbf{What it tells us} \\ \hline
+  RQ1 & A vs D &
+      \begin{tabular}[t]{@{}l@{}}Content branch\end{tabular} &
+      \begin{tabular}[t]{@{}l@{}}Does substituting the multimodal branch\\for the text branch improve performance\\within the full context-aware framework?\end{tabular} \\ \hline
+  \multirow{3}{*}{RQ2} & A vs B &
+      \begin{tabular}[t]{@{}l@{}}Context branch\end{tabular} &
+      \begin{tabular}[t]{@{}l@{}}How much does the social context branch\\contribute with text-only content?\end{tabular} \\ \cline{2-4}
+  & B vs C &
+      \begin{tabular}[t]{@{}l@{}}Content branch\end{tabular} &
+      \begin{tabular}[t]{@{}l@{}}Does adding visual features improve\\detection independent of social context?\end{tabular} \\ \cline{2-4}
+  & C vs D &
+      \begin{tabular}[t]{@{}l@{}}Context branch\end{tabular} &
+      \begin{tabular}[t]{@{}l@{}}How much does the social context branch\\contribute with multimodal content?\end{tabular} \\ \hline
+  \end{tabular}
+  \caption{Pairwise condition comparisons and research question alignment.}
+  \label{tab:pairwise}
+  }
+  \end{table}
+
+  \section{Research Timeline}
+
+  The research project is planned across a 22-week period; Table~\ref{tab:timeline} presents the planned research timeline, based on the proposed methodology. Research activities concentrated in Weeks~1--18 and five weeks reserved for thesis writing (Weeks~18--22).
+
+
+  \newcommand{\Ga}{\cellcolor{gray!35}}          % Setup
+  \newcommand{\Bl}{\cellcolor{blue!25}}          % Stage 1
+  \newcommand{\Bm}{\cellcolor{blue!60}}          % Stage 1 milestone
+  \newcommand{\Or}{\cellcolor{orange!35}}        % Dataset Adaptation
+  \newcommand{\Om}{\cellcolor{orange!65}}        % Dataset Adaptation milestone
+  \newcommand{\Te}{\cellcolor{teal!30}}          % MACE Development
+  \newcommand{\Tf}{\cellcolor{teal!15}}          % MACE fallback (conditional)
+  \newcommand{\Tm}{\cellcolor{teal!60}}          % MACE milestone
+  \newcommand{\Vi}{\cellcolor{violet!25}}        % Stage 2
+  \newcommand{\Vm}{\cellcolor{violet!60}}        % Stage 2 milestone
+  \newcommand{\Rr}{\cellcolor{red!25}}           % Thesis Writing
+  \newcommand{\Rm}{\cellcolor{red!60}}           % Thesis milestone
+
+  \begin{table}[H]
 \centering
-{\small
+\caption{Summary research timeline by phase.}
+\label{tab:summarytimeline}
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.25}
 
-\begin{tabular}{lp{4.5cm}p{4.5cm}}
+\begin{tabular}{|p{3.1cm}|*{22}{c|}}
 \hline
-& \textbf{DANES} & \textbf{GETAE} \\
+\textbf{Phase} &
+\rotatebox{90}{\scriptsize\textbf{W1}} &
+\rotatebox{90}{\scriptsize\textbf{W2}} &
+\rotatebox{90}{\scriptsize\textbf{W3}} &
+\rotatebox{90}{\scriptsize\textbf{W4}} &
+\rotatebox{90}{\scriptsize\textbf{W5}} &
+\rotatebox{90}{\scriptsize\textbf{W6}} &
+\rotatebox{90}{\scriptsize\textbf{W7}} &
+\rotatebox{90}{\scriptsize\textbf{W8}} &
+\rotatebox{90}{\scriptsize\textbf{W9}} &
+\rotatebox{90}{\scriptsize\textbf{W10}} &
+\rotatebox{90}{\scriptsize\textbf{W11}} &
+\rotatebox{90}{\scriptsize\textbf{W12}} &
+\rotatebox{90}{\scriptsize\textbf{W13}} &
+\rotatebox{90}{\scriptsize\textbf{W14}} &
+\rotatebox{90}{\scriptsize\textbf{W15}} &
+\rotatebox{90}{\scriptsize\textbf{W16}} &
+\rotatebox{90}{\scriptsize\textbf{W17}} &
+\rotatebox{90}{\scriptsize\textbf{W18}} &
+\rotatebox{90}{\scriptsize\textbf{W19}} &
+\rotatebox{90}{\scriptsize\textbf{W20}} &
+\rotatebox{90}{\scriptsize\textbf{W21}} &
+\rotatebox{90}{\scriptsize\textbf{W22}} \\
 \hline
 
-Social context approach & Graph embedding from static
-  network structure &
-  GNN over dynamic propagation graph \\
-Key information used & User interactions, relationships,
-  and post behaviour &
-  Information diffusion and propagation patterns \\
+1.~Setup
+& \Ga & \Ga & & & & & & & & & & & & & & & & & & & & \\
 \hline
+
+2.~Stage~1 Replication
+& & \Bl & \Bl & \Bl & \Bl & \Bl & \Bl & \Bm & & & & & & & & & & & & & & \\
+\hline
+
+3.~Dataset Adaptation
+& & & & & & \Or & \Or & \Or & \Or & \Or & \Or & \Or & \Om & & & & & & & & & \\
+\hline
+
+4.~MACE Development
+& & & & & & & & & & \Te & \Te & \Te & \Te & \Te & \Tm & & & & & & & \\
+\hline
+
+5.~Stage~2 Experiments
+& & & & & & & & & & & & & \Vi & \Vi & \Vi & \Vi & \Vi & \Vm & & & & \\
+\hline
+
+6.~Thesis Writing
+& & & & & & & & & & & & & & & & & & \Rr & \Rr & \Rr & \Rr & \Rm \\
+\hline
+
 \end{tabular}
-\caption{Comparison of DANES and GETAE social context branches.}}
-\label{tab:danes_getae}
 
-\end{table}
+\vspace{0.5em}
+\raggedright
+\footnotesize
+Note. Darker cells are key milestones. The full timeline is provided in Appendix~\ref{sec:fulltimeline}.
 
-\subsection{Feature Fusion and Classification}
-
-% Explain how the multimodal content and social context representations are combined for final prediction.
-Both fusion models combine branch outputs by concatenating the content and context embeddings to produce 
-a classification embedding, which is passed to a classification layer. The classification layer applies a softmax function to produce a probability 
-distribution over the classes (authentic or inauthentic) and assigns a label based on the highest probability.
-
-MACE retains this fusion mechanism to ensure the performance differences can be attributed 
-to the substitution of the content branch rather than changes in the fusion or classification approach in response to limitations identified in prior work \citep{Dellys2025, jing2025}. 
-
-\section{Experimental Design}
-
-% Describe the comparative model setup and the logic of the experiments.
-The experiment design is structured as a two-stage process to systematically evaluate 
-the proposed architecture and address the research questions. Both base architectures are 
-evaluated allowing the findings to be evaluated for consistency across different fusion approaches.
-
-The model is treated as a replication factor, rather than a variable, as the primary focus is on 
-evaluating the impact of the proposed architecture modifications (multimodal content branch), rather 
-than comparing the performance of the two fusion approaches.
-
-\subsection{Experiment Stages and Conditions}
-
-\textbf{Stage 1} is to replicate the published architectures and  
-evaluate their performance on the Twitter15 and Twitter16 datasets to ensure 
-the implementation is correct and consistent with the published results.
-
-\textbf{Stage 2} evaluates four conditions on a multimodal dataset. Condition A establishes a new 
-baseline and Conditions B, C and D systematically evaluate the contribution of content and 
-context features against this new baseline to isolate the impact of the proposed architecture modification.
-
-\begin{table}[h!]
-{\small
-\begin{tabular}{llllll}
-\hline
-\multicolumn{2}{l}{\textbf{Stage}} & \textbf{Label}                                                    & \textbf{\begin{tabular}[c]{@{}l@{}}Content\\ Branch\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Context\\ Branch\end{tabular}} & \textbf{Goal / Purpose}                                                                                                                          \\ \hline
-1                        & A       & \begin{tabular}[c]{@{}l@{}}Implementation\\ Baseline\end{tabular} & Text-only                                                         & \checkmark                                                                        & \begin{tabular}[c]{@{}l@{}}Replicate baseline fusion models \\ and confirm published results prior \\ to introducing modifications.\end{tabular} \\ \hline
-\multirow{4}{*}{2}       & A       & \begin{tabular}[c]{@{}l@{}}Dataset\\ Baseline\end{tabular}        & Text-only                                                         & \checkmark                                                                        & \begin{tabular}[c]{@{}l@{}}Establish baseline on multimodal \\ dataset using existing fusion models.\end{tabular}                                \\ \cline{2-6} 
-                         & B       & Ablation 1                                                        & Text-only                                                         & $\times$                                                                         & \begin{tabular}[c]{@{}l@{}}Isolate contribution of text-only \\ features.\end{tabular}                                                           \\ \cline{2-6} 
-                         & C       & Ablation 2                                                        & Multimodal                                                        & $\times$                                                                         & \begin{tabular}[c]{@{}l@{}}Isolate contribution of multimodal \\ features.\end{tabular}                                                          \\ \cline{2-6} 
-                         & D       & \begin{tabular}[c]{@{}l@{}}Proposed \\ (MACE)\end{tabular}        & Multimodal                                                        & \checkmark                                                                        & Evaluation of full proposed framework.                                                                                                           \\ \hline
-\end{tabular}
-\caption{Summary of experiment conditions and objectives.}
-
-}
-\end{table}
-
-\subsection{Research Question Alignment}
-
-% Explain how the experiments answer RQ1 and RQ2.
-RQ1 is directly addressed by comparing the performance of the proposed architecture (Condition D) against the baseline architecture (Condition A) with the multimodal dataset.
-
-A pairwise comparison of condition's B, C and D address RQ2 by evaluating the contribution of the multimodal content branch and the social context branch to the overall 
-performance of the model.
-
-\begin{table}[h!]
-\centering
-{\small
-
-
-\begin{tabular}{llp{3.5cm}p{5.5cm}}
-\hline
- & \textbf{Comparison} & \textbf{What varies} & \textbf{What it tells us} \\ \hline
-RQ1 & A vs D &
-    \begin{tabular}[t]{@{}l@{}}Content branch\end{tabular} &
-    \begin{tabular}[t]{@{}l@{}}Does substituting the multimodal branch\\for the text branch improve performance\\within the full context-aware framework?\end{tabular} \\ \hline
-\multirow{3}{*}{RQ2} & A vs B &
-    \begin{tabular}[t]{@{}l@{}}Context branch\end{tabular} &
-    \begin{tabular}[t]{@{}l@{}}How much does the social context branch\\contribute with text-only content?\end{tabular} \\ \cline{2-4}
- & B vs C &
-    \begin{tabular}[t]{@{}l@{}}Content branch\end{tabular} &
-    \begin{tabular}[t]{@{}l@{}}Does adding visual features improve\\detection independent of social context?\end{tabular} \\ \cline{2-4}
- & C vs D &
-    \begin{tabular}[t]{@{}l@{}}Context branch\end{tabular} &
-    \begin{tabular}[t]{@{}l@{}}How much does the social context branch\\contribute with multimodal content?\end{tabular} \\ \hline
-\end{tabular}
-\caption{Pairwise condition comparisons and research question alignment.}
-\label{tab:pairwise}
-}
 \end{table}
