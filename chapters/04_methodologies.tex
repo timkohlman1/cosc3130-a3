@@ -18,7 +18,7 @@
   \subsection{Multimodal Content Branch}
 
   % Briefly describe how textual and visual features are extracted and combined.
-  MACE adopts HMCAN (Hierarchical Multi-modal Contextual Attention Network \citep{Qian2021}), or alternatively MPFN (Multimodal Progressive Fusion Network \citep{Jing2023})\footnote{If HMCAN proves incompatible with the selected dataset or integration constraints, MPFN is identified as a potential fallback candidate, utilising a more complex image pipeline.}, these models are selected for their task alignment, dataset compatibility and ease of integration with the existing DANES/GETAE architectures.
+  MACE adopts HMCAN (Hierarchical Multimodal Contextual Attention Network \citep{Qian2021}), or alternatively MPFN (Multimodal Progressive Fusion Network \citep{Jing2023})\footnote{If HMCAN proves incompatible with the selected dataset or integration constraints, MPFN is identified as a potential fallback candidate, utilising a more complex image pipeline.}, these models are selected for their task alignment, dataset compatibility and ease of integration with the existing DANES/GETAE architectures.
 
   HMCAN has demonstrated excellent accuracy using Twitter-based data sets (89.7\%, outperforming common baselines such as EANN) in multimodal fake news detection using its BERT + ResNet encoding pipeline, making it a good candidate \citep{Qian2021}.
 
