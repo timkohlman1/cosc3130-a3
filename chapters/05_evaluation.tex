@@ -1,21 +1,24 @@
 \chapter{Evaluation}
 \section{Datasets}
-To assess the performance of the proposed model, these datasets will be used to compare performance to the baseline model.
-Datasets are chosen because they provides textual, visual and social context features which is align with the proposed model architecture. The datasets are described in detail as follows:
+To assess the performance of the proposed model, these datasets will be used to compare performance against the baseline models:
 \begin{itemize}
     \item \textbf FakeNewsNet \citep{shu2020fakenewsnet}, it integrates news content, social context, and spatiotemporal information, making it highly suitable for evaluating models that combine content-based and multimodal features. The dataset is constructed from two fact-checking sources \citep{shu2018fake, shu2017fake, shu2017fake2}, PolitiFact and GossipCop, and includes news articles labelled as real or fake. Social context include user profiles, user posts, and the social network. 
     \item \textbf MuMin \citep{mumindataset}, is a recent dataset specifically designed to support multimodal and social-context-aware misinformation detection. The dataset is structured as a heterogeneous graph and features 21,565,018 tweets and 1,986,354 users, belonging to 26,048 Twitter threads, discussing 12,914 fact-checked claims from 115 fact-checking organisations in 41 different languages, spanning a decade. It classifies claims and tweets as misinformation or factual.
 \end{itemize}
 
+Specifically, these datasets provide textual, visual, and social context features, making them suitable for evaluating multimodal and context-aware architectures. They offer graph-structured data, aligning with the social context branches of DANES and GETAE. 
+
+These characteristics together ensure that the datasets support both the multimodal substitution investigated in RQ1 and the contribution analysis required for RQ2 making them suitable for the planned research.
+
 \section{Benchmarking}
 To evaluate the effectiveness of the proposed MACE model, the results of inauthentic social media classification from the selected datasets will be compared to previous research works with similar objective.
-The comparisons will be done across three domains: (1) single-modal with social-context modelling, (2) multi-modal without social-context modelling, and (3) multi-modal with social-context modelling that is similar to the proposed MACE.
+The comparisons will be done across three domains: (1) unimodal with social-context modelling, (2) multimodal without social-context modelling, and (3) multimodal with social-context modelling that is similar to the proposed MACE.
 \begin{itemize}
-    \item \textbf single-modal with social-context modelling, consists of DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}. These models will be the primary baseline for combining text or graph neural networks with social context features.
-    \item \textbf multi-modal without social-context modelling, consists of HMCAN \citep{Qian2021} and MPFN \citep{Jing2023}. As sub-components of MACE, the standalone performance of these models is considered as a comparator during ablation experiments.
-    \item \textbf multi-modal with social-context modelling, consists of DPSG \citep{jing2025} and multi-modal fusion from \citet{Dellys2025}.
+    \item \textbf unimodal with social-context modelling, consists of DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}. These models will be the primary baseline for combining text or graph neural networks with social context features.
+    \item \textbf multimodal without social-context modelling, consists of HMCAN \citep{Qian2021} and MPFN \citep{Jing2023}. As sub-components of MACE, the standalone performance of these models is considered as a comparator during ablation experiments.
+    \item \textbf multimodal with social-context modelling, consists of DPSG \citep{jing2025} and multimodal fusion from \citet{Dellys2025}.
 \end{itemize}
-These three domain baselines gives a structured comparison across single or multi-modal, context-aware, and hybrid approaches, ensuring that the performance of the proposed MACE model is evaluated properly against existing methods in full-model testing and under ablation conditions.
+These three domain baselines gives a structured comparison across unimodal or multimodal, context-aware, and hybrid approaches, ensuring that the performance of the proposed MACE model is evaluated properly against existing methods in full-model testing and under ablation conditions.
 
 \section{Evaluation Metrics}
 For evaluation plan, the main objective is to determine how effective the proposed model is in detecting inauthentic social media post.
@@ -33,3 +36,7 @@ These metrics are compared against the baseline models to assess the effectivene
 A high accuracy means that a model is more accurate in classifying inauthentic social media posts.
 High precision and high recall also indicating that the model ensures inauthentic post is detected and avoids incorrectly labelling authentic content as inauthentic. F1 score will be used as the main comparison between model and experiment datasets as it capture the balance of detection capability (recall) and reliability (precision).
 All metrics are evaluated across Stage 1 and Stage 2 (Conditions A-D). This allows for a consistent comparison between the baseline and modified model, and helps to measure the contribution of multimodal content and social context features. 
+
+Class imbalance is a known issue in misinformation datasets, often arising from the prevalence of false claims in fact-checking sources~\citep{mumindataset}. To mitigate the impact on evaluation, we use F1-score over accuracy and report macro-averaged metrics to ensure balanced consideration of both classes.
+
+To ensure that observed performance differences between models are not due to random variation, statistical significance testing will be conducted~\citep{stat_test}. For pairwise model comparisons on classification outputs, McNemar's test~\citep{McNemar_1947} will be used to assess differences in prediction distributions on the same dataset. For experiments involving repeated runs or cross-validation, a paired t-test will be applied across folds to evaluate whether differences in performance metrics (e.g., F1-score) are statistically significant. A significance level of $\alpha = 0.05$ will be used. Performance will be reported as mean and standard deviation across runs.
