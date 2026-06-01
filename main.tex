@@ -8,7 +8,6 @@
 \usepackage{ltablex}
 \usepackage{svg}
 \keepXColumns
-\usetikzlibrary{arrows.meta,calc}
 
 \usepackage{pdflscape}
 \usepackage{rotating}
@@ -29,6 +28,15 @@
   right=6pt,
   top=6pt,
   bottom=6pt
+}
+
+\usetikzlibrary{
+    arrows.meta,
+    positioning,
+    fit,
+    calc,
+    backgrounds,
+    shapes.geometric
 }
 
 \renewcommand{\chaptername}{Section}
