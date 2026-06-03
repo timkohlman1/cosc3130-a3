@@ -48,26 +48,182 @@
 \end{greybox}
 
 
-This research aims to develop a context-aware misinformation detection framework that replaces the text-only content branch in established ensemble models, such as DANES~\citep{truica2024danes} and GETAE~\citep{GETAE2025}, with a multimodal content branch that jointly captures textual and visual information. Both DANES and GETAE achieve state-of-the-art performance on benchmark datasets by combining a text content branch with a social context branch that models how information propagates through networks. However, their content branches process only text, ignoring the visual signals that increasingly characterise modern misinformation. While recent work has explored combining multimodal content with social context features~\citep{Nadeem2023, jing2025, Dellys2025}, these approaches employ social branches that differ architecturally from the propagation-graph ensemble structure of the DANES/GETAE family, which use engagement signals, dynamic temporal graphs, or attention-based fusion instead. As a result, two specific research questions remain unanswered, and together they form the technical core of this project.
 
-\paragraph{RQ1.} \textit{How does replacing a text-only content branch with a multimodal content branch affect the performance of context-aware inauthentic social media content detection models, and to what extent?}
+This research aims to develop a context-aware misinformation detection
+framework that replaces the text-only content branch in established
+ensemble models, specifically DANES~\citep{truica2024danes} and
+GETAE~\citep{truica2025getae}, with a multimodal content branch that
+jointly captures textual and visual information. Both DANES and GETAE
+achieve state-of-the-art performance on benchmark datasets by combining
+a text content branch with a social context branch that models how
+information propagates through networks. However, their content branches
+process only text, ignoring the visual signals that increasingly
+characterise modern misinformation. While recent work has explored
+combining multimodal content with social context features~\citep{%
+nadeem2023efnd, jing2025dpsg, dellys2025}, these approaches employ
+social branches that differ architecturally from the propagation-graph
+ensemble structure of the DANES/GETAE family, using engagement signals,
+dynamic temporal graphs, or attention-based fusion instead. Compounding
+this, the larger multimodal datasets best suited to such an
+evaluation, including FakeNewsNet~\citep{shu2020fakenewsnet} and
+MuMin~\citep{nielsen2022mumin}, have known practical limitations such
+as incomplete image availability and sparse propagation traces, making
+their adaptation to a DANES/GETAE-style ensemble a non-trivial
+methodological problem in its own right. As a result, three specific
+research questions remain unanswered, and together they form the
+technical core of this project.
 
-\begin{description}
-    \item[What it addresses.] This question isolates a single, controlled architectural change: keeping the social context branch of DANES and GETAE intact while substituting the text-only content processor with a content branch that fuses textual and visual features. Specifically, the text-only processor will be replaced with a multimodal component combining a transformer-based text encoder (e.g., BERT) with a CNN- or transformer-based visual encoder for image features. The effect of this substitution will be measured against the original text-only baselines on the same benchmark datasets used in the DANES and GETAE papers, Twitter15 and Twitter16, as well as multimodal FakeNewsNet~\citep{shu2020fakenewsnet} and MuMin~\citep{mumindataset} datasets, using accuracy, F1-score, precision, and recall.
 
-    \item[Significance.] Misinformation on social platforms increasingly relies on manipulated images, memes, out-of-context photographs, and screenshots where the textual signal alone is insufficient or misleading~\citep{Segura2022}. Studies on multimodal-only detectors have shown accuracy improvements of 5--15\% over text-only baselines on datasets such as GossipCop and Fakeddit~\citep{Nakamura2020}. Even strong context-aware ensembles inherit the blindness of their text-only content component, meaning a measurable portion of detectable misinformation may be missed not because the social signal is weak, but because the content signal is incomplete. Quantifying the gain, or absence of gain, from a multimodal substitution directly informs whether the established DANES/GETAE family of architectures is leaving detection accuracy on the table.
+\subsection*{RQ1: Multimodal Substitution and its Cost}
+\label{subsec:rq1}
 
-    \item[Novelty and difficulty.] No prior work directly performs this controlled substitution and isolates its effect on the DANES/GETAE backbone. Existing multimodal-plus-context models such as EFND~\citep{Nadeem2023}, DPSG~\citep{jing2025}, and the framework of \citet{Dellys2025} use fundamentally different social branches, including engagement signals, dynamic propagation graphs, or attention-based fusion, so their reported results cannot be cleanly attributed to the multimodal component alone. Answering RQ1 requires re-implementing a non-trivial baseline architecture, designing a compatible multimodal branch that integrates with the existing ensemble structure without confounding the social branch, and ensuring the experimental comparison remains controlled across datasets and metrics. This makes the question both technically challenging and methodologically demanding.
-\end{description}
+\begin{quote}
+\emph{How does replacing a text-only content branch with a multimodal
+content branch affect the performance of context-aware inauthentic
+social media content detection models, and what is the associated cost
+in terms of inference time and computational resource usage?}
+\end{quote}
 
-\paragraph{RQ2.} \textit{How does the relative contribution of the multimodal content branch and the social context branch affect overall detection performance?}
+\paragraph{What it addresses.}
+RQ1 isolates a single architectural change in the DANES/GETAE ensemble:
+the text-only content branch is substituted with a multimodal branch
+that processes both textual and visual input, while the social context
+branch is left unchanged. By holding the social signal constant, any
+observed change in detection performance can be attributed directly to
+the multimodal substitution rather than to confounded changes elsewhere
+in the architecture. The question also explicitly addresses the
+computational cost of this substitution (including additional
+inference time, GPU memory consumption, and parameter count), so that
+the tradeoff between accuracy gain and resource overhead can be
+quantified within a single controlled experimental frame.
 
-\begin{description}
-    \item[What it addresses.] Where RQ1 asks \emph{whether} multimodal substitution improves detection, RQ2 asks \emph{why} by decomposing where the model's predictive power originates. Through systematic ablation studies, running the content branch alone, the social branch alone, and the full ensemble, the project will quantify how much each branch contributes to correct classification. Additionally, analysis of the fusion-layer weights will reveal whether the two branches provide complementary signals (each capturing different types of misinformation) or whether one branch's contribution is largely redundant when the other is present. This decomposition will be performed across different categories of misinformation to determine whether the balance shifts depending on content type.
+\paragraph{Significance.}
+Modern misinformation increasingly relies on images, memes,
+screenshots, and out-of-context visual material, which text-only
+content branches cannot interpret. Existing context-aware ensembles
+such as DANES and GETAE pre-date this shift and may therefore be
+leaving meaningful detection accuracy unrealised. Establishing whether
+multimodal substitution measurably improves their performance, and at
+what computational cost, gives the field an empirical basis for
+deciding when richer content encoders justify their additional
+resource requirements, a question that is increasingly important as
+detection systems are deployed at platform scale.
 
-    \item[Significance.] Knowing that a combined model performs well in aggregate is not sufficient for either researchers or practitioners. If the social context branch dominates overall performance, then the additional engineering cost of multimodal feature extraction, including image preprocessing, visual model training, and increased inference time, may not be justified for real-world deployment. Conversely, if the multimodal branch dominates, the field should reconsider its current emphasis on increasingly complex propagation-graph architectures and invest more in content-side improvements. The answer therefore has direct design implications for the next generation of misinformation detection systems, informing where computational resources and research effort should be directed.
+\paragraph{Novelty and difficulty.}
+No prior work directly performs this controlled substitution and
+isolates its effect on the DANES/GETAE backbone. Existing
+multimodal-plus-context models such as EFND~\citep{nadeem2023efnd},
+DPSG~\citep{jing2025dpsg}, and \citet{dellys2025} use fundamentally
+different social branches, so their reported gains cannot be cleanly
+attributed to the multimodal component alone. Quantifying both the
+accuracy benefit and the computational cost of this substitution within
+a single controlled experimental frame is therefore a novel
+contribution. The conceptual challenge lies in isolating the multimodal
+effect while leaving the social branch untouched, ensuring that any
+observed change is attributable to the content modification rather than
+to confounded architectural choices elsewhere in the ensemble.
 
-    \item[Novelty and difficulty.] Most prior multimodal-plus-context studies report only headline accuracy and do not cleanly decompose contributions across a propagation-graph social branch of the DANES/GETAE family. Approaches such as TMEF-BI~\citep{Chen2025} perform reliability-aware modality weighting, but on a fundamentally different social signal (speaker behaviour rather than propagation structure), meaning their findings do not transfer directly to the architecture under investigation. A principled contribution analysis on the proposed backbone is therefore both novel and methodologically demanding, requiring careful experimental design to avoid confounding the two branches and to ensure that observed differences are statistically meaningful rather than artefacts of training variance.
-\end{description}
+\subsection*{RQ2: Branch Contribution Decomposition}
+\label{subsec:rq2}
 
-Together, RQ1 and RQ2 form a coherent and complementary investigation: RQ1 establishes \emph{whether} multimodal substitution measurably improves context-aware misinformation detection on the DANES/GETAE backbone, while RQ2 explains \emph{why} by revealing how the content and social context signals interact and contribute to overall performance. Answering both questions is necessary to make a defensible and actionable contribution to the context-aware fake news detection literature.
+\begin{quote}
+\emph{How does the relative contribution of the multimodal content
+branch and the social context branch affect overall detection
+performance?}
+\end{quote}
+
+\paragraph{What it addresses.}
+RQ2 shifts the focus from substitution to decomposition. Given a
+multimodal content branch and a propagation-graph social context
+branch, the question asks how much each branch contributes to overall
+detection performance and whether their signals are complementary or
+redundant. It is answered through a controlled ablation in which each
+branch is run in isolation and in combination, allowing the marginal
+contribution of each modality and signal source to be quantified
+rather than reported only as a single combined accuracy figure.
+
+\paragraph{Significance.}
+Most published context-aware detection models report a single combined
+performance number and do not separate the contribution of content
+modelling from the contribution of social-context modelling. This
+makes it difficult for the field to determine where future research
+effort is best invested: in richer content encoders, in deeper
+propagation modelling, or in more sophisticated fusion mechanisms.
+A principled decomposition on the proposed backbone therefore has
+direct design implications for the next generation of misinformation
+detection systems and turns an otherwise opaque ensemble into a more
+interpretable one.
+
+\paragraph{Novelty and difficulty.}
+Most prior multimodal-plus-context studies report only headline accuracy
+and do not cleanly decompose contributions across a propagation-graph
+social branch of the DANES/GETAE family. Approaches such as
+TMEF-BI~\citep{chen2025tmefbi} perform reliability-aware modality
+weighting, but on a fundamentally different social signal (speaker
+behaviour rather than propagation structure), so their findings do not
+transfer to the architecture under investigation. A principled
+contribution analysis on the proposed backbone is therefore both novel
+and conceptually demanding, since the two branches must be evaluated
+independently and jointly without confounding their respective signals.
+
+
+\subsection*{RQ3: Dataset Adaptation and Generalisability}
+\label{subsec:rq3}
+
+\begin{quote}
+\emph{What criteria and preprocessing steps are required to adapt an
+existing multimodal social-media dataset for use with the DANES/GETAE
+ensemble backbone, and how does dataset choice affect the
+generalisability of results?}
+\end{quote}
+
+\paragraph{What it addresses.}
+RQ1 and RQ2 both assume that suitable multimodal datasets are available
+and that the framework behaves consistently across them. RQ3 examines
+this assumption directly. DANES and GETAE were originally evaluated on
+Twitter15 and Twitter16, which provide propagation graphs but limited
+multimodal content, while datasets such as
+FakeNewsNet~\citep{shu2020fakenewsnet} and
+MuMin~\citep{nielsen2022mumin} offer richer multimodal content but
+carry known practical limitations including broken or missing image
+URLs, sparse or delayed user engagement traces, and class imbalance
+inherited from fact-checking sources. RQ3 will establish explicit
+criteria (such as a minimum image-availability rate, graph-density
+thresholds, and class-balance requirements) under which a dataset is
+considered suitable for MACE evaluation, and will compare performance
+across the adapted datasets to determine how strongly dataset
+characteristics influence the conclusions drawn from RQ1 and RQ2.
+
+\paragraph{Significance.}
+Cross-dataset generalisation is a recurring concern in misinformation
+detection research, where strong performance on one benchmark frequently
+fails to transfer to another~\citep{nielsen2022mumin}. Without explicit
+attention to dataset adaptation, the contribution of multimodal content
+modelling cannot be cleanly separated from artefacts of dataset
+construction. Establishing transparent adaptation criteria therefore
+serves two purposes: it makes the MACE results reproducible and
+comparable across datasets, and it offers a methodological contribution
+to the wider field, where dataset suitability is often treated as an
+unstated pre-condition rather than a research variable.
+
+\paragraph{Novelty and difficulty.}
+Most published work in this area treats dataset selection as fixed and
+reports results without quantifying dataset suitability, leaving an
+open methodological gap. The conceptual difficulty is one of
+disentanglement: dataset characteristics, model architecture, and
+evaluation protocol are typically confounded, and isolating the effect
+of dataset choice requires designing the adaptation criteria and the
+cross-dataset comparison \emph{before} any model results are
+interpreted, so that observed differences in performance can be
+attributed to dataset properties rather than to post-hoc tuning.
+
+Together, RQ1, RQ2, and RQ3 form a coherent and complementary
+investigation. RQ1 establishes whether multimodal substitution
+measurably improves context-aware misinformation detection on the
+DANES/GETAE backbone and quantifies the cost of doing so. RQ2 explains
+\emph{why} by decomposing how content and social signals interact and
+contribute to overall performance. RQ3 grounds both findings by
+determining whether observed gains generalise across multimodal
+datasets adapted under explicit, transparent criteria. Answering all
+three questions is necessary to make a defensible and actionable
+contribution to the context-aware fake news detection literature.
