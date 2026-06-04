@@ -8,20 +8,42 @@
 \usepackage{ltablex}
 \usepackage{svg}
 \keepXColumns
-\usetikzlibrary{arrows.meta,calc}
 
 \usepackage{pdflscape}
 \usepackage{rotating}
 
 \usepackage{colortbl}
 \usepackage{pdfpages}
+\usepackage[most]{tcolorbox}
 
+\usepackage[margin=1.5cm]{geometry}
+
+\newtcolorbox{greybox}{
+  breakable,
+  colback=gray!10,
+  colframe=black,
+  boxrule=0.5pt,
+  arc=0mm,
+  left=6pt,
+  right=6pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\usetikzlibrary{
+    arrows.meta,
+    positioning,
+    fit,
+    calc,
+    backgrounds,
+    shapes.geometric
+}
 
 \renewcommand{\chaptername}{Section}
 
 % Assignment details
 \newcommand{\subject}{COSC2148/COSC3130 Computing Research and Project Preparation}
-\newcommand{\assignment}{Assignment 2}
+\newcommand{\assignment}{Assignment 3}
 \newcommand{\institution}{RMIT University}
 \newcommand{\school}{School of Computer Science and Information Technology}
 \newcommand{\dateSubmitted}{\today}
@@ -51,8 +73,9 @@
 
 \vspace{1cm}
 
+
 {\LARGE \textbf{Detection of Inauthentic Social Media Contents} \par}
-{\LARGE First Draft of Research Proposal - Multimodal and Context Aware Ensemble (MACE) Framework \par}
+{\LARGE Research Proposal - Multimodal and Context Aware Ensemble (MACE) Framework \par}
 
 \vspace{1cm}
 
@@ -110,6 +133,7 @@
 \include{chapters/04_methodologies}
 \include{chapters/05_evaluation}
 \include{chapters/06_project_management}
+%\include{cosc3130-a3-athul/07_athul}
 
 \bibliographystyle{abbrvnat}
 \bibliography{bib/strings,bib/main}
