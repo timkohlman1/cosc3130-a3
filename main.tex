@@ -18,6 +18,19 @@
 
 \usepackage[margin=1.5cm]{geometry}
 
+\usepackage{titlesec}
+
+\titleformat{\chapter}[hang]
+  {\normalfont\huge\bfseries}
+  {\chaptername\ \thechapter}
+  {1em}
+  {}
+
+\titlespacing*{\chapter}
+  {0pt}   % left margin
+  {0pt}   % space before chapter title
+  {18pt}  % space after chapter title
+
 \newtcolorbox{greybox}{
   breakable,
   colback=gray!10,
@@ -139,6 +152,7 @@
 \bibliography{bib/strings,bib/main}
 
 \appendix
+\renewcommand{\chaptername}{Appendix}
 
 \include{appendix/lit_review_table}
 \include{appendix/timeline}
