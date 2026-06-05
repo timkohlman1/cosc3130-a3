@@ -1,24 +1,5 @@
   \section{Research Methodologies}
 
-\begin{greybox}
-
-\textbf{Changes Needed for Assignment 3}
-
-\vspace{1em}
-
-\small
-
-Complete - Estimate and parameters around computation
-Complete - Additional references
-Complete - Addressed fallback position of MPFN (removed MPFN entirely)
-Complete - Updated MACE diagram to include more detail and also added diagram for experiment conditions
-Complete - Added more detail in feature fusion strategies and classification decisions
-Complete - Addressed impacts of dataset size
-Complete - Updates to include RQ3 in methodology
-
-\end{greybox}
-
-
   \subsection{Proposed Framework}
 
   DANES~\citep{truica2024danes} and GETAE~\citep{GETAE2025} classify inauthentic social media content by fusing a single-modal text-based content branch and a social context branch to create an ensemble model. The proposed MACE (\textbf{M}ultimodal \textbf{A}nd \textbf{C}ontext-aware \textbf{E}nsemble) framework adopts a comparative experimental design to evaluate the impact of integrating multimodal content features into these models.
@@ -468,9 +449,9 @@ training time, inference time, peak memory, storage cost
 
 \subsubsection{Dataset Adaptation and Selection}
 
-Before Stage~3 model evaluation, candidate multimodal datasets will be assessed for compatibility with the MACE architecture. This stage addresses RQ3 by determining whether each dataset contains sufficient textual content, image availability, label compatibility, social-context or propagation information, and computational feasibility for use with the DANES/GETAE-style ensemble. Candidate datasets will be profiled for record count, image-availability rate, missing or broken media links, class balance, graph density, availability of user or propagation traces, and estimated storage and memory requirements.
+Before Stage~3 model evaluation, all Stage~2 candidate datasets will be assessed for compatibility with the MACE architecture. This stage addresses RQ3 by determining whether each dataset contains sufficient textual content, image availability, label compatibility, social-context or propagation information, and computational feasibility for use with the DANES/GETAE-style ensemble. Candidate datasets will be profiled for record count, image-availability rate, missing or broken media links, class balance, graph density, availability of user or propagation traces, language compatibility, domain specificity, and estimated storage and memory requirements. The Stage~2 candidate pool is derived from a first-stage screen of the dataset landscape described in Section~5.1 and comprises: Weibo, Twitter, PolitiFact and GossipCop (via FakeNewsNet), MuMin, CHECKED, CoAID, MC-Fake, MR2, and ReCOVery.
 
-The dataset adaptation process will include preprocessing text fields, validating and downloading available images, creating dummy image placeholders where required, mapping dataset labels to the target classification structure, constructing or adapting social-context graph features, and producing dataset-level feasibility statistics. FakeNewsNet and MuMin will be considered as candidate Stage~2 datasets; however, final selection will depend on the adaptation results. Where more than one dataset satisfies the suitability criteria, MACE will be evaluated across multiple adapted datasets to assess generalisability. Where only one dataset is feasible within the available compute and time constraints, the excluded dataset characteristics and reasons for exclusion will be reported as part of the RQ3 findings.
+The dataset adaptation process will include preprocessing text fields, validating and downloading available images, creating dummy image placeholders where required, mapping dataset labels to the target binary classification structure, constructing or adapting social-context graph features, and producing dataset-level feasibility statistics. Final selection for Stage~3 will depend on the adaptation results. Where more than one dataset satisfies the suitability criteria, MACE will be evaluated across multiple adapted datasets to assess generalisability. Where only one dataset is feasible within the available compute and time constraints, the excluded dataset characteristics and reasons for exclusion will be reported as part of the RQ3 findings.
 
 \subsubsection{Experiment Stages and Conditions}
 
