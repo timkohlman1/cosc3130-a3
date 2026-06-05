@@ -1,4 +1,4 @@
-\documentclass[11pt]{report}
+\documentclass[a4paper,11pt]{article}
 \usepackage[table]{xcolor}
 \usepackage{a4wide,parskip,graphicx,amsmath,natbib,xurl,hyperref,float,multirow,amssymb,tabularx}
 \usepackage{longtable}
@@ -15,21 +15,9 @@
 \usepackage{colortbl}
 \usepackage{pdfpages}
 \usepackage[most]{tcolorbox}
+\usepackage[titletoc,title]{appendix}
 
 \usepackage[margin=1.5cm]{geometry}
-
-\usepackage{titlesec}
-
-\titleformat{\chapter}[hang]
-  {\normalfont\huge\bfseries}
-  {\chaptername\ \thechapter}
-  {1em}
-  {}
-
-\titlespacing*{\chapter}
-  {0pt}   % left margin
-  {0pt}   % space before chapter title
-  {18pt}  % space after chapter title
 
 \newtcolorbox{greybox}{
   breakable,
@@ -51,8 +39,6 @@
     backgrounds,
     shapes.geometric
 }
-
-\renewcommand{\chaptername}{Section}
 
 % Assignment details
 \newcommand{\subject}{COSC2148/COSC3130 Computing Research and Project Preparation}
@@ -140,25 +126,28 @@
 \clearpage
 \pagenumbering{arabic}
 
-\include{chapters/01_introduction}
-\include{chapters/02_research_questions}
-\include{chapters/03_literature_review}
-\include{chapters/04_methodologies}
-\include{chapters/05_evaluation}
-\include{chapters/06_project_management}
-%\include{cosc3130-a3-athul/07_athul}
+\input{chapters/01_introduction}
+\input{chapters/02_research_questions}
+\input{chapters/03_literature_review}
+\input{chapters/04_methodologies}
+\input{chapters/05_evaluation}
+\input{chapters/06_project_management}
+%\input{cosc3130-a3-athul/07_athul}
+
+\clearpage
 
 \bibliographystyle{abbrvnat}
 \bibliography{bib/strings,bib/main}
 
-\appendix
-\renewcommand{\chaptername}{Appendix}
+\clearpage
 
+\begin{appendices}
 \include{appendix/lit_review_table}
 \include{appendix/timeline}
 \include{appendix/risks_mitigation}
 \include{appendix/ai_usage}
 \include{appendix/contribution_sheet}
+\end{appendices}
 
 \end{document}
 
