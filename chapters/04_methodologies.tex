@@ -1,4 +1,4 @@
-  \chapter{Research Methodologies}
+  \section{Research Methodologies}
 
 \begin{greybox}
 
@@ -19,7 +19,7 @@ Complete - Updates to include RQ3 in methodology
 \end{greybox}
 
 
-  \section{Proposed Framework}
+  \subsection{Proposed Framework}
 
   DANES~\citep{truica2024danes} and GETAE~\citep{GETAE2025} classify inauthentic social media content by fusing a single-modal text-based content branch and a social context branch to create an ensemble model. The proposed MACE (\textbf{M}ultimodal \textbf{A}nd \textbf{C}ontext-aware \textbf{E}nsemble) framework adopts a comparative experimental design to evaluate the impact of integrating multimodal content features into these models.
 
@@ -206,7 +206,7 @@ Complete - Updates to include RQ3 in methodology
 \label{fig:mace_architecture}
 \end{figure}
 
-\subsection{Multimodal Content Branch}
+\subsubsection{Multimodal Content Branch}
 
 MACE adopts HMCAN (Hierarchical Multimodal Contextual Attention Network) as the multimodal content branch \citep{Qian2021}. HMCAN is selected because it is task-aligned with multimodal fake news detection, has demonstrated strong performance on Twitter-based multimodal datasets, and uses an encoding pipeline that is compatible with the textual and visual components of the proposed datasets.
 
@@ -216,7 +216,7 @@ In MACE, the HMCAN representation will be used as the content-branch embedding a
 
 This design allows the experiment to isolate the effect of substituting a multimodal content branch for the original text-only content branch while keeping the social-context branch, fusion mechanism, and classifier structure unchanged. As a result, any performance difference between the baseline and MACE conditions can be attributed primarily to the richer multimodal content representation rather than to simultaneous changes in downstream fusion or classification.
 
-  \subsection{Social Context Branch}
+  \subsubsection{Social Context Branch}
 
   % Describe the user-level, interaction-based, and lightweight network/context features.
   We retain the Graph-based Deep Learning social context branches from the baseline DANES/GETAE architectures, as these studies and others provide strong evidence supporting the effectiveness of propagation and interaction signals in misinformation detection \citep{truica2024danes, GETAE2025, Song2021,Min2022,Zhu24}.
@@ -243,7 +243,7 @@ This design allows the experiment to isolate the effect of substituting a multim
 
   \end{table}
 
-\subsection{Feature Fusion and Classification}
+\subsubsection{Feature Fusion and Classification}
 
 Both fusion models combine branch outputs by concatenating the content and context embeddings to produce a single classification embedding. In DANES, this concatenated embedding is passed directly to a dense classification layer with softmax activation. In GETAE, the concatenated embedding is first passed through a dense hidden layer with ReLU activation, then through a final dense softmax classification layer. In both cases, the final softmax layer produces a probability distribution over the target classes and assigns the final label based on the highest predicted probability. MACE retains the classification mechanisms from the original frameworks.
 
@@ -253,7 +253,7 @@ More advanced fusion strategies may improve cross-modal interaction modelling. F
 
 However, the objective of this study is not to optimise the fusion or classification mechanisms, but to isolate the effect of replacing the text-only content branch with a multimodal content branch in the DANES/GETAE-style ensemble, addressing limitations identified by \citet{Dellys2025}. Changes to these mechanisms would introduce additional confounding architectural variables. MACE therefore retains the existing concatenation-based fusion and classification mechanism so that observed performance differences can be attributed primarily to the content-branch substitution rather than to simultaneous changes in representation, fusion, and classification design.
 
-\section{Experimental Design}
+\subsection{Experimental Design}
 
 The experiment design is structured as a three-stage process to systematically evaluate dataset suitability, replicate the baseline architectures, and test the proposed MACE architecture. Both base architectures are evaluated so that findings can be assessed for consistency across the DANES and GETAE ensemble backbones.
 
@@ -466,13 +466,13 @@ training time, inference time, peak memory, storage cost
 \end{figure}
 
 
-\subsection{Dataset Adaptation and Selection}
+\subsubsection{Dataset Adaptation and Selection}
 
 Before Stage~3 model evaluation, candidate multimodal datasets will be assessed for compatibility with the MACE architecture. This stage addresses RQ3 by determining whether each dataset contains sufficient textual content, image availability, label compatibility, social-context or propagation information, and computational feasibility for use with the DANES/GETAE-style ensemble. Candidate datasets will be profiled for record count, image-availability rate, missing or broken media links, class balance, graph density, availability of user or propagation traces, and estimated storage and memory requirements.
 
 The dataset adaptation process will include preprocessing text fields, validating and downloading available images, creating dummy image placeholders where required, mapping dataset labels to the target classification structure, constructing or adapting social-context graph features, and producing dataset-level feasibility statistics. FakeNewsNet and MuMin will be considered as candidate Stage~2 datasets; however, final selection will depend on the adaptation results. Where more than one dataset satisfies the suitability criteria, MACE will be evaluated across multiple adapted datasets to assess generalisability. Where only one dataset is feasible within the available compute and time constraints, the excluded dataset characteristics and reasons for exclusion will be reported as part of the RQ3 findings.
 
-\subsection{Experiment Stages and Conditions}
+\subsubsection{Experiment Stages and Conditions}
 
 \textbf{Stage 1} replicates the published DANES and GETAE architectures and evaluates their performance on Twitter15 and Twitter16 to confirm that the implementation is consistent with the published baselines before introducing architectural modifications.
 
@@ -497,7 +497,7 @@ The dataset adaptation process will include preprocessing text fields, validatin
 }
 \end{table}
 
-\subsection{Computational Cost Estimates}
+\subsubsection{Computational Cost Estimates}
 
 The MACE framework adds two computationally significant components for processing multimodal datasets: a BERT-based text encoder and a ResNet-based visual encoder within the multimodal content branch, alongside the social-context processing branch inherited from DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}. The proposed methodology also evaluates datasets larger than those used in the original DANES, GETAE, and HMCAN experiments, making evidence-based cost estimation important for assessing feasibility and managing budget and schedule constraints.
 
@@ -507,11 +507,11 @@ The social-context branches of DANES and GETAE introduce additional cost through
 
 Accordingly, computational resource demand will be evaluated as part of dataset selection. FakeNewsNet and MuMin will therefore be assessed during Stage~2 rather than assumed suitable in advance. FakeNewsNet may be more feasible for primary Stage~3 experiments if it provides sufficient image availability and social-context information while allowing the baseline social-context branch to be preserved without major architectural changes. If MuMin or another candidate dataset satisfies the feasibility criteria within the available hardware and schedule, it may be included as an additional cross-dataset generalisation test for RQ3.
 
-\subsection{Recommended Experimental Environment}
+\subsubsection{Recommended Experimental Environment}
 
 The recommended environment is a single-GPU workstation or cloud instance with at least 24GB GPU VRAM (e.g., NVIDIA A100 or equivalent), 128GB system RAM, 16--32 CPU cores, and 1--2TB of fast local storage for cached embeddings. This is below the four-GPU NVIDIA DGX Station used by DANES \citep{truica2024danes} but substantially above the unaccelerated Google Colab environment used by GETAE \citep{GETAE2025}, reflecting the additional cost of the multimodal content branch and larger Stage~2 datasets. Where hardware limits are encountered, the implementation will use mixed-precision training, cached embeddings, and dataset subsampling for pilot runs. Compute reporting will follow the MLPerf convention of wall-clock time to a defined quality target \citep{mattson2020mlperf}, and will include hardware configuration, peak GPU memory, peak system RAM, inference time, and storage requirements alongside classification performance.
 
-\subsection{Research Question Alignment}
+\subsubsection{Research Question Alignment}
 
 RQ1 is addressed by comparing the proposed MACE architecture (Stage~3, Condition D) against the dataset baseline (Stage~3, Condition A) on the selected adapted multimodal dataset or datasets, and by reporting the associated inference time, wall-clock training time, peak memory use, and storage requirements. RQ2 is addressed through pairwise comparison of Conditions A--D to isolate the contribution of the multimodal content branch and the social-context branch. RQ3 is addressed through Stage~2 dataset adaptation and, where feasible, by comparing the same Stage~3 conditions across multiple adapted datasets.
 
@@ -544,7 +544,7 @@ RQ3 & Stage~2 and cross-dataset comparison &
 }
 \end{table}
 
-\section{Research Timeline}
+\subsection{Research Timeline}
 
 The research project is planned across a 22-week period; Table~\ref{tab:timeline} presents the planned research timeline, based on the proposed methodology. Research activities are concentrated in Weeks~1--18, including Stage~2 dataset adaptation before Stage~3 experiments, with five weeks reserved for thesis writing (Weeks~18--22).
 

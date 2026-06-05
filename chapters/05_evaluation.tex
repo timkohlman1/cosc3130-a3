@@ -1,4 +1,4 @@
-\chapter{Evaluation}
+\section{Evaluation}
 
 \begin{greybox}
 
@@ -21,7 +21,7 @@
 \end{greybox}
 
 
-\section{Datasets}
+\subsection{Datasets}
 To assess the performance of the proposed model, these datasets will be used to compare performance against the baseline models:
 \begin{itemize}
     \item \textbf{FakeNewsNet} \citep{shu2020fakenewsnet}, it integrates news content, social context, and spatiotemporal information, making it highly suitable for evaluating models that combine content-based and multimodal features. The dataset is constructed from two fact-checking sources \citep{shu2018fake, shu2017fake, shu2017fake2}, PolitiFact and GossipCop, and includes news articles labelled as real or fake. Social context include user profiles, user posts, and the social network. 
@@ -47,7 +47,7 @@ Specifically, these datasets provide textual, visual, and social context feature
 
 These characteristics together ensure that the datasets support both the multimodal substitution investigated in RQ1 and the contribution analysis required for RQ2 making them suitable for the planned research.
 
-\section{Dataset Adaptation}
+\subsection{Dataset Adaptation}
 Before implementing and evaluating the MACE model, both candidate datasets will undergo adaptation to ensure their suitability. This assessment checks that the chosen dataset will support the multimodal branch under the MACE framework. Adaptation stage is important to ensure complete modalities within dataset candidate, as any missing or incomplete modalities can lower the effectiveness of feature extraction and fusion of different data types \citep{baltruvsaitis2019multimodal}. Therefore, datasets must include all necessary modalities, such as text, images, and enough user interaction or propagation information to support graph-based modeling. Dataset candidates will be evaluated based on the main considerations outlined below.
 
 \begin{itemize}
@@ -64,7 +64,7 @@ Before implementing and evaluating the MACE model, both candidate datasets will 
 \end{itemize}
 
 
-\section{Benchmarking}
+\subsection{Benchmarking}
 To evaluate the effectiveness of the proposed MACE model, the results of inauthentic social media classification from the selected datasets will be compared to previous research works with similar objective.
 The comparisons will be done across three domains: (1) unimodal with social-context modelling, (2) multimodal without social-context modelling, and (3) multimodal with social-context modelling that is similar to the proposed MACE.
 \begin{itemize}
@@ -74,7 +74,7 @@ The comparisons will be done across three domains: (1) unimodal with social-cont
 \end{itemize}
 These three domain baselines gives a structured comparison across unimodal or multimodal, context-aware, and hybrid approaches, ensuring that the performance of the proposed MACE model is evaluated properly against existing methods in full-model testing and under ablation conditions.
 
-\section{Evaluation Metrics}
+\subsection{Evaluation Metrics}
 Based on information explained in the Methodology section, there will be three (3) stages of experiments performed. Each stage will be defined its own evaluation metrics as needed.
 
 \textbf{Stage 1} where it replicates DANES and GETAE models to confirm the MACE baseline model. For this stage, standard performance metrics will be used and the result will be compared to the previous studies of DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}. 
@@ -115,7 +115,7 @@ For pairwise model comparisons on classification outputs, McNemar's test~\citep{
 For experiments involving repeated runs or cross-validation, a paired t-test will be applied across folds to evaluate whether differences in performance metrics (e.g., F1-score) are statistically significant.
 A significance level of $\alpha = 0.05$ will be used. Performance will be reported as mean and standard deviation across runs.
 
-\section{Computational Efficiency Metrics}
+\subsection{Computational Efficiency Metrics}
 In addition to classification performance, computational efficiency will be evaluated to determine the practical operational cost of introducing multimodal content processing into the DANES and GETAE frameworks. Following the framework established by \citet{Justus2018}, a deep learning model's training and execution cost is heavily affected by hidden factors such as slow data-loading speeds, hardware memory limits, and the model run-time itself. Based on this, the proposed MACE framework's efficiency will be evaluated and reported in below computational costs.
 
 \begin{itemize}

@@ -1,6 +1,6 @@
-\chapter{Literature Review}
+\section{Literature Review}
 
-\section{Overview of Social Media Misinformation Detection}
+\subsection{Overview of Social Media Misinformation Detection}
 
 Research into social media misinformation detection has developed across several related directions, including text-based content modelling, multimodal content analysis, and social-context or propagation-based modelling. Earlier approaches commonly treated misinformation detection as a supervised classification problem, where the main task was to classify a post, article, or claim as authentic or inauthentic based on textual information. These approaches provided an important foundation because they showed that misinformation often contains identifiable linguistic, semantic, or stylistic patterns \citep{Wang2018,Song2021,truica2024danes}.
 
@@ -10,7 +10,7 @@ As a result, recent misinformation detection research increasingly recognises th
 
 This limitation is central to the proposed MACE framework. Existing multimodal models show that text and images are useful together, while DANES and GETAE show that social-context modelling improves detection \citep{Qian2021,truica2024danes,GETAE2025}. However, there is still limited work that performs a controlled replacement of the text-only content branch inside a DANES/GETAE-style propagation ensemble while keeping the social branch, fusion mechanism, and classifier largely unchanged. Therefore, the literature review focuses not only on what previous studies achieved, but also on the methodological limitations that create the gap for this research.
 
-\section{Text-Only Content-Based Detection Approaches}
+\subsection{Text-Only Content-Based Detection Approaches}
 
 Text-only content-based approaches remain an important starting point in fake news and misinformation detection. These models represent posts, articles, or claims using linguistic and semantic features and then classify them based on textual evidence. Earlier methods used hand-crafted linguistic features, while later approaches adopted neural models such as convolutional neural networks, recurrent neural networks, and transformer-based encoders such as BERT \citep{Devlin2019,truica2024danes}.
 
@@ -22,7 +22,7 @@ This limitation also applies to DANES and GETAE. Both models are strong context-
 
 Methodologically, text-only models are valuable because they provide a clean baseline for comparison. However, their findings are limited when applied to multimodal social media environments. Their performance may reflect the strength of textual cues in specific datasets rather than a complete ability to detect real-world misinformation. For this reason, the proposed MACE framework treats text-only DANES/GETAE performance as the baseline rather than the final solution.
 
-\section{Context-Aware Detection with Social and Propagation Signals}
+\subsection{Context-Aware Detection with Social and Propagation Signals}
 
 A second major research direction focuses on social context and propagation behaviour. These approaches are based on the idea that misinformation differs not only in what it says, but also in how it spreads, who interacts with it, how quickly it is reshared, and what type of engagement pattern it creates \citep{Vosoughi2018,Song2021,Min2022}. Social-context models therefore use features such as user interactions, repost structures, propagation trees, temporal diffusion, graph relationships, and engagement behaviour.
 
@@ -34,7 +34,7 @@ However, social-context and propagation-based approaches also have methodologica
 
 This limitation directly supports RQ3. Since MACE depends on both multimodal content and social-context information, dataset suitability cannot be assumed. Candidate datasets must be checked for graph density, user or propagation traces, missing media, class balance, and computational feasibility before they can be used for controlled evaluation. Therefore, the literature suggests that social-context modelling is valuable, but only when the dataset provides enough reliable interaction evidence.
 
-\section{Multimodal Content-Based Detection Approaches}
+\subsection{Multimodal Content-Based Detection Approaches}
 
 Multimodal misinformation detection addresses the limitations of text-only approaches by combining textual and visual features. EANN is one of the foundational models in this area. It demonstrated that combining text and images can improve fake news detection compared with text-only or image-only baselines. The importance of multimodal learning was further supported by datasets such as Fakeddit, which showed that multimodal representations can improve classification across different fake news categories \citep{Wang2018,Nakamura2020}.
 
@@ -48,7 +48,7 @@ Another important issue is visual encoder selection. Earlier multimodal models o
 
 For MACE, the purpose is not to optimise the visual encoder itself. Instead, the purpose is to test whether replacing the original text-only content branch with an HMCAN-based multimodal branch improves performance while keeping the rest of the DANES/GETAE-style ensemble controlled. Therefore, using HMCAN provides a practical balance between multimodal capability, reproducibility, and compatibility with the proposed controlled experimental design.
 
-\section{Integrating Multimodal Content and Social Context}
+\subsection{Integrating Multimodal Content and Social Context}
 
 Recent research has increasingly attempted to combine multimodal content and social-context information within unified fake news detection frameworks. This direction is highly relevant to MACE because it recognises that misinformation detection benefits from both content-level evidence and social behaviour. However, existing integrated models differ significantly in how they represent social context and how they fuse text, image, and social signals.
 
@@ -66,7 +66,7 @@ Sun et al.'s ESDGFN and Ji et al.'s LDPG further show the recent movement toward
 
 This is where MACE is positioned differently. MACE does not attempt to redesign every part of the detection pipeline. Instead, it retains the DANES/GETAE-style social-context branch, fusion mechanism, and classifier as far as possible, while replacing only the original text-only content branch with an HMCAN-based multimodal branch. This controlled substitution design directly supports RQ1 and RQ2. RQ1 evaluates whether the multimodal substitution improves performance and whether the improvement justifies the added computational cost. RQ2 uses ablation conditions to examine how much the multimodal content branch and social-context branch each contribute to the final prediction.
 
-\section{Computational Cost and Practical Deployment Considerations}
+\subsection{Computational Cost and Practical Deployment Considerations}
 
 Although multimodal models can improve detection performance, they usually introduce additional computational cost. A text-only model typically requires one main text encoder, such as BERT. In contrast, an HMCAN-style multimodal pipeline requires both a text encoder and a visual encoder, as well as additional preprocessing and fusion operations. The updated MACE methodology specifically uses HMCAN with BERT and ResNet-50, meaning that the model must process both textual and visual inputs before producing a multimodal content representation \citep{Qian2021,Devlin2019,He2016}.
 
@@ -76,7 +76,7 @@ The MACE methodology addresses this limitation by treating computational cost as
 
 This also strengthens RQ1. Instead of only asking whether multimodal substitution improves accuracy, RQ1 asks what cost is associated with this substitution in terms of inference time and computational resource usage. This makes the research more practically relevant because it considers deployment feasibility as well as classification performance.
 
-\section{Dataset Characteristics and Selection Challenges}
+\subsection{Dataset Characteristics and Selection Challenges}
 
 Dataset selection is a major methodological challenge in misinformation detection. Different datasets vary in platform source, language, topic, label construction, modality availability, social-context completeness, class balance, and preprocessing requirements. These differences affect model performance and make cross-study comparison difficult \citep{Nakamura2020,shu2020fakenewsnet,mumindataset}. For MACE, dataset selection is especially important because the framework requires both multimodal content and social or propagation information.
 
@@ -92,7 +92,7 @@ Cross-dataset generalisation is also a major concern. A model trained or evaluat
 
 The inclusion of Stage 2 dataset adaptation is therefore an important methodological contribution. It ensures that dataset suitability is evaluated before model results are interpreted. This reduces the risk of treating dataset artefacts as model improvements and makes the proposed evaluation more transparent and reproducible.
 
-\section{Research Gap and Positioning of the Proposed Study}
+\subsection{Research Gap and Positioning of the Proposed Study}
 
 The reviewed literature shows that misinformation detection has advanced through text-only modelling, multimodal content learning, social-context modelling, and integrated multimodal-social frameworks. However, a clear gap remains in the controlled integration of multimodal content into established propagation-based ensemble architectures.
 
