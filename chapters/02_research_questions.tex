@@ -132,7 +132,7 @@ generalisability of results?}
 RQ1 and RQ2 both assume that suitable multimodal datasets are available
 and that the framework behaves consistently across them. RQ3 examines
 this assumption directly. DANES and GETAE were originally evaluated on
-Twitter15 and Twitter16, which provide propagation graphs but limited
+Twitter15 and Twitter16, which provide propagation graphs but without
 multimodal content, while datasets such as
 FakeNewsNet~\citep{shu2020fakenewsnet} and
 MuMin~\citep{mumindataset} offer richer multimodal content but
@@ -155,7 +155,7 @@ construction. Establishing transparent adaptation criteria therefore
 serves two purposes: it makes the MACE results reproducible and
 comparable across datasets, and it offers a methodological contribution
 to the wider field, where dataset suitability is often treated as an
-unstated pre-condition rather than a research variable.
+unstated pre-condition rather than a research variable. For MACE, the simultaneous requirement for text, image, and network modalities across both branches substantially narrows the usable candidate pool from the broader landscape of available fake news datasets \citep{lv2025multimodal}; determining which datasets are genuinely suitable, and under what preprocessing conditions, is therefore a non-trivial research problem in its own right.
 
 \paragraph{Novelty and difficulty.}
 Most published work in this area treats dataset selection as fixed and
