@@ -230,6 +230,71 @@ Based on the recommended experimental environment, the total compute requirement
 
 For cloud execution, cost should be reported separately as GPU-hours and instance-hours. A100-class cloud pricing varies substantially by provider, region, reservation model, and whether the instance is single-GPU or multi-GPU. For example, an AWS p4d.24xlarge instance provides eight A100 GPUs rather than a single GPU, so its hourly instance price should not be treated as a single-GPU-hour cost. As a conservative planning figure, the project should allow approximately AUD~\$500--\$1000 for cloud compute, storage, pilot runs, failed runs, and data-transfer overheads. Where university HPC resources are available, direct per-hour costs may be substantially reduced or eliminated; however, the GPU-hour estimate remains useful for scheduling, queue-time planning, and reproducibility reporting.
 
+\subsection{First Stage Dataset Evaluation Results}
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{@{}
+  >{\raggedright\arraybackslash}p{0.25\textwidth}
+  c
+  c
+  c
+  c
+  >{\raggedright\arraybackslash}X
+@{}}
+\toprule
+\textbf{Dataset} & \textbf{Year} & \textbf{T} & \textbf{I} & \textbf{N} & \textbf{Notes} \\
+\midrule
+Weibo
+  & 2017 & \checkmark & \checkmark & \checkmark
+  & Chinese-language platform \\
+
+Twitter
+  & 2015 & \checkmark & \checkmark & \checkmark
+  &  \\
+
+PolitiFact
+  & 2018 & \checkmark & \checkmark & \checkmark
+  & Fact-checked political news (via FakeNewsNet)\\
+
+GossipCop
+  & 2018 & \checkmark & \checkmark & \checkmark
+  & Fact-checked entertainment news (via FakeNewsNet) \\
+
+MuMin
+  & 2022 & \checkmark & \checkmark & \checkmark
+  & Multilingual; large graph scale may affect feasibility \\
+
+CHECKED
+  & 2021 & \checkmark & \checkmark & \checkmark
+  & Chinese-language; language compatibility requires assessment \\
+
+CoAID
+  & 2020 & \checkmark & \checkmark & \checkmark
+  & COVID-19 domain; domain specific \\
+
+MC-Fake
+  & 2021 & \checkmark & \checkmark & \checkmark
+  & Multi-domain coverage \\
+
+MR2
+  & 2022 & \checkmark & \checkmark & \checkmark
+  & Three classes (rumor/non-rumor/unverified) \\
+
+ReCOVery
+  & 2023 & \checkmark & \checkmark & \checkmark
+  & COVID-19 domain; domain specific \\
+\bottomrule
+\end{tabularx}
+\caption{Stage 1 screening results. Modality columns follow the notation of \citet{lv2025multimodal}:
+T~=~text, I~=~image, N~=~network/propagation.}
+\label{tab:stage1_candidates}
+\end{table}
+
+
+
 \subsection{Evaluation Matrix Template}
 \label{sec:evalmatrix}
 

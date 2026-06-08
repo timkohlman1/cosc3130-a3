@@ -3,91 +3,11 @@
 \subsection{Datasets}
 \label{sec:datasets}
 
-Dataset selection for MACE evaluation proceeds in two stages. In the first stage, candidate datasets
-are screened against basic acceptance criteria derived from the architectural requirements of the MACE
-framework. In the second stage (Section~\ref{sec:dataset_adaptation}), datasets that pass the
-first-stage screen undergo detailed adaptation and feasibility assessment to determine suitability for
-Stage 3 experiments; this assessment directly addresses RQ3.
+Dataset selection for MACE evaluation proceeds in two stages. The candidate pool is drawn from \citet{lv2025multimodal}, a taxonomy of eighteen multimodal fake news datasets classified by modality availability, classification structure, and source platform.
 
-The candidate pool is drawn from \citet{lv2025multimodal}, a taxonomy of eighteen multimodal fake news
-datasets classified by modality availability, classification structure, and source platform.
-The basic acceptance criteria applied at this stage are the dataset must include: (1) a text modality;
-(2) a network or propagation modality to support graph-based social context
-modelling; and (3) a binary or near-binary authenticity classification structure
-compatible with the MACE output layer. 
+In the first stage screening, candidate datasets must include: (1) a text modality; (2) a network or propagation modality to support graph-based social context modelling; and (3) a binary or near-binary authenticity classification structure compatible with the MACE output layer. The datasets meeting these criteria are summarised in Appendix~\ref{sec:computeexperiment}, Table~\ref{tab:stage1_candidates}.
 
-Applying the hard criteria eliminates datasets lacking network or propagation structure
-(e.g.\ COSMOS, MCFEND, Pheme, Fakeddit, Buzzfeed, FakeSv) and those using non-compatible multi-class
-schemes. The remaining candidates are summarised in Table~\ref{tab:stage1_candidates}.
-
-\begin{table}[H]
-\centering
-\small
-\renewcommand{\arraystretch}{1.25}
-\begin{tabularx}{\textwidth}{@{}
-  >{\raggedright\arraybackslash}p{0.25\textwidth}
-  c
-  c
-  c
-  c
-  >{\raggedright\arraybackslash}X
-@{}}
-\toprule
-\textbf{Dataset} & \textbf{Year} & \textbf{T} & \textbf{I} & \textbf{N} & \textbf{Notes} \\
-\midrule
-Weibo
-  & 2017 & \checkmark & \checkmark & \checkmark
-  & Chinese-language platform \\
-
-Twitter
-  & 2015 & \checkmark & \checkmark & \checkmark
-  &  \\
-
-PolitiFact
-  & 2018 & \checkmark & \checkmark & \checkmark
-  & Fact-checked political news (via FakeNewsNet)\\
-
-GossipCop
-  & 2018 & \checkmark & \checkmark & \checkmark
-  & Fact-checked entertainment news (via FakeNewsNet) \\
-
-MuMin
-  & 2022 & \checkmark & \checkmark & \checkmark
-  & Multilingual; large graph scale may affect feasibility \\
-
-CHECKED
-  & 2021 & \checkmark & \checkmark & \checkmark
-  & Chinese-language; language compatibility requires assessment \\
-
-CoAID
-  & 2020 & \checkmark & \checkmark & \checkmark
-  & COVID-19 domain; domain specific \\
-
-MC-Fake
-  & 2021 & \checkmark & \checkmark & \checkmark
-  & Multi-domain coverage \\
-
-MR2
-  & 2022 & \checkmark & \checkmark & \checkmark
-  & Three classes (rumor/non-rumor/unverified) \\
-
-ReCOVery
-  & 2023 & \checkmark & \checkmark & \checkmark
-  & COVID-19 domain; domain specific \\
-\bottomrule
-\end{tabularx}
-\caption{Stage 1 screening results. Modality columns follow the notation of \citet{lv2025multimodal}:
-T~=~text, I~=~image, N~=~network/propagation.}
-\label{tab:stage1_candidates}
-\end{table}
-
-Stage 2 adaptation will determine
-which candidates provide sufficient image availability, graph density, and propagation trace
-completeness to support the full MACE evaluation. Practical constraints noted in
-Table~\ref{tab:stage1_candidates} --- including language compatibility for Weibo and CHECKED, domain
-specificity for CoAID and ReCOVery, graph scale for MuMin, and unverified-class handling for MR2 ---
-are carried forward as considerations for the Stage 2 feasibility assessment rather than treated as
-hard exclusions at this stage.
+In the second stage (Section~\ref{sec:dataset_adaptation}), a detailed adaptation and feasibility assessment determines suitability for Stage 3 experiments; this assessment directly addresses RQ3.
 
 \subsection{Dataset Adaptation}
 \label{sec:dataset_adaptation}
