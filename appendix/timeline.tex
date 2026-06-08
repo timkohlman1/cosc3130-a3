@@ -74,7 +74,7 @@
 \multirow{3}{*}{\parbox{2.4cm}{1.~Setup}}
   & Environment \& toolchain setup
   & \Ga & & & & & & & & & & & & & & & & & & & & & \\
-  & All data acquisition initiated (all datasets)
+  & Candidate dataset inventory and access checks initiated
   & \Ga & \Ga & & & & & & & & & & & & & & & & & & & & \\
   & Twitter15/16 preprocessing
   & & \Ga & & & & & & & & & & & & & & & & & & & & \\
@@ -93,23 +93,23 @@
   & \textbf{M1:~Stage~1 replication confirmed}
   & & & & & & & & \Bm & & & & & & & & & & & & & & \\
 \hline
-\pagebreak
 
-\multirow{6}{*}{\parbox{2.4cm}{3.~Dataset\\Adaptation}}
-  & FakeNewsNet acquisition \& preprocessing
+\multirow{6}{*}{\parbox{2.4cm}{3.~Stage~2\\Dataset\\Adaptation}}
+  & Acquisition and detailed screening of candidate datasets
   & & & & & & \Or & \Or & \Or & & & & & & & & & & & & & & \\
-  & MuMin acquisition \& graph construction
-  & & & & & & \Or & \Or & \Or & \Or & & & & & & & & & & & & & \\
-  & Port DANES graph pipeline to new datasets
+  & Text, image \& label compatibility assessment
   & & & & & & & & & \Or & \Or & \Or & & & & & & & & & & & \\
-  & Port GETAE graph pipeline to new datasets
-  & & & & & & & & & & \Or & \Or & \Or & & & & & & & & & & \\
-  & Pipeline validation, debugging \& contingency
+  & Social graph suitability assessment
+  & & & & & & & & & \Or & \Or & \Or & & & & & & & & & & & \\
+  & Feasibility review, dataset selection
   & & & & & & & & & & & & \Or & \Or & & & & & & & & & \\
+  & Selected dataset preparation
+  & & & & & & & & & & & & \Or & \Or & & & & & & & & & \\  
 \cline{2-24}
-  & \textbf{M2:~Content pipelines validated on multi-modal datasets}
+  & \textbf{M2:~Stage~2 dataset adaptation and selection complete}
   & & & & & & & & & & & & & \Om & & & & & & & & & \\
 \hline
+\pagebreak
 
 \multirow{6}{*}{\parbox{2.4cm}{4.~MACE\\Development}}
   & HMCAN multimodal branch development
@@ -120,15 +120,15 @@
   & & & & & & & & & & & & & & \Te & \Te & & & & & & & \\
   & End-to-end integration testing \& debugging
   & & & & & & & & & & & & & & & \Te & & & & & & & \\
-  & MPFN fallback integration
-  & & & & & & & & & & & & & \Tf & \Tf & \Tf & & & & & & & \\
+  & HMCAN interface, projection adapter \& integration buffer
+  & & & & & & & & & & & & & \Te & \Te & \Te & & & & & & & \\
 \cline{2-24}
   & \textbf{M3:~MACE framework ready}
   & & & & & & & & & & & & & & & \Tm & & & & & & & \\
 \hline
 
 
-\multirow{7}{*}{\parbox{2.4cm}{5.~Stage~2\\Experiments}}
+\multirow{7}{*}{\parbox{2.4cm}{5.~Stage~3\\Experiments}}
   & Cond.~A-C:~Dataset baseline and ablation study
   & & & & & & & & & & & & & \Vi & \Vi & & & & & & & & \\
   & Cond.~D:~Full MACE

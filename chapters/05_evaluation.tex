@@ -28,47 +28,62 @@ forward as Stage 2 candidates are summarised in Table~\ref{tab:stage1_candidates
 \begin{table}[H]
 \centering
 \small
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{lccccl}
-\hline
-\textbf{Dataset} & \textbf{Year} & \textbf{T} & \textbf{I} & \textbf{N} & \textbf{Notes} \\ \hline
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{@{}
+  >{\raggedright\arraybackslash}p{0.25\textwidth}
+  c
+  c
+  c
+  c
+  >{\raggedright\arraybackslash}X
+@{}}
+\toprule
+\textbf{Dataset} & \textbf{Year} & \textbf{T} & \textbf{I} & \textbf{N} & \textbf{Notes} \\
+\midrule
 Weibo
   & 2017 & \checkmark & \checkmark & \checkmark
   & Chinese-language platform; language compatibility requires assessment \\
+
 Twitter
   & 2015 & \checkmark & \checkmark & \checkmark
   & Used in Stage 1 replication; also a Stage 2 candidate \\
+
 PolitiFact (via FakeNewsNet)
   & 2018 & \checkmark & \checkmark & \checkmark
-  & Fact-checked political news \citep{shu2020fakenewsnet} \\
+  & Fact-checked political news \\
+
 GossipCop (via FakeNewsNet)
   & 2018 & \checkmark & \checkmark & \checkmark
-  & Entertainment news fact-checking \citep{shu2020fakenewsnet} \\
+  & Entertainment news fact-checking \\
+
 MuMin
   & 2022 & \checkmark & \checkmark & \checkmark
-  & Multilingual; large graph scale may affect feasibility \citep{mumindataset} \\
+  & Multilingual; large graph scale may affect feasibility \\
+
 CHECKED
   & 2021 & \checkmark & \checkmark & \checkmark
   & Chinese-language; language compatibility requires assessment \\
+
 CoAID
   & 2020 & \checkmark & \checkmark & \checkmark
   & COVID-19 domain; domain specificity may limit generalisability \\
+
 MC-Fake
   & 2021 & \checkmark & \checkmark & \checkmark
   & Multi-domain coverage \\
+
 MR2
   & 2022 & \checkmark & \checkmark & \checkmark
   & Three classes (rumor/non-rumor/unverified); label mapping required \\
+
 ReCOVery
   & 2023 & \checkmark & \checkmark & \checkmark
-  & COVID-19 domain; domain specificity may limit generalisability \\ \hline
-\end{tabular}
+  & COVID-19 domain; domain specificity may limit generalisability \\
+\bottomrule
+\end{tabularx}
 \caption{Stage 1 screening results: datasets satisfying hard acceptance criteria and carried forward
 for Stage 2 adaptation assessment. Modality columns follow the notation of \citet{lv2025multimodal}:
-T~=~text, I~=~image, N~=~network/propagation. All ten datasets provide binary or near-binary
-classification; MR2 requires a label mapping step to consolidate the unverified class. Twitter15 and
-Twitter16 are used for Stage 1 baseline replication and are not subject to Stage 2 multimodal
-adaptation.}
+T~=~text, I~=~image, N~=~network/propagation.}
 \label{tab:stage1_candidates}
 \end{table}
 
@@ -143,6 +158,8 @@ on the main considerations outlined below.
     problem addressed by MACE.
 
 \end{itemize}
+
+As part of this adaptation process, Stage 2 will produce concrete subset statistics for each candidate dataset. These statistics will distinguish the published dataset from the subset that remains usable for MACE after the above adaptation constraints have been evaluated, and be an important feasibility consideration, since the useable adapted dataset must be able to support the controlled ablation conditions required by RQ1 and RQ2.
 
 \subsection{Benchmarking}
 
