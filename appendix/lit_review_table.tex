@@ -1,4 +1,5 @@
-\section{Literature Review Summary Table}
+\section{Literature Review Supplemental}
+\label{sec:litreviewsummary}
 
 {\small
 \setlength{\tabcolsep}{4pt}
@@ -354,3 +355,52 @@ Useful for framing the broader research landscape, but it is a survey rather tha
 
 \end{longtable}
 }
+
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllll}
+\toprule
+\textbf{Model} & \textbf{Text encoder} & \textbf{Visual encoder} & 
+\textbf{Fusion strategy} & \textbf{Social signal type} \\
+\midrule
+EFND \citep{Nadeem2023} 
+    & BERT & CNN 
+    & Late fusion, concatenation 
+    & Engagement / socially augmented features \\
+C2DCMTN \citep{Wang2024} 
+    & BERT & CNN 
+    & Masked cross-modal transformer 
+    & Comment-based context \\
+DPSG \citep{jing2025} 
+    & BERT & ViT/CNN 
+    & Cross-modal attention + dynamic graph 
+    & Dynamic propagation graph \\
+Dellys et al.\ \citep{Dellys2025} 
+    & BERT & ResNet 
+    & Multimodal fusion attention 
+    & Static social context features \\
+TMEF-BI \citep{Chen2025} 
+    & BERT & CNN 
+    & Reliability-weighted evidential fusion 
+    & Speaker behaviour signals \\
+ESDGFN \citep{Sun25} 
+    & BERT & CNN 
+    & Multi-level dynamic interaction 
+    & Evolving stance + conversation graph \\
+LDPG \citep{Ji2026LDPG} 
+    & BERT & ResNet 
+    & Local dynamic graph fusion 
+    & Local propagation graph \\
+MACE (proposed) 
+    & BERT & ResNet-50 
+    & Concatenation (retained from DANES/GETAE) 
+    & Static/dynamic propagation graph (retained) \\
+\bottomrule
+\end{tabular}%
+
+}
+\caption{Comparison of fusion strategy and social branch design across integrated 
+multimodal-social misinformation detection models.}
+\label{tab:fusion-taxonomy}
+\end{table}
