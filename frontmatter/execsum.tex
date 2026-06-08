@@ -1,0 +1,33 @@
+\section*{Executive Summary}
+\addcontentsline{toc}{section}{Executive Summary}
+
+This research proposal presents the development of the Multimodal and Context-Aware Ensemble
+(MACE) framework for the detection of inauthentic social media content. The proposal is based on
+the increasing impact of misinformation on public trust, online information credibility, and
+decision-making. As misinformation is now commonly shared through text, images, reposts,
+comments, user interactions, and propagation patterns, the detection of inauthentic content
+requires more than text-only analysis.
+
+The main purpose of this research is the investigation of whether the replacement of a text-only
+content branch in existing context-aware models, specifically DANES and GETAE, with a multimodal
+content branch can improve misinformation detection performance. The proposed MACE framework keeps
+the original social-context branch from these models while replacing the text-only branch with a
+multimodal branch based on HMCAN, enabling the processing of both textual and visual information
+while maintaining the existing propagation-based context structure.
+
+The research is guided by three main questions: whether multimodal substitution improves detection
+performance and at what computational cost; the relative contribution of the multimodal content
+branch versus the social-context branch through ablation testing; and the dataset adaptation
+requirements for using existing multimodal social media datasets within a DANES/GETAE-style
+ensemble structure.
+
+The proposed methodology follows a staged experimental design. Stage 1 replicates DANES and GETAE
+on Twitter15 and Twitter16. Stage 2 assesses candidate datasets such as FakeNewsNet and MuMin for
+text availability, image availability, label compatibility, graph suitability, class balance, and
+computational feasibility. Stage 3 conducts controlled evaluation across multiple experimental
+conditions, including text-only baselines, multimodal-only ablations, and the full MACE framework.
+
+Evaluation uses standard classification metrics (accuracy, precision, recall, and F1-score)
+alongside computational efficiency metrics (inference time, training time, peak memory usage,
+storage requirements, and hardware configuration), assessing not only whether MACE improves
+performance but whether the improvement justifies the additional computational cost.
