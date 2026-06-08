@@ -30,12 +30,57 @@
 \bottomrule
 \endlastfoot
 
+\textbf{\citet{Vosoughi2018}} \newline
+Spread of true and false news online
+&
+Demonstrated that false news spreads differently from true news online, supporting the value of propagation and social-context signals in misinformation detection.
+&
+Important motivation for propagation modelling, but it does not address multimodal content or DANES/GETAE-style content-branch substitution. \\
+
+\midrule
+
 \textbf{\citet{Wang2018} -- EANN} \newline
 Early multimodal fake news detection
 &
 Showed that combining text and image features improves fake news detection compared with text-only or image-only models. It established an early two-branch multimodal structure for fake news detection.
 &
 Fusion was still relatively early-stage and did not fully model deeper cross-modal relationships. It also did not include a DANES/GETAE-style propagation branch. \\
+
+\midrule
+
+\textbf{\citet{Baltrusaitis2019}} \newline
+Multimodal machine learning survey
+&
+Provides a conceptual foundation for multimodal fusion, alignment, and representation learning. This is useful for explaining why fusion design matters.
+&
+General multimodal learning survey rather than a fake news-specific model. \\
+
+\midrule
+
+\textbf{\citet{Devlin2019} -- BERT} \newline
+Transformer text encoder
+&
+Established BERT as a strong transformer-based text encoder. It supports the use of BERT in HMCAN and cost estimation for the text branch.
+&
+Not specific to fake news detection and introduces substantial parameter and fine-tuning cost. \\
+
+\midrule
+
+\textbf{\citet{He2016} -- ResNet} \newline
+Image feature extraction
+&
+Introduced ResNet, including ResNet-50, which is widely used for image feature extraction and is part of the HMCAN-style visual pipeline.
+&
+Adds visual feature extraction cost compared with text-only models and may be less semantically aligned than newer CLIP or ViT-based encoders. \\
+
+\midrule
+
+\textbf{\citet{hameleers2020}} \newline
+Effects of multimodal disinformation
+&
+Showed that multimodal disinformation can influence credibility judgements and may be perceived differently from text-only disinformation.
+&
+Useful for motivating multimodal detection, but it does not provide a computational detection model or a DANES/GETAE-style architecture. \\
 
 \midrule
 
@@ -84,6 +129,24 @@ Relies on interaction data, which may be sparse, delayed, or unavailable in earl
 
 \midrule
 
+\textbf{\citet{Radford2021} and \citet{Dosovitskiy2021}} \newline
+CLIP and ViT-based visual encoders
+&
+Show that newer vision-language or transformer-based visual encoders can improve image-text alignment compared with standard CNN encoders.
+&
+Often increase computational cost and change the content branch more substantially, making controlled comparison with HMCAN harder. \\
+
+\midrule
+
+\textbf{\citet{silva2021embracing}} \newline
+Cross-domain multimodal fake news detection
+&
+Showed that fake news detection performance can degrade across domains and that the relative value of text and network features can vary between datasets.
+&
+Supports the need for dataset adaptation and generalisability checks, but uses a different multimodal setting from MACE. \\
+
+\midrule
+
 \textbf{\citet{Min2022}} \newline
 Post-user interaction network
 &
@@ -96,7 +159,7 @@ Less effective when user activity data is limited, missing, or not transferable 
 \textbf{\citet{mumindataset} -- MuMin} \newline
 Multilingual multimodal dataset
 &
-Provided a large-scale multilingual multimodal misinformation dataset with tweets, users, claims, and graph relationships. It is highly relevant for RQ3 and dataset adaptation.
+Provided a large-scale multilingual multimodal misinformation dataset with tweets, users, claims, and graph relationships. It is highly relevant for dataset adaptation and multimodal-social evaluation.
 &
 Its scale, multilingual nature, and graph complexity create preprocessing, storage, and computational feasibility challenges. \\
 
@@ -126,6 +189,33 @@ Semantic, visual, and social features
 Showed that semantic, visual, and socially augmented features can produce strong detection performance when fused together.
 &
 Social context differs from DANES/GETAE propagation graphs, making it hard to isolate whether gains come from multimodality or added context. \\
+
+\midrule
+
+\textbf{\citet{phan2023graphsurvey}} \newline
+Graph neural network survey for fake news detection
+&
+Showed that graph neural networks are useful for modelling relationships between content, propagation, users, and social context in fake news detection.
+&
+Relevant to the social-context branch, but does not directly test multimodal substitution inside DANES/GETAE-style ensembles. \\
+
+\midrule
+
+\textbf{\citet{gong2023fakenewsdetectiongraphbased}} \newline
+Graph-based fake news detection survey
+&
+Classified graph-based fake news detection methods into knowledge-driven, propagation-based, and heterogeneous social-context approaches.
+&
+Provides useful background for graph-based modelling, but remains a survey and does not isolate the contribution of multimodal content. \\
+
+\midrule
+
+\textbf{\citet{yang2023facebook}} \newline
+Visual misinformation on social media
+&
+Provided large-scale evidence that image-based political misinformation is common on Facebook and that prior studies may underestimate misinformation by focusing mainly on links or text.
+&
+Supports the need for visual modelling, but is an empirical misinformation study rather than a detection architecture. \\
 
 \midrule
 
@@ -165,30 +255,12 @@ Performance depends on the availability and completeness of network or interacti
 
 \midrule
 
-\textbf{\citet{Baltrusaitis2019}} \newline
-Multimodal machine learning survey
+\textbf{\citet{Hao24}} \newline
+Self-learning multimodal fake news detection
 &
-Provides a conceptual foundation for multimodal fusion, alignment, and representation learning. This is useful for explaining why fusion design matters.
+Explored contrastive learning and LLM-supported multimodal analysis to address limited labelled data.
 &
-General multimodal learning survey rather than a fake news-specific model. \\
-
-\midrule
-
-\textbf{\citet{Devlin2019} -- BERT} \newline
-Transformer text encoder
-&
-Established BERT as a strong transformer-based text encoder. It supports the use of BERT in HMCAN and cost estimation for the text branch.
-&
-Not specific to fake news detection and introduces substantial parameter and fine-tuning cost. \\
-
-\midrule
-
-\textbf{\citet{He2016} -- ResNet} \newline
-Image feature extraction
-&
-Introduced ResNet, including ResNet-50, which is widely used for image feature extraction and is part of the HMCAN-style visual pipeline.
-&
-Adds visual feature extraction cost compared with text-only models and may be less semantically aligned than newer CLIP or ViT-based encoders. \\
+Relevant as an emerging method, but less directly aligned with the controlled DANES/GETAE substitution design. \\
 
 \midrule
 
@@ -228,6 +300,15 @@ Behaviour information differs from propagation-graph social context, limiting di
 
 \midrule
 
+\textbf{\citet{lv2025multimodal}} \newline
+Multimodal fake news dataset and method survey
+&
+Provided a taxonomy of multimodal fake news datasets and showed that few datasets contain text, image, and network modalities together.
+&
+Highly relevant to dataset selection, but it is a survey rather than an experimental model. \\
+
+\midrule
+
 \textbf{\citet{Sun25} -- ESDGFN} \newline
 Dynamic graph and evolving stance
 &
@@ -237,12 +318,12 @@ Adds architectural complexity and reduces comparability with simpler DANES/GETAE
 
 \midrule
 
-\textbf{\citet{Hao24}} \newline
-Self-learning multimodal fake news detection
+\textbf{\citet{Ji2026LDPG} -- LDPG} \newline
+Local dynamic propagation graph-based multimodal fake news detection
 &
-Explored contrastive learning and LLM-supported multimodal analysis to address limited labelled data.
+Further supports the effectiveness of combining multimodal content with propagation-aware social context, especially through local dynamic graph modelling.
 &
-Relevant as an emerging method, but less directly aligned with the controlled DANES/GETAE substitution design. \\
+The separate effect of multimodality is still not clearly decomposed because the model changes multiple components together. \\
 
 \midrule
 
@@ -264,21 +345,12 @@ General benchmarking framework, not specific to misinformation detection. \\
 
 \midrule
 
-\textbf{\citet{Radford2021} and \citet{Dosovitskiy2021}} \newline
-CLIP and ViT-based visual encoders
+\textbf{\citet{emil2025autofakenews}} \newline
+Automatic fake news detection survey
 &
-Show that newer vision-language or transformer-based visual encoders can improve image-text alignment compared with standard CNN encoders.
+Reviewed fake news detection from traditional machine learning to deep learning, transformers, and large language models. It organised detection methods around knowledge, style/content, propagation, and source-based perspectives.
 &
-Often increase computational cost and change the content branch more substantially, making controlled comparison with HMCAN harder. \\
-
-\midrule
-
-\textbf{\citet{Ji2026LDPG} -- LDPG} \newline
-Local dynamic propagation graph-based multimodal fake news detection
-&
-Further supports the effectiveness of combining multimodal content with propagation-aware social context, especially through local dynamic graph modelling.
-&
-The separate effect of multimodality is still not clearly decomposed because the model changes multiple components together. \\
+Useful for framing the broader research landscape, but it is a survey rather than a specific multimodal-social architecture for controlled comparison with MACE. \\
 
 \end{longtable}
 }
