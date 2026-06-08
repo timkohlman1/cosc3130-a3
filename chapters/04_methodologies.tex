@@ -187,13 +187,11 @@
 
 \subsubsection{Multimodal Content Branch}
 
-MACE adopts HMCAN (Hierarchical Multimodal Contextual Attention Network) as the multimodal content branch \citep{Qian2021}. HMCAN is selected because it is task-aligned with multimodal fake news detection, has demonstrated strong performance on Twitter-based multimodal datasets, and uses an encoding pipeline that is compatible with the textual and visual components of the proposed datasets.
+MACE adopts HMCAN as the multimodal content branch \citep{Qian2021} as it is task-aligned with multimodal fake news detection, has demonstrated strong performance on Twitter-based multimodal datasets, and uses an encoding pipeline that is suited to both textual and visual components of social media posts.
 
-HMCAN extracts textual features using BERT and visual features using a pre-trained ResNet50 image encoder. These modality-specific representations are then passed through multimodal contextual attention and hierarchical encoding components to produce a single fixed-length post representation. For posts without attached images, HMCAN uses dummy images as visual placeholders to preserve data alignment \citep{Qian2021}. This makes HMCAN suitable for MACE because its output can serve as an architectural replacement for the text-only content embedding used in the original DANES/GETAE-style ensemble, while still supporting datasets that contain a mixture of image-containing and text-only posts.
+HMCAN extracts textual features using BERT and visual features using a pre-trained ResNet50 image encoder. These modality-specific representations are then passed through multimodal contextual attention and hierarchical encoding components to produce a single fixed-length post representation. For posts without attached images, HMCAN uses dummy images as visual placeholders to preserve data alignment \citep{Qian2021}. In MACE, the HMCAN representation serves as the content-branch embedding prior to fusion and classification, and can handle text-only and image-attached posts.
 
-In MACE, the HMCAN representation serves as the content-branch embedding, concatenated with the social-context embedding before classification; a linear projection adapter is applied if output dimensions differ. Because the social-context branch, fusion mechanism, and classifier remain unchanged, any performance difference between baseline and MACE conditions is attributable to the richer multimodal content representation.
-
-  \subsubsection{Social Context Branch}
+\subsubsection{Social Context Branch}
 
 We retain the graph-based social context branches from DANES and GETAE unchanged, as propagation and interaction signals have demonstrated strong evidence in misinformation detection~\citep{truica2024danes, GETAE2025, Song2021, Min2022, Zhu24}; the distinction between the two approaches is illustrated in Figure~\ref{fig:mace_architecture}.
 
@@ -218,7 +216,7 @@ The dataset adaptation process will include preprocessing text fields, validatin
 \subsubsection{Experiment Stages and Conditions}
 The experiment is organised into three stages: baseline replication, dataset adaptation, and controlled MACE evaluation. Stage~3 uses four conditions to compare the original text-only ensemble, content-only ablations, multimodal substitution, and the full proposed framework. The ablation design follows established multimodal fake news detection practice, where components are removed or isolated to measure their contribution to overall performance~\citep{Qian2021}.
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \small
 \setlength{\tabcolsep}{3pt}
@@ -243,21 +241,15 @@ The experiment is organised into three stages: baseline replication, dataset ada
 Detailed computational cost estimates and the recommended experimental environment are provided in Appendix~\ref{sec:computeexperiment}.
 
 
-
-
-
-
-
-
 \subsubsection{Research Question Alignment}
-Table~\ref{tab:pairwise} maps each research question to the relevant experimental comparisons and reporting.
+The following table maps each research question to the relevant experimental comparisons and reporting.
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 {\small
 
 
-\begin{tabular}{llp{3.5cm}p{5.5cm}}
+\begin{tabular}{llp{3.5cm}p{6.5cm}}
 \hline
 & \textbf{Comparison} & \textbf{What varies} & \textbf{What it tells us} \\ \hline
 RQ1 & Stage~3 A vs D &
@@ -272,7 +264,7 @@ RQ1 & Stage~3 A vs D &
 & Stage~3 C vs D &
     \begin{tabular}[t]{@{}l@{}}Context branch\end{tabular} &
     \begin{tabular}[t]{@{}l@{}}How much does the social context branch\\contribute with multimodal content?\end{tabular} \\ \hline
-RQ3 & Stage~2 and cross-dataset comparison &
+RQ3 & Stage~2 &
     \begin{tabular}[t]{@{}l@{}}Dataset suitability\\and preprocessing\end{tabular} &
     \begin{tabular}[t]{@{}l@{}}What adaptation criteria are required,\\which datasets are feasible, and do\\results generalise across adapted datasets?\end{tabular} \\ \hline
 \end{tabular}
