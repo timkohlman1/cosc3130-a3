@@ -49,21 +49,12 @@ Fusion was still relatively early-stage and did not fully model deeper cross-mod
 
 \midrule
 
-\textbf{\citet{Baltrusaitis2019}} \newline
-Multimodal machine learning survey
-&
-Provides a conceptual foundation for multimodal fusion, alignment, and representation learning. This is useful for explaining why fusion design matters.
-&
-General multimodal learning survey rather than a fake news-specific model. \\
-
-\midrule
-
 \textbf{\citet{Devlin2019} -- BERT} \newline
 Transformer text encoder
 &
-Established BERT as a strong transformer-based text encoder. It supports the use of BERT in HMCAN and cost estimation for the text branch.
+Established BERT as a strong transformer-based text encoder. It supports the use of BERT in HMCAN and the proposed multimodal content branch.
 &
-Not specific to fake news detection and introduces substantial parameter and fine-tuning cost. \\
+Not specific to fake news detection and introduces substantial fine-tuning and computational cost. \\
 
 \midrule
 
@@ -166,15 +157,6 @@ Its scale, multilingual nature, and graph complexity create preprocessing, stora
 
 \midrule
 
-\textbf{\citet{Segura2022}} \newline
-Multimodal fake news benchmarking
-&
-Reinforced evidence that multimodal approaches outperform text-only models on social media misinformation tasks.
-&
-Does not resolve how multimodality performs when propagation-based social context is held constant. \\
-
-\midrule
-
 \textbf{\citet{Jing2023} -- MPFN} \newline
 Progressive multimodal fusion
 &
@@ -238,30 +220,12 @@ Comment-context representation differs from DANES/GETAE propagation branches, ma
 
 \midrule
 
-\textbf{\citet{Szu-Yin24}} \newline
-Text-image multimodal fusion
-&
-Compared early, joint, and late fusion strategies using BERT and CNN-based image features, showing that fusion design affects performance.
-&
-Useful for fusion discussion, but mainly focuses on content-level multimodal fusion rather than retained propagation context. \\
-
-\midrule
-
 \textbf{\citet{Zhu24}} \newline
 Propagation structure-aware graph transformer
 &
 Showed that propagation structure can improve robustness and interpretability in fake news detection.
 &
 Performance depends on the availability and completeness of network or interaction data. \\
-
-\midrule
-
-\textbf{\citet{Hao24}} \newline
-Self-learning multimodal fake news detection
-&
-Explored contrastive learning and LLM-supported multimodal analysis to address limited labelled data.
-&
-Relevant as an emerging method, but less directly aligned with the controlled DANES/GETAE substitution design. \\
 
 \midrule
 
@@ -398,7 +362,6 @@ MACE (proposed)
     & Static/dynamic propagation graph (retained) \\
 \bottomrule
 \end{tabular}%
-
 }
 \caption{Comparison of fusion strategy and social branch design across integrated 
 multimodal-social misinformation detection models.}

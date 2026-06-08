@@ -9,22 +9,16 @@ framework. In the second stage (Section~\ref{sec:dataset_adaptation}), datasets 
 first-stage screen undergo detailed adaptation and feasibility assessment to determine suitability for
 Stage 3 experiments; this assessment directly addresses RQ3.
 
-To establish the first-stage candidate pool, we draw on the survey by \citet{lv2025multimodal}, which
-catalogues eighteen multimodal fake news detection datasets published between 2017 and 2024, classifying
-each by modality availability (text, image, network, video), classification structure, and data source.
-The basic acceptance criteria applied at this stage are: (1) the dataset must include a text modality;
-(2) the dataset must include a network or propagation modality to support graph-based social context
-modelling, as this is the binding architectural requirement for the DANES/GETAE-style social context
-branch; and (3) the dataset must use a binary or near-binary authenticity classification structure
-compatible with the MACE output layer. Image availability is not applied as a hard exclusion criterion
-at this stage, as HMCAN supports dummy image placeholders for posts without attached
-images~\citep{Qian2021}; however, image availability rate is recorded and carried forward as a key
-Stage 2 adaptation metric, since datasets with very low image availability reduce the meaningfulness
-of the multimodal content branch evaluation. Applying the hard criteria to the eighteen datasets listed
-in \citet{lv2025multimodal} eliminates datasets that lack network or propagation structure
-(e.g.\ COSMOS, MCFEND, Pheme, Fakeddit, Buzzfeed, FakeSv) and datasets using non-compatible
-multi-class schemes. The datasets that satisfy the hard acceptance criteria and are therefore carried
-forward as Stage 2 candidates are summarised in Table~\ref{tab:stage1_candidates}.
+The candidate pool is drawn from \citet{lv2025multimodal}, a taxonomy of eighteen multimodal fake news
+datasets classified by modality availability, classification structure, and source platform.
+The basic acceptance criteria applied at this stage are the dataset must include: (1) a text modality;
+(2) a network or propagation modality to support graph-based social context
+modelling; and (3) a binary or near-binary authenticity classification structure
+compatible with the MACE output layer. 
+
+Applying the hard criteria eliminates datasets lacking network or propagation structure
+(e.g.\ COSMOS, MCFEND, Pheme, Fakeddit, Buzzfeed, FakeSv) and those using non-compatible multi-class
+schemes. The remaining candidates are summarised in Table~\ref{tab:stage1_candidates}.
 
 \begin{table}[H]
 \centering
@@ -43,19 +37,19 @@ forward as Stage 2 candidates are summarised in Table~\ref{tab:stage1_candidates
 \midrule
 Weibo
   & 2017 & \checkmark & \checkmark & \checkmark
-  & Chinese-language platform; language compatibility requires assessment \\
+  & Chinese-language platform \\
 
 Twitter
   & 2015 & \checkmark & \checkmark & \checkmark
-  & Used in Stage 1 replication; also a Stage 2 candidate \\
+  &  \\
 
-PolitiFact (via FakeNewsNet)
+PolitiFact
   & 2018 & \checkmark & \checkmark & \checkmark
-  & Fact-checked political news \\
+  & Fact-checked political news (via FakeNewsNet)\\
 
-GossipCop (via FakeNewsNet)
+GossipCop
   & 2018 & \checkmark & \checkmark & \checkmark
-  & Entertainment news fact-checking \\
+  & Fact-checked entertainment news (via FakeNewsNet) \\
 
 MuMin
   & 2022 & \checkmark & \checkmark & \checkmark
@@ -67,7 +61,7 @@ CHECKED
 
 CoAID
   & 2020 & \checkmark & \checkmark & \checkmark
-  & COVID-19 domain; domain specificity may limit generalisability \\
+  & COVID-19 domain; domain specific \\
 
 MC-Fake
   & 2021 & \checkmark & \checkmark & \checkmark
@@ -75,21 +69,19 @@ MC-Fake
 
 MR2
   & 2022 & \checkmark & \checkmark & \checkmark
-  & Three classes (rumor/non-rumor/unverified); label mapping required \\
+  & Three classes (rumor/non-rumor/unverified) \\
 
 ReCOVery
   & 2023 & \checkmark & \checkmark & \checkmark
-  & COVID-19 domain; domain specificity may limit generalisability \\
+  & COVID-19 domain; domain specific \\
 \bottomrule
 \end{tabularx}
-\caption{Stage 1 screening results: datasets satisfying hard acceptance criteria and carried forward
-for Stage 2 adaptation assessment. Modality columns follow the notation of \citet{lv2025multimodal}:
+\caption{Stage 1 screening results. Modality columns follow the notation of \citet{lv2025multimodal}:
 T~=~text, I~=~image, N~=~network/propagation.}
 \label{tab:stage1_candidates}
 \end{table}
 
-All ten candidate datasets provide text, image, and network modalities and binary or near-binary
-classification structures, satisfying the hard acceptance criteria. Stage 2 adaptation will determine
+Stage 2 adaptation will determine
 which candidates provide sufficient image availability, graph density, and propagation trace
 completeness to support the full MACE evaluation. Practical constraints noted in
 Table~\ref{tab:stage1_candidates} --- including language compatibility for Weibo and CHECKED, domain
@@ -100,56 +92,32 @@ hard exclusions at this stage.
 \subsection{Dataset Adaptation}
 \label{sec:dataset_adaptation}
 
-Before implementing and evaluating the MACE model, all Stage 2 candidate datasets will undergo
-adaptation to verify their suitability for the MACE framework. This assessment checks that each
-candidate dataset can support both the multimodal content branch and the social context branch of the
-MACE architecture. Adaptation is important to ensure complete modalities within each candidate dataset,
-as any missing or incomplete modalities can lower the effectiveness of feature extraction and fusion of
-different data types \citep{Baltrusaitis2019}. Dataset candidates will be evaluated based
-on the main considerations outlined below.
+All Stage~2 candidate datasets will undergo adaptation to verify suitability for both branches of the
+MACE architecture; missing or incomplete modalities degrade feature extraction and
+fusion~\citep{Baltrusaitis2019}. Candidates are evaluated against the following criteria.
 
 \begin{itemize}
 
-    \item \textbf{Text Availability} \citep{ENGLMEIER2021149}. Text serves as a key source of
-    information in misinformation detection. The linguistic, semantic, and contextual clues found in
-    posts can strongly indicate authenticity \citep{ENGLMEIER2021149}. In the proposed MACE framework,
-    textual content will be processed by the BERT-based encoder adopted from HMCAN to generate semantic
-    representations \citep{Qian2021}. Dataset adaptation will therefore assess the availability and
-    completeness of textual content to ensure there are sufficient records containing usable text for
-    multimodal representation learning and downstream classification.
+    \item \textbf{Text Availability}. Textual content is processed by HMCAN's BERT
+    encoder~\citep{Qian2021}. Adaptation will assess availability and completeness to confirm
+    sufficient records for multimodal representation learning and classification~\citep{ENGLMEIER2021149}.
 
-    \item \textbf{Image Availability} \citep{Qian2021, Dellys2025}. Visual content improves
-    misinformation detection performance when combined with textual features. Within the proposed MACE
-    framework, images are processed using a ResNet-50 encoder as part of the HMCAN multimodal content
-    branch \citep{Qian2021}. Dataset adaptation will evaluate the availability and accessibility of
-    image resources, including the proportion of records containing associated images and the presence
-    of inaccessible or missing image links, to determine whether sufficient multimodal samples remain
-    available for experimentation. This assessment will quantify the ratio of missing or broken media
-    links to establish where dummy image placeholders must be introduced to preserve data alignment
-    within the HMCAN branch. Datasets with low image availability rates will still be considered for
-    inclusion, but the implications for the multimodal branch evaluation will be reported explicitly
-    as part of the RQ3 findings.
+    \item \textbf{Image Availability}. Images are processed by HMCAN's ResNet-50
+    encoder~\citep{Qian2021}. Adaptation will measure the proportion of records with accessible images
+    and quantify missing or broken links, determining where dummy placeholders are required to preserve
+    data alignment. Datasets with low image availability will still be considered, but the implications
+    for the multimodal branch evaluation will be reported as RQ3 findings~\citep{Dellys2025}.
 
-    \item \textbf{Social-Context Availability} \citep{Song2021}. User interactions, social
-    relationships, and information propagation patterns provide evidence for distinguishing authentic
-    from inauthentic content. The proposed MACE framework retains the social-context branches of DANES
-    and GETAE, which rely on graph-based representations constructed from user networks and propagation
-    structures \citep{truica2024danes, GETAE2025}. Candidate datasets must therefore offer sufficient
-    user-level metadata, interaction information, or propagation traces to support graph construction
-    and social-context modelling. This assessment includes the availability of user records, interaction
-    logs, response structures, and network connectivity information.
+    \item \textbf{Social-Context Availability}. MACE retains the graph-based social-context branches
+    of DANES and GETAE~\citep{truica2024danes, GETAE2025, Song2021}, so candidate datasets must provide
+    sufficient user-level metadata, interaction logs, propagation traces, and network connectivity to
+    support graph construction.
 
-    \item \textbf{Label Mapping and Class Distribution}. This assessment will verify the mapping of
-    disparate source labels (e.g., real/fake vs.\ factual/misinformation vs.\
-    rumor/non-rumor/unverified) into a unified binary target classification structure to ensure
-    cross-dataset evaluation consistency. It will then evaluate the distribution of target classes and
-    measure the degree of imbalance across candidate datasets. An imbalanced dataset can artificially
-    inflate accuracy while reducing the model's ability to detect instances of the minority
-    class~\citep{Xue2021}. This issue is particularly relevant for misinformation datasets, where the
-    distribution of factual and misinformation samples may vary considerably depending on data
-    collection and fact-checking procedures~\citep{mumindataset}. For MR2, which provides three
-    classes (rumor, non-rumor, unverified), a specific label mapping strategy will be defined and
-    reported as part of the adaptation findings.
+    \item \textbf{Label Mapping and Class Distribution}. Source labels
+    (e.g., real/fake, rumor/non-rumor/unverified) will be mapped to a unified binary classification
+    structure, and class distribution and imbalance measured across
+    candidates~\citep{Xue2021, mumindataset}. For MR2, which provides three classes
+    (rumor, non-rumor, unverified), a specific label mapping strategy will be defined and reported.
 
     \item \textbf{Language and Domain Compatibility}. Candidate datasets collected from non-English
     platforms (Weibo, CHECKED) require assessment of language compatibility with the BERT-based text
@@ -160,15 +128,13 @@ on the main considerations outlined below.
 
 \end{itemize}
 
-As part of this adaptation process, Stage 2 will produce concrete subset statistics for each candidate dataset. These statistics will distinguish the published dataset from the subset that remains usable for MACE after the above adaptation constraints have been evaluated, and be an important feasibility consideration, since the useable adapted dataset must be able to support the controlled ablation conditions required by RQ1 and RQ2.
+Stage~2 will produce subset statistics for each dataset, distinguishing the published dataset from the
+usable subset and confirming that the adapted data can support the controlled ablation conditions
+required by RQ1 and RQ2.
 
 \subsection{Benchmarking}
 
-To evaluate the effectiveness of the proposed MACE model, the results of inauthentic social media
-classification from the selected datasets will be compared to previous research works with similar
-objectives. The comparisons will be done across three domains: (1) unimodal with social-context
-modelling, (2) multimodal without social-context modelling, and (3) multimodal with social-context
-modelling similar to the proposed MACE.
+MACE results will be compared against baselines across three categories:
 
 \begin{itemize}
     \item \textbf{Unimodal with social-context modelling}, consisting of DANES \citep{truica2024danes}
@@ -183,22 +149,13 @@ modelling similar to the proposed MACE.
     the multimodal fusion framework of \citet{Dellys2025}.
 \end{itemize}
 
-These three domain baselines provide a structured comparison across unimodal and multimodal,
-context-aware, and hybrid approaches, ensuring that the performance of the proposed MACE model is
-evaluated properly against existing methods in full-model testing and under ablation conditions.
-
 \subsection{Evaluation Metrics}
 
 Based on the methodology described in Section~4, \textbf{Stage 1} forms the baseline for evaluation. \textbf{Stage 2} assesses candidate datasets based on dataset adaptation metrics described in Section~\ref{sec:dataset_adaptation} and these results will be reported as part of the RQ3 findings. 
 
-\textbf{Stage 3} implements and evaluates the MACE framework against the selected dataset or datasets
-across several experimental conditions. The main objective is to determine how effective the proposed
-model is in detecting inauthentic social media posts. Evaluation adopts standard performance metrics
-that are widely used and well-established in fake news detection research \citep{su_wan_liu_huang_2020}.
-Prior studies, including DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}, have adopted the
-same metrics to assess model performance and enable comparison across different model architectures.
-Multimodal research including HMCAN \citep{Qian2021} also utilises these metrics to evaluate the
-effectiveness of integrating text and visual features.
+\textbf{Stage 3} evaluates the MACE framework across the experimental conditions defined in
+Section~4, using standard classification metrics consistent with DANES~\citep{truica2024danes},
+GETAE~\citep{GETAE2025}, and HMCAN~\citep{Qian2021, su_wan_liu_huang_2020}:
 
 \begin{itemize}
     \item \textbf{Accuracy}, measures the number of correct classifications divided by the total number
@@ -214,12 +171,10 @@ effectiveness of integrating text and visual features.
     false negatives equally.
 \end{itemize}
 
-These metrics are compared against the baseline models to assess the effectiveness of the proposed
-model \citep{Xue2021}. F1 score will be used as the primary comparison metric across models and
-datasets, as it captures the balance of detection capability (recall) and reliability (precision). All
-metrics are evaluated during Stage 3 across Conditions A--D, enabling consistent comparison between
-the baseline and the modified model and measuring the contribution of multimodal content and social
-context features.
+F1 score will be used as the primary comparison metric across models and datasets, as it captures
+the balance of detection capability (recall) and reliability (precision). All metrics are evaluated
+during Stage~3 across Conditions A--D, enabling consistent comparison between the baseline and the
+modified model and measuring the contribution of multimodal content and social context features.
 
 Class imbalance is a known issue in misinformation datasets, often arising from the prevalence of false
 claims in fact-checking sources~\citep{mumindataset}. To mitigate the impact on evaluation, F1-score
@@ -237,17 +192,12 @@ $\alpha = 0.05$ will be used. Performance will be reported as mean and standard 
 \subsection{Computational Efficiency Metrics}
 
 In addition to classification performance, computational efficiency will be evaluated to determine the
-practical operational cost of introducing multimodal content processing into the DANES and GETAE
-frameworks. Following the framework established by \citet{Justus2018}, a deep learning model's training
-and execution cost is heavily affected by factors such as data-loading speeds, hardware memory limits,
-and model run-time. The proposed MACE framework's efficiency will be evaluated and reported across the
-following computational cost dimensions.
+practical cost of introducing multimodal content processing into the DANES and GETAE frameworks. The
+following dimensions are reported following \citet{Justus2018}.
 
 \begin{itemize}
-    \item \textbf{Training Time}, measured as the total wall-clock time required to train each
-    experimental condition. Mirroring the epoch decomposition strategy of \citet{Justus2018}, this will
-    be evaluated as a function of processing time per batch step multiplied by the total step iterations
-    required to complete an epoch.
+    \item \textbf{Training Time}, measured as total wall-clock time per experimental condition,
+    decomposed by batch processing time and total iterations per epoch.
 
     \item \textbf{Inference Time}, measured as the average prediction time per sample during testing.
 
