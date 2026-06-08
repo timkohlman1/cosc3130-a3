@@ -309,7 +309,8 @@ Table~\ref{tab:efficiency_matrix}.
 \centering
 \small
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{|l|c|c|c|c|c|c|}
+
+\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|}
 \hline
 \textbf{Experimental Condition} &
 \textbf{\begin{tabular}[c]{@{}c@{}}Train Time\\ (hrs)\end{tabular}} &
@@ -318,11 +319,14 @@ Table~\ref{tab:efficiency_matrix}.
 \textbf{\begin{tabular}[c]{@{}c@{}}Peak RAM\\ (GB)\end{tabular}} &
 \textbf{\begin{tabular}[c]{@{}c@{}}Storage\\ (GB)\end{tabular}} &
 \textbf{FLOPs} \\ \hline
-\textbf{Stage 3A:} Dataset Baseline          & & & & & & \\ \hline
-\textbf{Stage 3B:} Ablation 1 (Text-only)    & & & & & & \\ \hline
-\textbf{Stage 3C:} Ablation 2 (Multimodal)   & & & & & & \\ \hline
-\textbf{Stage 3D:} Full MACE Framework       & & & & & & \\ \hline
-\end{tabular}
+
+\textbf{Stage 3A:} Dataset Baseline & & & & & & \\ \hline
+\textbf{Stage 3B:} Ablation 1 (Text-only) & & & & & & \\ \hline
+\textbf{Stage 3C:} Ablation 2 (Multimodal) & & & & & & \\ \hline
+\textbf{Stage 3D:} Full MACE Framework & & & & & & \\ \hline
+
+\end{tabularx}
+
 \caption{Evaluation matrix template for computational efficiency cost across Stage 3 conditions.}
 \label{tab:efficiency_matrix}
 \end{table}
