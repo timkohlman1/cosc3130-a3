@@ -1,29 +1,7 @@
 \section{Research Questions}
 \label{sec:research_questions}
 
-This research aims to develop a context-aware misinformation detection
-framework that replaces the text-only content branch in established
-ensemble models, specifically DANES~\citep{truica2024danes} and
-GETAE~\citep{GETAE2025}, with a multimodal content branch that
-jointly captures textual and visual information. Both DANES and GETAE
-achieve state-of-the-art performance on benchmark datasets by combining
-a text content branch with a social context branch that models how
-information propagates through networks. However, their content branches
-process only text, ignoring the visual signals that increasingly
-characterise modern misinformation. While recent work has explored
-combining multimodal content with social context features~\citep{Nadeem2023, jing2025, Dellys2025}, these approaches employ
-social branches that differ architecturally from the propagation-graph
-ensemble structure of the DANES/GETAE family, using engagement signals,
-dynamic temporal graphs, or attention-based fusion instead. Compounding
-this, the larger multimodal datasets best suited to such an
-evaluation, including FakeNewsNet~\citep{shu2020fakenewsnet} and
-MuMin~\citep{mumindataset}, have known practical limitations such
-as incomplete image availability and sparse propagation traces, making
-their adaptation to a DANES/GETAE-style ensemble a non-trivial
-methodological problem in its own right. As a result, three specific
-research questions remain unanswered, and together they form the
-technical core of this project.
-
+This research investigates whether established context-aware misinformation detection models, specifically DANES~\citep{truica2024danes} and GETAE~\citep{GETAE2025}, can be improved by replacing their text-only content branch with a multimodal content branch. From the gap identified in the literature, three research questions arise concerning the performance and computational cost of this substitution, the relative contribution of the content and social-context branches, and the dataset adaptation requirements for evaluating the proposed MACE framework.
 
 \subsection*{RQ1: Multimodal Substitution and its Cost}
 \label{subsec:rq1}
@@ -60,20 +38,6 @@ deciding when richer content encoders justify their additional
 resource requirements, a question that is increasingly important as
 detection systems are deployed at platform scale.
 
-\paragraph{Novelty and difficulty.}
-No prior work directly performs this controlled substitution and
-isolates its effect on the DANES/GETAE backbone. Existing
-multimodal-plus-context models such as EFND~\citep{Nadeem2023},
-DPSG~\citep{jing2025}, and \citet{Dellys2025} use fundamentally
-different social branches, so their reported gains cannot be cleanly
-attributed to the multimodal component alone. Quantifying both the
-accuracy benefit and the computational cost of this substitution within
-a single controlled experimental frame is therefore a novel
-contribution. The conceptual challenge lies in isolating the multimodal
-effect while leaving the social branch untouched, ensuring that any
-observed change is attributable to the content modification rather than
-to confounded architectural choices elsewhere in the ensemble.
-
 \subsection*{RQ2: Branch Contribution Decomposition}
 \label{subsec:rq2}
 
@@ -104,19 +68,6 @@ A principled decomposition on the proposed backbone therefore has
 direct design implications for the next generation of misinformation
 detection systems and turns an otherwise opaque ensemble into a more
 interpretable one.
-
-\paragraph{Novelty and difficulty.}
-Most prior multimodal-plus-context studies report only headline accuracy
-and do not cleanly decompose contributions across a propagation-graph
-social branch of the DANES/GETAE family. Approaches such as
-TMEF-BI~\citep{Chen2025} perform reliability-aware modality
-weighting, but on a fundamentally different social signal (speaker
-behaviour rather than propagation structure), so their findings do not
-transfer to the architecture under investigation. A principled
-contribution analysis on the proposed backbone is therefore both novel
-and conceptually demanding, since the two branches must be evaluated
-independently and jointly without confounding their respective signals.
-
 
 \subsection*{RQ3: Dataset Adaptation and Generalisability}
 \label{subsec:rq3}
@@ -156,17 +107,6 @@ serves two purposes: it makes the MACE results reproducible and
 comparable across datasets, and it offers a methodological contribution
 to the wider field, where dataset suitability is often treated as an
 unstated pre-condition rather than a research variable. For MACE, the simultaneous requirement for text, image, and network modalities across both branches substantially narrows the usable candidate pool from the broader landscape of available fake news datasets \citep{lv2025multimodal}; determining which datasets are genuinely suitable, and under what preprocessing conditions, is therefore a non-trivial research problem in its own right.
-
-\paragraph{Novelty and difficulty.}
-Most published work in this area treats dataset selection as fixed and
-reports results without quantifying dataset suitability, leaving an
-open methodological gap. The conceptual difficulty is one of
-disentanglement: dataset characteristics, model architecture, and
-evaluation protocol are typically confounded, and isolating the effect
-of dataset choice requires designing the adaptation criteria and the
-cross-dataset comparison \emph{before} any model results are
-interpreted, so that observed differences in performance can be
-attributed to dataset properties rather than to post-hoc tuning.
 
 Together, RQ1, RQ2, and RQ3 form a coherent and complementary
 investigation. RQ1 establishes whether multimodal substitution

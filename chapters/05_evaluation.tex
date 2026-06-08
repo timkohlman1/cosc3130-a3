@@ -1,6 +1,7 @@
 \section{Evaluation}
 
 \subsection{Datasets}
+\label{sec:datasets}
 
 Dataset selection for MACE evaluation proceeds in two stages. In the first stage, candidate datasets
 are screened against basic acceptance criteria derived from the architectural requirements of the MACE
@@ -188,47 +189,7 @@ evaluated properly against existing methods in full-model testing and under abla
 
 \subsection{Evaluation Metrics}
 
-Based on the methodology described in Section~4, three stages of experiments will be performed. Each
-stage defines its own evaluation metrics as required.
-
-\textbf{Stage 1} replicates DANES and GETAE models to confirm the MACE baseline implementation. For
-this stage, standard performance metrics will be used and the results compared to the published results
-of DANES \citep{truica2024danes} and GETAE \citep{GETAE2025}.
-
-\textbf{Stage 2} assesses candidate datasets to confirm their suitability for use within the MACE
-framework. The following adaptation metrics will be collected for each candidate dataset:
-
-\begin{itemize}
-    \item \textbf{Text Availability Rate}, measured as the percentage of records with usable textual
-    content \citep{ENGLMEIER2021149}.
-
-    \item \textbf{Image Availability Rate}, measured as the percentage of records with accessible image
-    resources after validating and removing broken links \citep{Qian2021, Dellys2025}.
-
-    \item \textbf{Social-Context Coverage}, measured as the percentage of content records that
-    successfully retain associated user metadata, interaction logs, and propagation traces required to
-    build graph connectivity.
-
-    \item \textbf{Label Mapping and Class Distribution}, measured as the proportion of authentic and
-    inauthentic samples \citep{mumindataset} after mapping disparate source labels into the target
-    binary classification structure.
-
-    \item \textbf{Language and Domain Assessment}, recording the primary language(s) of each dataset
-    and evaluating whether domain specificity or language constraints are likely to affect the
-    generalisability of results.
-
-    \item \textbf{Storage Requirements}, measured as total disk space needed for processed text, images,
-    and graph data.
-
-    \item \textbf{Memory Requirements}, estimated as memory consumption needed for graph construction
-    and model training.
-\end{itemize}
-
-Datasets satisfying these adaptation criteria will be considered suitable for Stage 3 experimentation.
-Where a dataset fails one or more criteria, the limitations and reasons for exclusion will be reported
-as part of the RQ3 findings. Where more than one dataset satisfies all criteria, Stage 3 experiments
-will be conducted across multiple adapted datasets to assess whether results generalise, directly
-addressing the cross-dataset generalisation dimension of RQ3.
+Based on the methodology described in Section~4, \textbf{Stage 1} forms the baseline for evaluation. \textbf{Stage 2} assesses candidate datasets based on dataset adaptation metrics described in Section~\ref{sec:dataset_adaptation} and these results will be reported as part of the RQ3 findings. 
 
 \textbf{Stage 3} implements and evaluates the MACE framework against the selected dataset or datasets
 across several experimental conditions. The main objective is to determine how effective the proposed
@@ -303,30 +264,6 @@ following computational cost dimensions.
 These metrics will directly support the evaluation of RQ1 by quantifying the computational cost
 associated with substituting the original text-only branch with a multimodal content branch. To ensure
 a systematic comparison, these metrics will be logged using the evaluation template structured in
-Table~\ref{tab:efficiency_matrix}.
+Appendix~\ref{sec:computeexperiment}, Table~\ref{tab:efficiency_matrix}.
 
-\begin{table}[htbp]
-\centering
-\small
-\renewcommand{\arraystretch}{1.2}
 
-\begin{tabularx}{\textwidth}{|X|c|c|c|c|c|c|}
-\hline
-\textbf{Experimental Condition} &
-\textbf{\begin{tabular}[c]{@{}c@{}}Train Time\\ (hrs)\end{tabular}} &
-\textbf{\begin{tabular}[c]{@{}c@{}}Inference\\ (ms/sample)\end{tabular}} &
-\textbf{\begin{tabular}[c]{@{}c@{}}Peak GPU\\ (GB)\end{tabular}} &
-\textbf{\begin{tabular}[c]{@{}c@{}}Peak RAM\\ (GB)\end{tabular}} &
-\textbf{\begin{tabular}[c]{@{}c@{}}Storage\\ (GB)\end{tabular}} &
-\textbf{FLOPs} \\ \hline
-
-\textbf{Stage 3A:} Dataset Baseline & & & & & & \\ \hline
-\textbf{Stage 3B:} Ablation 1 (Text-only) & & & & & & \\ \hline
-\textbf{Stage 3C:} Ablation 2 (Multimodal) & & & & & & \\ \hline
-\textbf{Stage 3D:} Full MACE Framework & & & & & & \\ \hline
-
-\end{tabularx}
-
-\caption{Evaluation matrix template for computational efficiency cost across Stage 3 conditions.}
-\label{tab:efficiency_matrix}
-\end{table}

@@ -67,61 +67,9 @@ TMEF-BI introduces another important direction by treating multimodal fusion as 
 
 Sun et al.'s ESDGFN and Ji et al.'s LDPG further show the recent movement toward dynamic, graph-based, multimodal detection \citep{Sun25,Ji2026LDPG}. ESDGFN combines multimodal source content with evolving stance and dynamic conversation graphs, while LDPG uses local dynamic propagation graphs to reduce noise and improve early detection. These models are important because they show the current direction of the field: combining multimodal content with increasingly sophisticated temporal and social graph modelling. However, they also reinforce the methodological problem that MACE addresses. Many recent models change several components at once, including the text encoder, visual encoder, graph structure, fusion mechanism, and classifier. As a result, the exact source of performance improvement becomes difficult to isolate.
 
-A comparative view of these models reveals that they differ not only in what modalities they process, but in how they fuse those modalities and what type of social signal they use. Table~\ref{tab:fusion-taxonomy} summarises the fusion strategy and social branch design for each integrated model reviewed in this section.
-
-\begin{table}[ht]
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{lllll}
-\toprule
-\textbf{Model} & \textbf{Text encoder} & \textbf{Visual encoder} & 
-\textbf{Fusion strategy} & \textbf{Social signal type} \\
-\midrule
-EFND \citep{Nadeem2023} 
-    & BERT & CNN 
-    & Late fusion, concatenation 
-    & Engagement / socially augmented features \\
-C2DCMTN \citep{Wang2024} 
-    & BERT & CNN 
-    & Masked cross-modal transformer 
-    & Comment-based context \\
-DPSG \citep{jing2025} 
-    & BERT & ViT/CNN 
-    & Cross-modal attention + dynamic graph 
-    & Dynamic propagation graph \\
-Dellys et al.\ \citep{Dellys2025} 
-    & BERT & ResNet 
-    & Multimodal fusion attention 
-    & Static social context features \\
-TMEF-BI \citep{Chen2025} 
-    & BERT & CNN 
-    & Reliability-weighted evidential fusion 
-    & Speaker behaviour signals \\
-ESDGFN \citep{Sun25} 
-    & BERT & CNN 
-    & Multi-level dynamic interaction 
-    & Evolving stance + conversation graph \\
-LDPG \citep{Ji2026LDPG} 
-    & BERT & ResNet 
-    & Local dynamic graph fusion 
-    & Local propagation graph \\
-MACE (proposed) 
-    & BERT & ResNet-50 
-    & Concatenation (retained from DANES/GETAE) 
-    & Static/dynamic propagation graph (retained) \\
-\bottomrule
-\end{tabular}%
-
-}
-\caption{Comparison of fusion strategy and social branch design across integrated 
-multimodal-social misinformation detection models.}
-\label{tab:fusion-taxonomy}
-\end{table}
-
-The taxonomy in Table~\ref{tab:fusion-taxonomy} reveals a wide variation on model composition and fusion strategy - no two models differ in fewer than two key dimensions. This means that comparitive benchmarking between these types of models is not enough to measure the benefits of substituting only the content branch inside an ensemble, since the social branch, fusion mechanism, or classifier also changes. 
+The taxonomy in Appendix~\ref{sec:litreviewsummary}, Table~\ref{tab:fusion-taxonomy} reveals a wide variation on model composition and fusion strategy adopted in these integrated models - no two models differ in fewer than two key dimensions. This means that comparitive benchmarking is not enough to measure the benefits of content branch substitution due to lack of consistency in social branch, fusion and classifier choices across these fusion models. 
 
 Recent integrated models illustrate why this controlled design remains useful. DPSG \citep{jing2025} combines multimodal fusion, dynamic propagation graphs and Transformer-based propagation modelling, while TMEF-BI \citep{Chen2025} combines modality-level evidence, uncertainty estimation and behaviour information. These studies include ablations, but the ablations generally remove complete modules or modalities rather than testing a controlled replacement of one content branch within an otherwise fixed ensemble. \citet{Dellys2025} also show that adding social context can improve multimodal detection, but use profile, reputation and metadata-based social features rather than a retained DANES/GETAE-style propagation branch. These examples show that recent work supports multimodal-social detection, but does not directly isolate whether replacing a text-only content branch with a multimodal branch improves a fixed propagation-based ensemble.
-
 
 Recent integrated models also show why attribution remains difficult even when the experiments themselves are well developed. DPSG \citep{jing2025} includes ablations, but these primarily remove model modules such as dynamic fusion or graph extraction, so the results show which parts of DPSG matter rather than how much improvement comes from changing only the content representation. TMEF-BI \citep{Chen2025} provides modality-level ablations, but its dataset has substantial missing image data, with unavailable image features replaced by zero vectors, making the measured value of the image modality dependent on dataset completeness as well as model design. Dellys et al.\ \citep{Dellys2025} further demonstrate that dataset size and class imbalance can affect model comparison, particularly when evaluating different classifiers on relatively small multimodal datasets. These examples suggest that recent work leaves room for a more controlled experiment in which dataset suitability, branch contribution and computational cost are treated as part of the research design rather than as secondary implementation details.
 
