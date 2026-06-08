@@ -1,5 +1,214 @@
-\section{Computational Cost and Environment}
+\section{Experiment Design Addendum}
 \label{sec:computeexperiment}
+
+\subsection{Experimental Design Flowchart}
+\label{sec:mace_experimental_design}
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.98\textwidth}{!}{%
+\begin{tikzpicture}[
+    font=\scriptsize,
+    node distance=10mm and 10mm,
+    >=Latex,
+    stage/.style={
+        rectangle,
+        draw,
+        thick,
+        align=center,
+        minimum width=4.1cm,
+        minimum height=1.15cm,
+        fill=yellow!15
+    },
+    condition/.style={
+        rectangle,
+        draw,
+        thick,
+        align=center,
+        minimum width=3.5cm,
+        minimum height=1.2cm,
+        fill=blue!8
+    },
+    output/.style={
+        rectangle,
+        draw,
+        thick,
+        align=center,
+        minimum width=4.5cm,
+        minimum height=1.05cm,
+        fill=green!10
+    },
+    dataset/.style={
+        rectangle,
+        draw,
+        thick,
+        align=center,
+        minimum width=3.7cm,
+        minimum height=0.9cm,
+        fill=blue!8
+    },
+    note/.style={
+        rectangle,
+        draw,
+        dashed,
+        align=left,
+        inner sep=5pt,
+        fill=gray!4
+    },
+    arrow/.style={->, thick},
+    lineonly/.style={thick}
+]
+
+% ------------------------------------------------------------------
+% Main stages
+% ------------------------------------------------------------------
+\node[stage] (s1) {
+Stage 1\\
+Baseline replication
+};
+
+\node[stage, right=18mm of s1] (s2) {
+Stage 2\\
+Dataset adaptation\\
+and selection
+};
+
+\node[stage, right=18mm of s2] (s3) {
+Stage 3\\
+Controlled evaluation\\
+on adapted dataset(s)
+};
+
+% ------------------------------------------------------------------
+% Stage 1 experiment and outputs
+% ------------------------------------------------------------------
+\node[condition, below=10mm of s1] (s1exp) {
+Replicate DANES / GETAE\\
+on Twitter15 and Twitter16
+};
+
+\node[output, below=7mm of s1exp] (s1out) {
+\textbf{Baseline Validation Outputs}\\
+Accuracy, precision, recall, F1-score\\
+compared with published results
+};
+
+% ------------------------------------------------------------------
+% Stage 2 stacked dataset evaluations and outputs
+% ------------------------------------------------------------------
+\node[dataset, below=10mm of s2] (ds1) {
+Candidate dataset(s)\\
+adaptation and feasibility check
+};
+
+
+\node[output, below=7mm of ds1, xshift=0mm] (s2out) {
+\textbf{Dataset Evaluation Outputs}\\
+image availability, label fit, graph suitability\\
+class balance, memory, storage, feasibility decision
+};
+
+% ------------------------------------------------------------------
+% Stage 3 experimental conditions
+% ------------------------------------------------------------------
+\node[condition, below=50mm of s3, xshift=-61mm] (a) {
+Stage 3A\\
+Dataset baseline\\
+Text-only content\\
++ social context
+};
+
+\node[condition, right=7mm of a] (b) {
+Stage 3B\\
+Ablation 1\\
+Text-only content\\
+without social context
+};
+
+\node[condition, right=7mm of b] (c) {
+Stage 3C\\
+Ablation 2\\
+Multimodal content\\
+without social context
+};
+
+\node[condition, right=7mm of c] (d) {
+Stage 3D\\
+MACE\\
+Multimodal content\\
++ social context
+};
+
+% ------------------------------------------------------------------
+% Stage 3 evaluation outputs
+% ------------------------------------------------------------------
+\node[output, below=18mm of b, xshift=43mm] (s3out) {
+\textbf{MACE Evaluation and Ablation Study Outputs}\\
+Accuracy, precision, recall, F1-score\\
+McNemar's test / paired t-tests\\
+training time, inference time, peak memory, storage cost
+};
+
+% ------------------------------------------------------------------
+% Arrows between stages
+% ------------------------------------------------------------------
+\draw[arrow] (s1.east) -- (s2.west);
+\draw[arrow] (s2.east) -- (s3.west);
+
+% ------------------------------------------------------------------
+% Stage 1 arrows
+% ------------------------------------------------------------------
+\draw[arrow] (s1.south) -- (s1exp.north);
+\draw[arrow] (s1exp.south) -- (s1out.north);
+
+% ------------------------------------------------------------------
+% Stage 2 arrows
+% ------------------------------------------------------------------
+\draw[arrow] (s2.south) -- (ds1.north);
+\draw[arrow] (ds1.south) -- (s2out.north);
+
+% ------------------------------------------------------------------
+% Stage 3 arrows to conditions
+% ------------------------------------------------------------------
+\coordinate (split) at ($(s3.south) + (0,-42mm)$);
+\draw[lineonly] (s3.south) -- (split);
+
+\draw[arrow] (split) -| (a.north);
+\draw[arrow] (split) -| (b.north);
+\draw[arrow] (split) -| (c.north);
+\draw[arrow] (split) -| (d.north);
+
+% ------------------------------------------------------------------
+% Arrows from conditions to Stage 3 outputs
+% ------------------------------------------------------------------
+\coordinate (evalsplit) at ($(s3out.north) + (0,15mm)$);
+
+\draw[lineonly] (a.south) |- (evalsplit);
+\draw[lineonly] (b.south) |- (evalsplit);
+\draw[lineonly] (c.south) |- (evalsplit);
+\draw[lineonly] (d.south) |- (evalsplit);
+\draw[arrow] (evalsplit) -- (s3out.north);
+
+% ------------------------------------------------------------------
+% Background grouping for Stage 3 conditions
+% ------------------------------------------------------------------
+\begin{scope}[on background layer]
+    \node[
+        draw,
+        dashed,
+        rounded corners,
+        thick,
+        fit=(a)(b)(c)(d),
+        label={[font=\small\bfseries]below, xshift=-30mm:Controlled experimental conditions and ablations},
+        inner sep=5mm
+    ] {};
+\end{scope}
+
+\end{tikzpicture}%
+}
+\caption{Experimental design and evaluation outputs for MACE.}
+\label{fig:mace_experimental_design}
+\end{figure}
 
 \subsection{Computational Cost Estimates}
 \label{sec:computecost}

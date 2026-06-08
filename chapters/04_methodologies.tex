@@ -230,218 +230,13 @@ Both fusion models combine branch outputs by concatenating the content and conte
 
 The concatenation-based fusion mechanism is also retained in MACE. Multimodal fusion is a core design challenge in multimodal machine learning \citep{Baltrusaitis2019}. More recent work distinguishes between simple separate-encoder fusion, dedicated fusion networks, and unified cross-modal encoders, showing that fusion design can materially affect model behaviour and performance \citep{li2025multimodalalignment}.
 
+The objective of this study is not to optimise the fusion or classification mechanisms, but to isolate the effect of replacing the text-only content branch with a multimodal content branch in the DANES/GETAE-style ensemble. Changes to the fusion or classification design would introduce additional confounding architectural variables. MACE therefore retains the existing concatenation-based fusion and classifier so that observed performance differences can be attributed primarily to the content-branch substitution.
+
 \subsection{Experimental Design}
 
 The experiment design is structured as a three-stage process to systematically evaluate dataset suitability, replicate the baseline architectures, and test the proposed MACE architecture. Both base architectures are evaluated so that findings can be assessed for consistency across the DANES and GETAE ensemble backbones.
 
-The model backbone is treated as a replication factor, rather than the primary independent variable, as the main focus is evaluating the impact of substituting the text-only content branch with a multimodal content branch. The research questions also require assessment of dataset suitability and computational cost, so the experimental design includes a dataset adaptation and feasibility stage before full MACE evaluation.
-
-\begin{figure}[htbp]
-\centering
-\resizebox{0.98\textwidth}{!}{%
-\begin{tikzpicture}[
-    font=\scriptsize,
-    node distance=10mm and 10mm,
-    >=Latex,
-    stage/.style={
-        rectangle,
-        draw,
-        thick,
-        align=center,
-        minimum width=4.1cm,
-        minimum height=1.15cm,
-        fill=yellow!15
-    },
-    condition/.style={
-        rectangle,
-        draw,
-        thick,
-        align=center,
-        minimum width=3.5cm,
-        minimum height=1.2cm,
-        fill=blue!8
-    },
-    output/.style={
-        rectangle,
-        draw,
-        thick,
-        align=center,
-        minimum width=4.5cm,
-        minimum height=1.05cm,
-        fill=green!10
-    },
-    dataset/.style={
-        rectangle,
-        draw,
-        thick,
-        align=center,
-        minimum width=3.7cm,
-        minimum height=0.9cm,
-        fill=blue!8
-    },
-    note/.style={
-        rectangle,
-        draw,
-        dashed,
-        align=left,
-        inner sep=5pt,
-        fill=gray!4
-    },
-    arrow/.style={->, thick},
-    lineonly/.style={thick}
-]
-
-% ------------------------------------------------------------------
-% Main stages
-% ------------------------------------------------------------------
-\node[stage] (s1) {
-Stage 1\\
-Baseline replication
-};
-
-\node[stage, right=18mm of s1] (s2) {
-Stage 2\\
-Dataset adaptation\\
-and selection
-};
-
-\node[stage, right=18mm of s2] (s3) {
-Stage 3\\
-Controlled evaluation\\
-on adapted dataset(s)
-};
-
-% ------------------------------------------------------------------
-% Stage 1 experiment and outputs
-% ------------------------------------------------------------------
-\node[condition, below=10mm of s1] (s1exp) {
-Replicate DANES / GETAE\\
-on Twitter15 and Twitter16
-};
-
-\node[output, below=7mm of s1exp] (s1out) {
-\textbf{Baseline Validation Outputs}\\
-Accuracy, precision, recall, F1-score\\
-compared with published results
-};
-
-% ------------------------------------------------------------------
-% Stage 2 stacked dataset evaluations and outputs
-% ------------------------------------------------------------------
-\node[dataset, below=10mm of s2] (ds1) {
-Candidate dataset(s)\\
-adaptation and feasibility check
-};
-
-
-\node[output, below=7mm of ds1, xshift=0mm] (s2out) {
-\textbf{Dataset Evaluation Outputs}\\
-image availability, label fit, graph suitability\\
-class balance, memory, storage, feasibility decision
-};
-
-% ------------------------------------------------------------------
-% Stage 3 experimental conditions
-% ------------------------------------------------------------------
-\node[condition, below=50mm of s3, xshift=-61mm] (a) {
-Stage 3A\\
-Dataset baseline\\
-Text-only content\\
-+ social context
-};
-
-\node[condition, right=7mm of a] (b) {
-Stage 3B\\
-Ablation 1\\
-Text-only content\\
-without social context
-};
-
-\node[condition, right=7mm of b] (c) {
-Stage 3C\\
-Ablation 2\\
-Multimodal content\\
-without social context
-};
-
-\node[condition, right=7mm of c] (d) {
-Stage 3D\\
-MACE\\
-Multimodal content\\
-+ social context
-};
-
-% ------------------------------------------------------------------
-% Stage 3 evaluation outputs
-% ------------------------------------------------------------------
-\node[output, below=18mm of b, xshift=43mm] (s3out) {
-\textbf{MACE Evaluation and Ablation Study Outputs}\\
-Accuracy, precision, recall, F1-score\\
-McNemar's test / paired t-tests\\
-training time, inference time, peak memory, storage cost
-};
-
-% ------------------------------------------------------------------
-% Arrows between stages
-% ------------------------------------------------------------------
-\draw[arrow] (s1.east) -- (s2.west);
-\draw[arrow] (s2.east) -- (s3.west);
-
-% ------------------------------------------------------------------
-% Stage 1 arrows
-% ------------------------------------------------------------------
-\draw[arrow] (s1.south) -- (s1exp.north);
-\draw[arrow] (s1exp.south) -- (s1out.north);
-
-% ------------------------------------------------------------------
-% Stage 2 arrows
-% ------------------------------------------------------------------
-\draw[arrow] (s2.south) -- (ds1.north);
-\draw[arrow] (ds1.south) -- (s2out.north);
-
-% ------------------------------------------------------------------
-% Stage 3 arrows to conditions
-% ------------------------------------------------------------------
-\coordinate (split) at ($(s3.south) + (0,-42mm)$);
-\draw[lineonly] (s3.south) -- (split);
-
-\draw[arrow] (split) -| (a.north);
-\draw[arrow] (split) -| (b.north);
-\draw[arrow] (split) -| (c.north);
-\draw[arrow] (split) -| (d.north);
-
-% ------------------------------------------------------------------
-% Arrows from conditions to Stage 3 outputs
-% ------------------------------------------------------------------
-\coordinate (evalsplit) at ($(s3out.north) + (0,15mm)$);
-
-\draw[lineonly] (a.south) |- (evalsplit);
-\draw[lineonly] (b.south) |- (evalsplit);
-\draw[lineonly] (c.south) |- (evalsplit);
-\draw[lineonly] (d.south) |- (evalsplit);
-\draw[arrow] (evalsplit) -- (s3out.north);
-
-% ------------------------------------------------------------------
-% Background grouping for Stage 3 conditions
-% ------------------------------------------------------------------
-\begin{scope}[on background layer]
-    \node[
-        draw,
-        dashed,
-        rounded corners,
-        thick,
-        fit=(a)(b)(c)(d),
-        label={[font=\small\bfseries]below, xshift=-30mm:Controlled experimental conditions and ablations},
-        inner sep=5mm
-    ] {};
-\end{scope}
-
-\end{tikzpicture}%
-}
-\caption{Experimental design and evaluation outputs for MACE.}
-\label{fig:mace_experimental_design}
-\end{figure}
-
+The model backbone is treated as a replication factor, rather than the primary independent variable, as the main focus is evaluating the impact of substituting the text-only content branch with a multimodal content branch. The research questions also require assessment of dataset suitability and computational cost, so the experimental design includes a dataset adaptation and feasibility stage before full MACE evaluation. Experiment Stages and Phases are also shown in Appendix~\ref{sec:computeexperiment}, Figure~\ref{sec:mace_experimental_design}, and described in detail here.
 
 \subsubsection{Dataset Adaptation and Selection}
 
@@ -449,38 +244,45 @@ Before Stage~3 model evaluation, all Stage~2 candidate datasets will be assessed
 
 The dataset adaptation process will include preprocessing text fields, validating and downloading available images, creating dummy image placeholders where required, mapping dataset labels to the target binary classification structure, constructing or adapting social-context graph features, and producing dataset-level feasibility statistics. Final selection for Stage~3 will depend on the adaptation results. Where more than one dataset satisfies the suitability criteria, MACE will be evaluated across multiple adapted datasets to assess generalisability. Where only one dataset is feasible within the available compute and time constraints, the excluded dataset characteristics and reasons for exclusion will be reported as part of the RQ3 findings.
 
+
 \subsubsection{Experiment Stages and Conditions}
+The experiment is organised into three stages: baseline replication, dataset adaptation, and controlled MACE evaluation. Stage~3 uses four conditions to compare the original text-only ensemble, content-only ablations, multimodal substitution, and the full proposed framework. The ablation design follows established multimodal fake news detection practice, where components are removed or isolated to measure their contribution to overall performance~\citep{Qian2021}.
 
-\textbf{Stage 1} replicates the published DANES and GETAE architectures and evaluates their performance on Twitter15 and Twitter16 to confirm that the implementation is consistent with the published baselines before introducing architectural modifications.
 
-\textbf{Stage 2} adapts candidate multimodal datasets and selects the dataset or datasets suitable for MACE evaluation. This stage establishes whether the available multimodal and social-context data can support the proposed experimental comparisons, and records dataset feasibility criteria relevant to RQ3.
-
-\textbf{Stage 3} evaluates four experimental conditions on the selected adapted multimodal dataset or datasets. Condition A establishes a dataset-specific baseline using the original text-only content branch and retained social-context branch. Conditions B, C, and D systematically evaluate the independent and combined contribution of text-only content, multimodal content, and social-context features.
-
-The branch-contribution decomposition approach used in Conditions B--D follows an established ablation methodology in multimodal fake news detection research. \citet{Qian2021} demonstrate this pattern in HMCAN, where they evaluate three controlled variants --- removing visual information entirely, removing the multimodal contextual attention network, and removing hierarchical text semantics --- to isolate the contribution of each component to overall detection performance. This component-level ablation design, in which individual branches or modules are systematically removed while the rest of the model is held constant, is an established approach for attributing performance differences to specific architectural choices. The MACE ablation conditions follow this approach: by running the content branch and social-context branch in isolation and in combination across Conditions A--D, the contribution of each can be quantified through pair-wise comparison.
 
 \begin{table}[h!]
-{\small
-\begin{tabular}{llllll}
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{p{1cm}p{1cm}p{2.4cm}p{1.7cm}p{1.5cm}p{7.7cm}}
 \hline
-\multicolumn{2}{l}{\textbf{Stage}} & \textbf{Label}                                                    & \textbf{\begin{tabular}[c]{@{}l@{}}Content\\ Branch\end{tabular}} & \textbf{\begin{tabular}[c]{@{}l@{}}Context\\ Branch\end{tabular}} & \textbf{Goal / Purpose}                                                                                                                          \\ \hline
-1                        & A       & \begin{tabular}[c]{@{}l@{}}Implementation\\ Baseline\end{tabular} & Text-only                                                         & \checkmark                                                                        & \begin{tabular}[c]{@{}l@{}}Replicate baseline fusion models \\ and confirm published results prior \\ to introducing modifications.\end{tabular} \\ \hline
-2                        & A       & \begin{tabular}[c]{@{}l@{}}Dataset\\ Adaptation\end{tabular}        & --                                                         & --                                                                        & \begin{tabular}[c]{@{}l@{}}Assess image availability, graph \\ suitability, class balance, and \\ computational feasibility.\end{tabular}                                \\ \hline
-\multirow{4}{*}{3}       & A       & \begin{tabular}[c]{@{}l@{}}Dataset\\ Baseline\end{tabular}        & Text-only                                                         & \checkmark                                                                        & \begin{tabular}[c]{@{}l@{}}Establish baseline on adapted \\ multimodal dataset using existing \\ fusion models.\end{tabular}                                \\ \cline{2-6} 
-                        & B       & Ablation 1                                                        & Text-only                                                         & $\times$                                                                         & \begin{tabular}[c]{@{}l@{}}Isolate contribution of text-only \\ features.\end{tabular}                                                           \\ \cline{2-6} 
-                        & C       & Ablation 2                                                        & Multimodal                                                        & $\times$                                                                         & \begin{tabular}[c]{@{}l@{}}Isolate contribution of multimodal \\ features.\end{tabular}                                                          \\ \cline{2-6} 
-                        & D       & \begin{tabular}[c]{@{}l@{}}Proposed \\ (MACE)\end{tabular}        & Multimodal                                                        & \checkmark                                                                        & \begin{tabular}[c]{@{}l@{}}Evaluate full proposed framework \\ and record performance and \\ compute cost.\end{tabular}                                                                                                           \\ \hline
+\textbf{Stage} & \textbf{Cond.} & \textbf{Label} & \textbf{Content} & \textbf{Context} & \textbf{Purpose} \\
+\hline
+1 & A & Implementation baseline & Text-only & \checkmark & Replicate DANES/GETAE on Twitter15 and Twitter16 before introducing modifications. \\
+2 & -- & Dataset adaptation & -- & -- & Assess image availability, graph suitability, class balance, and computational feasibility. \\
+3 & A & Dataset baseline & Text-only & \checkmark & Establish the adapted-dataset baseline using the original ensemble structure. \\
+3 & B & Ablation 1 & Text-only & $\times$ & Isolate text-only content performance without social context. \\
+3 & C & Ablation 2 & Multimodal & $\times$ & Isolate multimodal content performance without social context. \\
+3 & D & MACE & Multimodal & \checkmark & Evaluate the full proposed framework and report performance and compute cost. \\
+\hline
 \end{tabular}
-\caption{Summary of experiment conditions and objectives.}
-
-}
+\caption{Experiment stages and conditions.}
+\label{tab:conditions}
 \end{table}
 
-Detailed computational cost estimates and the recommended experimental environment are provided in Appendix~\ref{sec:computeexperiment}, with the main methodology focusing on the experimental design and evaluation logic.
+
+Detailed computational cost estimates and the recommended experimental environment are provided in Appendix~\ref{sec:computeexperiment}.
+
+
+
+
+
+
+
 
 \subsubsection{Research Question Alignment}
-
-RQ1 is addressed by comparing the proposed MACE architecture (Stage~3, Condition D) against the dataset baseline (Stage~3, Condition A) on the selected adapted multimodal dataset or datasets, and by reporting the associated inference time, wall-clock training time, peak memory use, and storage requirements. RQ2 is addressed through pairwise comparison of Conditions A--D to isolate the contribution of the multimodal content branch and the social-context branch. RQ3 is addressed through Stage~2 dataset adaptation and, where feasible, by comparing the same Stage~3 conditions across multiple adapted datasets.
+The following summary shows how each research question is addressed through the staged experimental design, pairwise comparisons, dataset adaptation process, and computational reporting.
 
 \begin{table}[h!]
 \centering
@@ -506,15 +308,11 @@ RQ3 & Stage~2 and cross-dataset comparison &
     \begin{tabular}[t]{@{}l@{}}Dataset suitability\\and preprocessing\end{tabular} &
     \begin{tabular}[t]{@{}l@{}}What adaptation criteria are required,\\which datasets are feasible, and do\\results generalise across adapted datasets?\end{tabular} \\ \hline
 \end{tabular}
-\caption{Pairwise condition comparisons and research question alignment.}
 \label{tab:pairwise}
 }
 \end{table}
 
 \subsection{Research Timeline}
-
-The research project is planned across a 22-week period; Table~\ref{tab:timeline} presents the planned research timeline, based on the proposed methodology. Research activities are concentrated in Weeks~1--18, including Stage~2 dataset adaptation before Stage~3 experiments, with five weeks reserved for thesis writing (Weeks~18--22).
-
 
 \newcommand{\Ga}{\cellcolor{gray!35}}          % Setup
 \newcommand{\Bl}{\cellcolor{blue!25}}          % Stage 1
@@ -531,7 +329,7 @@ The research project is planned across a 22-week period; Table~\ref{tab:timeline
 
 \begin{table}[H]
 \centering
-\caption{Summary research timeline by phase.}
+\caption{Summary research timeline by phase, refer to Appendix~\ref{sec:fulltimeline} for detailed timeline.}
 \label{tab:summarytimeline}
 \small
 \setlength{\tabcolsep}{3pt}
@@ -592,7 +390,5 @@ The research project is planned across a 22-week period; Table~\ref{tab:timeline
 
 \vspace{0.5em}
 \raggedright
-\footnotesize
-Note. Darker cells are key milestones. The full timeline is provided in Appendix~\ref{sec:fulltimeline}.
 
 \end{table}
